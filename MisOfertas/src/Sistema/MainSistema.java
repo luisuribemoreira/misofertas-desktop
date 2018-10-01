@@ -5,16 +5,23 @@
  */
 package Sistema;
 
+import MisPaquetes.Conexion;
+import MisPaquetes.Usuario;
+import java.sql.SQLException;
+
 /**
  *
  * @author Nicolás
  */
 public class MainSistema {
 
+    static MisPaquetes.Conexion conn = new Conexion();
+    static MisPaquetes.Usuario user_conectado = new Usuario();
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        conn.Conectar();
         SistemaMisOfertas sistema = new SistemaMisOfertas();
         sistema.setVisible(true);
     }

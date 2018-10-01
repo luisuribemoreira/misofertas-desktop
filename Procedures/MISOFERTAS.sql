@@ -8,24 +8,26 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE LoginEmpleados(
-    v_username VARCHAR2, v_pass VARCHAR2, resultado OUT VARCHAR2
+CREATE OR REPLACE PROCEDURE Login(
+    v_username VARCHAR2, v_pass VARCHAR2, v_perfil OUT VARCHAR2, v_id OUT NUMBER
 )
 AS
 BEGIN
-    SELECT perfil
-    INTO resultado
+    SELECT perfil, id_user
+    INTO v_perfil, v_id
     FROM USUARIO
     WHERE username = v_username and password = v_pass;
     
     EXCEPTION
     WHEN OTHERS THEN
-      resultado := 'ERROR';
+      v_perfil := 'ERROR';
+      v_id := 0;
 END;
 /
 
-VARIABLE resultado VARCHAR2(50);
+VARIABLE perfil VARCHAR2(50);
+VARIABLE v_id NUMBER;
 
-EXEC LoginEmpleados('LUIS', 'LUS', :resultado);
+EXEC Login('LUIS', 'LUIS', :perfil, :v_id);
 
-EXEC pl('' || :resultado);
+EXEC pl('' || :perfil || :v_id);

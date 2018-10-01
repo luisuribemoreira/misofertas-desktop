@@ -6,6 +6,10 @@
 package Sistema;
 
 import MisPaquetes.Conexion;
+import MisPaquetes.Usuario;
+import static Sistema.MainSistema.conn;
+import static Sistema.MainSistema.user_conectado;
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -90,17 +94,21 @@ public class Login extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MisPaquetes.Conexion conn = new Conexion();
-        try {
-            conn.Conectar();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+
+        user_conectado = user_conectado.logear(txtUser.getText(), txtPass.getText(), conn);
+            
+        if(!user_conectado.getPerfil().equals("ERROR")){
+            Principal pr = new Principal();
+            SistemaMisOfertas.jDesktopPane1.add(pr);
+            SistemaMisOfertas.jDesktopPane1.remove(this);
+            pr.setVisible(true);
+        }else{
+            txtUser.setText("USUARIO INCORRECTO");
         }
-        if(conn != null){
-            txtUser.setText("Conectado");
-        }
+            
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
