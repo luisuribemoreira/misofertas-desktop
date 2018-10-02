@@ -120,13 +120,9 @@ public class SingIn extends javax.swing.JDialog {
         user_conectado = user_conectado.logear(txtUser.getText(), txtPass.getText(), conn);
 
         if(!user_conectado.getPerfil().equals("ERROR")){
-            Principal pr = new Principal();
             SistemaMisOfertas sistema = new SistemaMisOfertas();
-            sistema.setVisible(true);
-            SistemaMisOfertas.jDesktopPane1.add(pr);
-            SistemaMisOfertas.jDesktopPane1.remove(this);
             this.setVisible(false);
-            pr.setVisible(true);
+            sistema.setVisible(true);
         }else{
             txtUser.setText("USUARIO INCORRECTO");
         }

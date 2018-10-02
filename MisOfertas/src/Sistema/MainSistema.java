@@ -37,9 +37,6 @@ public class MainSistema {
             }
         });
         
-        /*
-        SistemaMisOfertas sistema = new SistemaMisOfertas();
-        sistema.setVisible(true);*/
     }
     
 }
