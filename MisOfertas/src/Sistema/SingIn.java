@@ -125,6 +125,7 @@ public class SingIn extends javax.swing.JDialog {
             sistema.setVisible(true);
             SistemaMisOfertas.jDesktopPane1.add(pr);
             SistemaMisOfertas.jDesktopPane1.remove(this);
+            this.setVisible(false);
             pr.setVisible(true);
         }else{
             txtUser.setText("USUARIO INCORRECTO");
