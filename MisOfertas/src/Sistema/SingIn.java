@@ -7,6 +7,7 @@ package Sistema;
 
 import static Sistema.MainSistema.conn;
 import static Sistema.MainSistema.user_conectado;
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 
 /**
  *
@@ -40,6 +41,7 @@ public class SingIn extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        lblMsgError = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,7 +128,9 @@ public class SingIn extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(131, 131, 131)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(lblMsgError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -134,7 +138,8 @@ public class SingIn extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMsgError, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,7 +173,11 @@ public class SingIn extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPassActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        String mensajeError = "";
+        
+        mensajeError = verificCamposVacios();
+        
         user_conectado = user_conectado.logear(txtUser.getText(), txtPass.getText(), conn);
 
         if(!user_conectado.getPerfil().equals("ERROR")){
@@ -176,7 +185,11 @@ public class SingIn extends javax.swing.JDialog {
             this.setVisible(false);
             sistema.setVisible(true);
         }else{
-            txtUser.setText("USUARIO INCORRECTO");
+            if(mensajeError.equals("")){
+                lblMsgError.setText("Usuario Incorrecto");
+            }else{
+                lblMsgError.setText(mensajeError);
+            }  
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -229,7 +242,19 @@ public class SingIn extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblMsgError;
     private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
+
+    //Funcion que valida que los campos no esten vacios
+    private String verificCamposVacios() {
+        if (txtUser.getText().equals("")) {
+            return "Ingrese el nombre de usuario";
+        }else if(txtPass.getText().equals("")){
+            return "Ingrese la password";
+        }else{
+            return "";
+        }
+    }
 }
