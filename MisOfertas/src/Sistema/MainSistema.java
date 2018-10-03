@@ -22,8 +22,21 @@ public class MainSistema {
      */
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         conn.Conectar();
-        SistemaMisOfertas sistema = new SistemaMisOfertas();
-        sistema.setVisible(true);
+        
+        //Funcion que realiza el llamado al login
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SingIn dialog = new SingIn(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+        
     }
     
 }
