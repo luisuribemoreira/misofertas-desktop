@@ -173,7 +173,7 @@ public class SingIn extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPassActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
         String mensajeError = "";
         
         mensajeError = verificCamposVacios();
@@ -181,10 +181,22 @@ public class SingIn extends javax.swing.JDialog {
         user_conectado = user_conectado.logear(txtUser.getText(), txtPass.getText(), conn);
 
         if(!user_conectado.getPerfil().equals("ERROR")){
+            
             if (user_conectado.getPerfil().equals("CONSUMIDOR")) {
                 lblMsgError.setText("Usuario no tiene permisos");
-            }else{
-                SistemaMisOfertas sistema = new SistemaMisOfertas();
+            }else if(user_conectado.getPerfil().equals("GERENTE")) {
+                SistemaMisOfertasG sistema = new SistemaMisOfertasG();
+                this.setVisible(false);
+                sistema.setVisible(true);
+            }else if(user_conectado.getPerfil().equals("ADMINISTRADOR")) 
+            {    
+                SistemaMisOfertasA sistema = new SistemaMisOfertasA();
+                this.setVisible(false);
+                sistema.setVisible(true);
+            }
+            else if(user_conectado.getPerfil().equals("ENCARGADO")) 
+            {
+                SistemaMisOfertasE sistema = new SistemaMisOfertasE();
                 this.setVisible(false);
                 sistema.setVisible(true);
             }
