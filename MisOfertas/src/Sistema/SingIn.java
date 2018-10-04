@@ -181,12 +181,16 @@ public class SingIn extends javax.swing.JDialog {
         user_conectado = user_conectado.logear(txtUser.getText(), txtPass.getText(), conn);
 
         if(!user_conectado.getPerfil().equals("ERROR")){
-            SistemaMisOfertas sistema = new SistemaMisOfertas();
-            this.setVisible(false);
-            sistema.setVisible(true);
+            if (user_conectado.getPerfil().equals("CONSUMIDOR")) {
+                lblMsgError.setText("Usuario no tiene permisos");
+            }else{
+                SistemaMisOfertas sistema = new SistemaMisOfertas();
+                this.setVisible(false);
+                sistema.setVisible(true);
+            }
         }else{
             if(mensajeError.equals("")){
-                lblMsgError.setText("Usuario Incorrecto");
+                lblMsgError.setText("Usuario No Registrado");
             }else{
                 lblMsgError.setText(mensajeError);
             }  
