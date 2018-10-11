@@ -31,3 +31,22 @@ VARIABLE v_id NUMBER;
 EXEC Login('LUIS', 'LUIS', :perfil, :v_id);
 
 EXEC pl('' || :perfil || :v_id);
+
+/*Primera version del procedimiento almacenado de insertar producto*/
+
+CREATE OR REPLACE PROCEDURE insertProduc(
+    id_prod       NUMBER,
+    nombre        VARCHAR2,
+    desc_prod     VARCHAR2,
+    fec_ingreso   DATE,
+    estado        CHAR,
+    stk_seguro    NUMBER,
+    rubro         VARCHAR2,
+    desc_rubro    VARCHAR2,
+    valor         NUMBER
+)
+AS
+BEGIN
+    insert into PRODUCTO 
+    VALUES (id_prod,nombre,desc_prod,fec_ingreso,estado,stk_seguro,rubro,desc_rubro,valor);
+END;
