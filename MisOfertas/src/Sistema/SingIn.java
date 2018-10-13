@@ -235,18 +235,18 @@ public class SingIn extends javax.swing.JDialog {
             if (user_conectado.getPerfil().equals("CONSUMIDOR")) {
                 lblMsgError.setText("Usuario no tiene permisos");
             }else if(user_conectado.getPerfil().equals("GERENTE")) {
-                SistemaMisOfertasG sistema = new SistemaMisOfertasG();
+                SistemaGerente sistema = new SistemaGerente();
                 this.setVisible(false);
                 sistema.setVisible(true);
             }else if(user_conectado.getPerfil().equals("ADMINISTRADOR")) 
             {    
-                SistemaMisOfertasA sistema = new SistemaMisOfertasA();
+                SistemaAdmin sistema = new SistemaAdmin();
                 this.setVisible(false);
                 sistema.setVisible(true);
             }
             else if(user_conectado.getPerfil().equals("ENCARGADO")) 
             {
-                SistemaMisOfertasE sistema = new SistemaMisOfertasE();
+                SistemaEncargado sistema = new SistemaEncargado();
                 this.setVisible(false);
                 sistema.setVisible(true);
             }
@@ -293,6 +293,7 @@ public class SingIn extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SingIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
