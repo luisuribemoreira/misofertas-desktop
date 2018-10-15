@@ -50,3 +50,73 @@ BEGIN
     insert into PRODUCTO 
     VALUES (id_prod,nombre,desc_prod,fec_ingreso,estado,stk_seguro,rubro,desc_rubro,valor);
 END;
+/
+
+
+
+-- Procedimientos Almacenados la GESTIÓN DE EMPRESAS
+
+CREATE OR REPLACE PROCEDURE BUSCAR_EMPRESA(
+    v_rut VARCHAR2, v_nombre OUT VARCHAR2, v_direccion OUT VARCHAR2, v_razon_social OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT nombre, direccion, razon_social
+    INTO v_nombre, v_direccion, v_razon_social
+    FROM EMPRESA
+    WHERE rut = v_rut;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_nombre := 'ERROR';
+      v_direccion := 'ERROR';
+      v_razon_social := 'ERROR';
+END;
+/
+
+CREATE OR REPLACE PROCEDURE AGREGAR_EMPRESA(
+    v_rut VARCHAR2, v_nombre VARCHAR2, v_direccion VARCHAR2, v_razon_social VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO EMPRESA VALUES (v_rut, v_nombre, v_direccion, v_razon_social);
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE MODIFICAR_EMPRESA(
+    v_rut VARCHAR2, v_nombre VARCHAR2, v_direccion VARCHAR2, v_razon_social VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE EMPRESA
+    SET NOMBRE = v_nombre, DIRECCION = v_direccion, RAZON_SOCIAL = v_razon_social
+    WHERE RUT = v_rut;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE ELIMINAR_EMPRESA(
+    v_rut VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    DELETE FROM EMPRESA
+    WHERE RUT = v_rut;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+
