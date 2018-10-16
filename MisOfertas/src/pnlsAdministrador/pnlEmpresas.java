@@ -30,7 +30,7 @@ public class pnlEmpresas extends javax.swing.JPanel {
             cargarTabla();
             vistaDefault();
         } catch (SQLException ex) {
-            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnlEmpresas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

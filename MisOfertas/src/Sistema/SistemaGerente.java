@@ -31,7 +31,7 @@ public class SistemaGerente extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         this.uno.setSelected(true);
         
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlHome());
+        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlProductos());
     }
 
     /**
@@ -503,7 +503,7 @@ public class SistemaGerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlHome());
+        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlProductos());
         if(this.uno.isSelected()){
             this.uno.setColorNormal(new Color(204,204,204));
             this.uno.setColorHover(new Color(204,204,204));

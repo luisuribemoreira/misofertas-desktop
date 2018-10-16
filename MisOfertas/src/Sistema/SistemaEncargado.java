@@ -31,7 +31,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         this.uno.setSelected(true);
         
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlHome());
+        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlProductos());
     }
 
     /**
@@ -63,8 +63,6 @@ public class SistemaEncargado extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jCTextField1 = new app.bolivia.swing.JCTextField();
         pnlCentro = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlPrincipal = new javax.swing.JPanel();
 
@@ -78,7 +76,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
 
         uno.setForeground(new java.awt.Color(128, 128, 131));
         uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
-        uno.setText("Home");
+        uno.setText("Productos");
         uno.setColorHover(new java.awt.Color(204, 204, 204));
         uno.setColorNormal(new java.awt.Color(204, 204, 204));
         uno.setColorPressed(new java.awt.Color(204, 204, 204));
@@ -103,7 +101,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel1.setText("PEOPLE");
+        jLabel1.setText("Mantenedores");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -435,29 +433,6 @@ public class SistemaEncargado extends javax.swing.JFrame {
 
         pnlCentro.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel4.setText("DASHBOARD 1");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(571, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jScrollPane1.setBorder(null);
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -468,14 +443,12 @@ public class SistemaEncargado extends javax.swing.JFrame {
         pnlCentro.setLayout(pnlCentroLayout);
         pnlCentroLayout.setHorizontalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
         pnlCentroLayout.setVerticalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCentroLayout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -503,7 +476,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlHome());
+        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlProductos());
         if(this.uno.isSelected()){
             this.uno.setColorNormal(new Color(204,204,204));
             this.uno.setColorHover(new Color(204,204,204));
@@ -951,12 +924,10 @@ public class SistemaEncargado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private rsbuttom.RSButtonMetro ocho;
     private javax.swing.JPanel pnlCentro;

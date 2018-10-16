@@ -7,6 +7,7 @@ package pnlsAdministrador;
 
 import MisPaquetes.Empresa;
 import MisPaquetes.Sucursal;
+import Sistema.Administrador.Sucursal_List;
 import static Sistema.MainSistema.conn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,14 @@ public class pnlSucursales extends javax.swing.JPanel {
      * Creates new form pnlHome
      */
     public pnlSucursales() {
-        initComponents();
+        try {
+            initComponents();
+            cargarTabla();
+            cargarComboBox();
+            vistaDefault();
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlSucursales.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
