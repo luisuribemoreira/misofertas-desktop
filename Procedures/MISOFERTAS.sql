@@ -1,4 +1,4 @@
-INSERT INTO USUARIO VALUES (2, 'LUIS', 'LUIS', 'CONSUMIDOR');
+INSERT INTO USUARIO VALUES ('LUIS', 'LUIS', 'CONSUMIDOR');
 CREATE OR REPLACE PROCEDURE pl (
    cadena VARCHAR2
 )
@@ -9,28 +9,26 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE Login(
-    v_username VARCHAR2, v_pass VARCHAR2, v_perfil OUT VARCHAR2, v_id OUT NUMBER
+    v_username VARCHAR2, v_pass VARCHAR2, v_perfil OUT VARCHAR2
 )
 AS
 BEGIN
-    SELECT perfil, id_user
-    INTO v_perfil, v_id
+    SELECT perfil
+    INTO v_perfil
     FROM USUARIO
     WHERE username = v_username and password = v_pass;
     
     EXCEPTION
     WHEN OTHERS THEN
       v_perfil := 'ERROR';
-      v_id := 0;
 END;
 /
 
 VARIABLE perfil VARCHAR2(50);
-VARIABLE v_id NUMBER;
 
-EXEC Login('LUIS', 'LUIS', :perfil, :v_id);
+EXEC Login('LUIS', 'LUIS', :perfil);
 
-EXEC pl('' || :perfil || :v_id);
+EXEC pl('' || :perfil);
 
 /*Primera version del procedimiento almacenado de insertar producto*/
 
@@ -119,4 +117,71 @@ BEGIN
 END;
 /
 
+
+-- Procedimientos Almacenados la GESTIÓN DE SUCURSALES
+
+CREATE OR REPLACE PROCEDURE BUSCAR_SUCURSAL(
+    v_id NUMBER, v_nombre OUT VARCHAR2, v_direccion OUT VARCHAR2, v_fono OUT VARCHAR2, v_comuna OUT VARCHAR2, v_empresa_rut OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT nombre, direccion, fono, comuna, empresa_rut
+    INTO v_nombre, v_direccion, v_fono, v_comuna, v_empresa_rut
+    FROM SUCURSAL
+    WHERE id_sucur = v_id;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_nombre := 'ERROR';
+      v_direccion := 'ERROR';
+      v_fono := 'ERROR';
+      v_comuna := 'ERROR';
+      v_empresa_rut := 'ERROR';
+END;
+/
+
+CREATE OR REPLACE PROCEDURE AGREGAR_SUCURSAL(
+    v_nombre VARCHAR2, v_direccion VARCHAR2, v_fono VARCHAR2, v_comuna VARCHAR2, v_empresa_rut VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO SUCURSAL VALUES (SUCURSAL_SEQ.NEXTVAL, v_nombre, v_direccion, v_fono, v_comuna, v_empresa_rut);
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE MODIFICAR_SUCURSAL(
+    v_id NUMBER, v_nombre VARCHAR2, v_direccion VARCHAR2, v_fono VARCHAR2, v_comuna VARCHAR2, v_empresa_rut VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE SUCURSAL
+    SET NOMBRE = v_nombre, DIRECCION = v_direccion, FONO = v_fono, COMUNA = v_comuna, EMPRESA_RUT = v_empresa_rut
+    WHERE ID_SUCUR = v_id;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE ELIMINAR_SUCURSAL(
+    v_id NUMBER, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    DELETE FROM SUCURSAL
+    WHERE ID_SUCUR = v_id;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
 

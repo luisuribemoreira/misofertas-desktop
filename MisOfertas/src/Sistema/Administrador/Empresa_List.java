@@ -179,24 +179,20 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
+                        .addGap(15, 15, 15)
                         .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDireccion)
                             .addGroup(pnlEmpresaLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pnlEmpresaLayout.createSequentialGroup()
-                                .addGap(15, 15, 15)
                                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlEmpresaLayout.createSequentialGroup()
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtDireccion))
-                                .addContainerGap())))
+                                    .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(pnlEmpresaLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(pnlEmpresaLayout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,6 +312,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaEmpresasMouseClicked
 
     private void btnNewEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEmpresaActionPerformed
+        vistaDefault();
         txtNombre.setEnabled(true);
         txtRut.setEnabled(true);
         txtDireccion.setEnabled(true);
@@ -342,7 +339,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             if(a == 0){
                 respuesta = emp.eliminar(conn);
                 if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La empresa fue Eliminada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa fue Eliminada",null, JOptionPane.INFORMATION_MESSAGE, null);
                     try {
                         cargarTabla();
                         vistaDefault();
@@ -368,7 +365,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             if(a == 0){
                 respuesta = emp.agregar(conn);
                 if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La empresa fue Registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa fue Registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
                     try {
                         cargarTabla();
                         vistaDefault();
@@ -376,7 +373,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                         Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,"La empresa ya fue registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa ya fue Registrada",null, JOptionPane.ERROR_MESSAGE, null);
                 }
             } 
         }else{
@@ -384,7 +381,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             if(a == 0){
                 respuesta = emp.modificar(conn);
                 if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La empresa fue Modificada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa fue Modificada",null, JOptionPane.INFORMATION_MESSAGE, null);
                     try {
                         cargarTabla();
                         vistaDefault();
@@ -392,7 +389,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                         Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.ERROR_MESSAGE, null);
                 }
             }
         }
