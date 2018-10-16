@@ -20,7 +20,7 @@ public class SistemaMisOfertasA extends javax.swing.JFrame {
     public SistemaMisOfertasA() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Empresa_List emp = new Empresa_List();
+        Sucursal_List emp = new Sucursal_List();
         jDesktopPane1.add(emp);
         emp.setVisible(true);
     }

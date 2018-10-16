@@ -7,6 +7,7 @@ package Sistema.Administrador;
 
 import MisPaquetes.Empresa;
 import static Sistema.MainSistema.conn;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -58,6 +59,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
         txtRazonSocial = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lblRespuestaEmpresa = new javax.swing.JLabel();
         btnNewEmpresa = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -144,12 +146,32 @@ public class Empresa_List extends javax.swing.JInternalFrame {
         jLabel4.setText("Razón Social:");
 
         txtRut.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRutKeyTyped(evt);
+            }
+        });
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
 
         txtRazonSocial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRazonSocial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRazonSocialKeyTyped(evt);
+            }
+        });
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAgregar.setText("Guardar");
@@ -166,6 +188,11 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
+
+        lblRespuestaEmpresa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblRespuestaEmpresa.setForeground(java.awt.Color.red);
+        lblRespuestaEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRespuestaEmpresa.setText("Respuesta");
 
         javax.swing.GroupLayout pnlEmpresaLayout = new javax.swing.GroupLayout(pnlEmpresa);
         pnlEmpresa.setLayout(pnlEmpresaLayout);
@@ -186,7 +213,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 292, Short.MAX_VALUE))))
                     .addGroup(pnlEmpresaLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -196,9 +223,13 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             .addGroup(pnlEmpresaLayout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(65, 65, 65)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 162, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlEmpresaLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(lblRespuestaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlEmpresaLayout.setVerticalGroup(
             pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,11 +250,13 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(lblRespuestaEmpresa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         btnNewEmpresa.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -285,8 +318,8 @@ public class Empresa_List extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(pnlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(pnlEmpresa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,24 +392,34 @@ public class Empresa_List extends javax.swing.JInternalFrame {
         emp.setDireccion(txtDireccion.getText());
         emp.setRazon_social(txtRazonSocial.getText());
         int respuesta = 0;
+        boolean validarCampos = validadorCampos();
         
-        if(txtRut.isEnabled()){
-            int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Empresa?", "Message",  JOptionPane.YES_NO_OPTION);
-            if(a == 0){
-                respuesta = emp.agregar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La Empresa fue Registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+        if (txtRut.isEnabled()) {
+            boolean validador = validarRut(txtRut.getText());
+            if (validador && validarCampos) {
+                int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Empresa?", "Message", JOptionPane.YES_NO_OPTION);
+                if (a == 0) {
+
+                    respuesta = emp.agregar(conn);
+                    if (respuesta == 1) {
+                        JOptionPane.showMessageDialog(null, "La Empresa fue Registrada", null, JOptionPane.INFORMATION_MESSAGE, null);
+                        try {
+                            cargarTabla();
+                            vistaDefault();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La Empresa ya fue Registrada", null, JOptionPane.ERROR_MESSAGE, null);
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null,"La Empresa ya fue Registrada",null, JOptionPane.ERROR_MESSAGE, null);
                 }
-            } 
-        }else{
+            } else if(!validador){
+                lblRespuestaEmpresa.setText("El Rut es incorrecto");
+            }else{
+                lblRespuestaEmpresa.setText("Complete todos los campos de texto");
+            }
+
+        } else {
             int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar esta Empresa?", "Message",  JOptionPane.YES_NO_OPTION);
             if(a == 0){
                 respuesta = emp.modificar(conn);
@@ -407,6 +450,42 @@ public class Empresa_List extends javax.swing.JInternalFrame {
         buscarEmpresa();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
+        if(txtRut.getText().length()>=10){
+            evt.consume();
+        }
+        if(!Character.isDigit(evt.getKeyChar()) && txtRut.getText().length() <= 7){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+        if(evt.getKeyChar() != '-' && txtRut.getText().length() == 8){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != 'k' && evt.getKeyChar() != 'K' && txtRut.getText().length() == 9){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtRutKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if(txtNombre.getText().length()>=25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        if(txtDireccion.getText().length()>=100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtRazonSocialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRazonSocialKeyTyped
+        if(txtRazonSocial.getText().length()>=25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRazonSocialKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -421,6 +500,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRespuestaBuscar;
+    private javax.swing.JLabel lblRespuestaEmpresa;
     private javax.swing.JPanel pnlBusqueda;
     private javax.swing.JPanel pnlEmpresa;
     private javax.swing.JTable tablaEmpresas;
@@ -471,6 +551,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
         txtRazonSocial.setText("");
         txtBuscar.setText("Ingrese Rut de la Empresa");
         lblRespuestaBuscar.setText("");
+        lblRespuestaEmpresa.setText("");
     }
 
     private void buscarEmpresa() {
@@ -492,5 +573,44 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             lblRespuestaBuscar.setText("No hay registros de la Empresa con RUT: " + txtBuscar.getText());
             vistaDefault();
         }
+    }
+
+    private boolean validarRut(String rut) {
+        boolean validacion = false;
+        try {
+            rut =  rut.toUpperCase();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
+
+            char dv = rut.charAt(rut.length() - 1);
+
+            int m = 0, s = 1;
+            for (; rutAux != 0; rutAux /= 10) {
+                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+            }
+            if (dv == (char) (s != 0 ? s + 47 : 75)) {
+                validacion = true;
+            }
+
+        } catch (java.lang.NumberFormatException e) {
+        } catch (Exception e) {
+        }
+        return validacion;
+    }
+
+    private boolean validadorCampos() {
+        boolean validador = true;
+        if (txtNombre.getText().trim().isEmpty()) {
+            validador = false;
+        }
+        if (txtDireccion.getText().trim().isEmpty()) {
+            validador = false;
+        }
+        if (txtRazonSocial.getText().trim().isEmpty()) {
+            validador = false;
+        }
+        
+        return validador;
     }
 }

@@ -8,6 +8,7 @@ package Sistema.Administrador;
 import MisPaquetes.Empresa;
 import MisPaquetes.Sucursal;
 import static Sistema.MainSistema.conn;
+import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -65,7 +66,7 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         txtId = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         ddlEmpresa = new javax.swing.JComboBox<>();
-        lblRespuestaEmpresa = new javax.swing.JLabel();
+        lblRespuestaSucursal = new javax.swing.JLabel();
         btnNewSucursal = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -152,12 +153,32 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         jLabel4.setText("Comuna:");
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionKeyTyped(evt);
+            }
+        });
 
         txtFono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtFono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFonoKeyTyped(evt);
+            }
+        });
 
         txtComuna.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtComuna.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtComunaKeyTyped(evt);
+            }
+        });
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAgregar.setText("Guardar");
@@ -188,10 +209,10 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         ddlEmpresa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ddlEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE EMPRESA ASOCIADA" }));
 
-        lblRespuestaEmpresa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblRespuestaEmpresa.setForeground(java.awt.Color.red);
-        lblRespuestaEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRespuestaEmpresa.setText("Respuesta");
+        lblRespuestaSucursal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblRespuestaSucursal.setForeground(java.awt.Color.red);
+        lblRespuestaSucursal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRespuestaSucursal.setText("Respuesta");
 
         javax.swing.GroupLayout pnSucursalLayout = new javax.swing.GroupLayout(pnSucursal);
         pnSucursal.setLayout(pnSucursalLayout);
@@ -226,7 +247,7 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(ddlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(305, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(pnSucursalLayout.createSequentialGroup()
                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnSucursalLayout.createSequentialGroup()
@@ -243,7 +264,7 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSucursalLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblRespuestaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblRespuestaSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(98, 98, 98))
         );
         pnSucursalLayout.setVerticalGroup(
@@ -277,7 +298,7 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
                             .addComponent(jLabel6)
                             .addComponent(ddlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(lblRespuestaEmpresa)
+                .addComponent(lblRespuestaSucursal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,14 +442,17 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         suc.setComuna(txtComuna.getText());
         Empresa emp = new Empresa();
         int respuesta = 0;
-        
+
         if (ddlEmpresa.getSelectedIndex() != 0) {
             emp = (Empresa) ddlEmpresa.getModel().getSelectedItem();
             suc.setEmpresaRut(emp.getRut());
         }
+
         
         if (ddlEmpresa.getSelectedIndex() == 0) {
-            lblRespuestaEmpresa.setText("Falta Seleccionar la Empresa de la Sucursal");
+            lblRespuestaSucursal.setText("Falta Seleccionar la Empresa de la Sucursal");
+        }else if (!validadorCampos()){
+            lblRespuestaSucursal.setText("Ingrese todos los datos");
         }else if(txtId.getText().equals("")){
             int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Sucursal?", "Message",  JOptionPane.YES_NO_OPTION);
             if(a == 0){
@@ -477,6 +501,34 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         buscarSucursal();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if(txtNombre.getText().length()>=25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
+        if(txtDireccion.getText().length()>=100){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionKeyTyped
+
+    private void txtFonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFonoKeyTyped
+        if(txtFono.getText().length()>=13){
+            evt.consume();
+        }
+        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '+' && txtFono.getText().length() == 0){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtFonoKeyTyped
+
+    private void txtComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComunaKeyTyped
+        if(txtComuna.getText().length()>=25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtComunaKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -494,7 +546,7 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRespuestaBuscar;
-    private javax.swing.JLabel lblRespuestaEmpresa;
+    private javax.swing.JLabel lblRespuestaSucursal;
     private javax.swing.JPanel pnSucursal;
     private javax.swing.JPanel pnlBusqueda;
     private javax.swing.JTable tablaSucursales;
@@ -553,7 +605,7 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         txtId.setText("");
         txtBuscar.setText("Ingrese ID de la Sucursal");
         lblRespuestaBuscar.setText("");
-        lblRespuestaEmpresa.setText("");
+        lblRespuestaSucursal.setText("");
     }
 
     private void buscarSucursal() {
@@ -594,5 +646,22 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
             v_emp.setRazon_social(rs.getString("RAZON_SOCIAL"));
             ddlEmpresa.addItem(v_emp);
         }
+    }
+
+    private boolean validadorCampos() {
+        boolean validar = true;
+        if (txtNombre.getText().trim().isEmpty()) {
+            validar = false;
+        }
+        if (txtDireccion.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtFono.getText().isEmpty()){
+            validar = false;
+        }
+        if (txtComuna.getText().isEmpty()) {
+            validar = false;
+        }
+        return validar;
     }
 }
