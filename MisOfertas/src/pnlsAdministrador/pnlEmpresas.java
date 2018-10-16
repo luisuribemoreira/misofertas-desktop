@@ -5,7 +5,6 @@
  */
 package pnlsAdministrador;
 
-import pnlsEncargado.*;
 import MisPaquetes.Empresa;
 import Sistema.Administrador.Empresa_List;
 import static Sistema.MainSistema.conn;

@@ -147,7 +147,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
         dos.setBackground(new java.awt.Color(239, 238, 244));
         dos.setForeground(new java.awt.Color(128, 128, 131));
         dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/collection.png"))); // NOI18N
-        dos.setText("Collection");
+        dos.setText("Sucursales");
         dos.setColorHover(new java.awt.Color(204, 204, 204));
         dos.setColorNormal(new java.awt.Color(239, 238, 244));
         dos.setColorPressed(new java.awt.Color(204, 204, 204));
@@ -593,7 +593,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_dosMousePressed
 
     private void dosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosActionPerformed
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlCollection());
+        new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlSucursales());
         if(this.dos.isSelected()){
             this.dos.setColorNormal(new Color(204,204,204));
             this.dos.setColorHover(new Color(204,204,204));
