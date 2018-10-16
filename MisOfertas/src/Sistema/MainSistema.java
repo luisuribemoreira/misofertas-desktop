@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class MainSistema {
 
-    static MisPaquetes.Conexion conn = new Conexion();
+    public static MisPaquetes.Conexion conn = new Conexion();
     static MisPaquetes.Usuario user_conectado = new Usuario();
     /**
      * @param args the command line arguments
