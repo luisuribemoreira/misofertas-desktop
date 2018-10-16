@@ -316,6 +316,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaEmpresasMouseClicked
 
     private void btnNewEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEmpresaActionPerformed
+        vistaDefault();
         txtNombre.setEnabled(true);
         txtRut.setEnabled(true);
         txtDireccion.setEnabled(true);
@@ -342,7 +343,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             if(a == 0){
                 respuesta = emp.eliminar(conn);
                 if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La empresa fue Eliminada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa fue Eliminada",null, JOptionPane.INFORMATION_MESSAGE, null);
                     try {
                         cargarTabla();
                         vistaDefault();
@@ -368,7 +369,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             if(a == 0){
                 respuesta = emp.agregar(conn);
                 if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La empresa fue Registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa fue Registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
                     try {
                         cargarTabla();
                         vistaDefault();
@@ -376,7 +377,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                         Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,"La empresa ya fue registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa ya fue Registrada",null, JOptionPane.ERROR_MESSAGE, null);
                 }
             } 
         }else{
@@ -384,7 +385,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
             if(a == 0){
                 respuesta = emp.modificar(conn);
                 if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La empresa fue Modificada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"La Empresa fue Modificada",null, JOptionPane.INFORMATION_MESSAGE, null);
                     try {
                         cargarTabla();
                         vistaDefault();
@@ -392,7 +393,7 @@ public class Empresa_List extends javax.swing.JInternalFrame {
                         Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.ERROR_MESSAGE, null);
                 }
             }
         }

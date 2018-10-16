@@ -15,18 +15,9 @@ import java.util.logging.Logger;
  * @author Nicolás
  */
 public class Usuario {
-    private int id_user;
     private String username;
     private String password;
     private String perfil;
-
-    public int getId_user() {
-        return id_user;
-    }
-
-    public void setId_user(int id_user) {
-        this.id_user = id_user;
-    }
 
     public String getUsername() {
         return username;
@@ -59,18 +50,16 @@ public class Usuario {
         Usuario user_conectado = new Usuario();
         try {
             
-            CallableStatement cst = conn.getConexion_base().prepareCall("{call Login (?,?,?,?)}");
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call Login (?,?,?)}");
             
             cst.setString(1, user);
             cst.setString(2, pass);
             
             cst.registerOutParameter(3, java.sql.Types.VARCHAR);
-            cst.registerOutParameter(4, java.sql.Types.NUMERIC);
             
             cst.execute();
             
             
-            user_conectado.setId_user(cst.getInt(4));
             user_conectado.setPerfil(cst.getString(3));
             user_conectado.setUsername(user);
             user_conectado.setPassword(pass);
