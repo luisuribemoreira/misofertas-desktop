@@ -279,6 +279,11 @@ public class Usuario_List extends javax.swing.JInternalFrame {
 
         ddlCargo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ddlCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Cargo", "Administrador", "Gerente de Asociación", "Encargado de Tienda" }));
+        ddlCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddlCargoActionPerformed(evt);
+            }
+        });
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -300,14 +305,13 @@ public class Usuario_List extends javax.swing.JInternalFrame {
                 .addGroup(pnCredencialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                     .addComponent(txtUser))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                .addGroup(pnCredencialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCredencialLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(144, 144, 144))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCredencialLayout.createSequentialGroup()
-                        .addComponent(ddlCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(144, 144, 144))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCredencialLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ddlCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         pnCredencialLayout.setVerticalGroup(
             pnCredencialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,15 +321,12 @@ public class Usuario_List extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGroup(pnCredencialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnCredencialLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addGroup(pnCredencialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnCredencialLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ddlCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ddlCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(pnCredencialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -651,6 +652,10 @@ public class Usuario_List extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtPassKeyTyped
+
+    private void ddlCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddlCargoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
