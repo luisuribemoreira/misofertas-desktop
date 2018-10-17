@@ -185,3 +185,72 @@ BEGIN
 END;
 /
 
+
+-- Procedimientos Almacenados la GESTIÓN DE USUARIOS (FALTA IMPLEMENTACION)
+
+CREATE OR REPLACE PROCEDURE BUSCAR_USUARIO(
+    v_id NUMBER, v_nombre OUT VARCHAR2, v_direccion OUT VARCHAR2, v_fono OUT VARCHAR2, v_comuna OUT VARCHAR2, v_empresa_rut OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT nombre, direccion, fono, comuna, empresa_rut
+    INTO v_nombre, v_direccion, v_fono, v_comuna, v_empresa_rut
+    FROM SUCURSAL
+    WHERE id_sucur = v_id;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_nombre := 'ERROR';
+      v_direccion := 'ERROR';
+      v_fono := 'ERROR';
+      v_comuna := 'ERROR';
+      v_empresa_rut := 'ERROR';
+END;
+/
+
+CREATE OR REPLACE PROCEDURE AGREGAR_USUARIO(
+    v_nombre VARCHAR2, v_direccion VARCHAR2, v_fono VARCHAR2, v_comuna VARCHAR2, v_empresa_rut VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO SUCURSAL VALUES (SUCURSAL_SEQ.NEXTVAL, v_nombre, v_direccion, v_fono, v_comuna, v_empresa_rut);
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE MODIFICAR_USUARIO(
+    v_id NUMBER, v_nombre VARCHAR2, v_direccion VARCHAR2, v_fono VARCHAR2, v_comuna VARCHAR2, v_empresa_rut VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE SUCURSAL
+    SET NOMBRE = v_nombre, DIRECCION = v_direccion, FONO = v_fono, COMUNA = v_comuna, EMPRESA_RUT = v_empresa_rut
+    WHERE ID_SUCUR = v_id;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE ELIMINAR_USUARIO(
+    v_user VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    DELETE FROM USUARIO
+    WHERE USERNAME = v_user;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+

@@ -559,30 +559,29 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla() throws SQLException {
-        DefaultTableModel modelo =  new DefaultTableModel();
-            modelo.addColumn("ID");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Dirección");
-            modelo.addColumn("Teléfono");
-            modelo.addColumn("Comuna");
-            modelo.addColumn("Rut Empresa");
-            
-            Sucursal suc = new Sucursal();
-            ResultSet rs = suc.listadoSucursales(conn);
-            Object [] fila = new Object[6];
-            while(rs.next()){
-                fila[0] = rs.getInt("ID_SUCUR");
-                fila[1] = rs.getString("NOMBRE");
-                fila[2] = rs.getString("DIRECCION");
-                fila[3] = rs.getString("FONO");
-                fila[4] = rs.getString("COMUNA");
-                fila[5] = rs.getString("EMPRESA_RUT");
-                modelo.addRow(fila);
-            }
-            
-            
-            tablaSucursales.setModel(modelo);
-            tablaSucursales.setVisible(true);
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Dirección");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Comuna");
+        modelo.addColumn("Rut Empresa");
+
+        Sucursal suc = new Sucursal();
+        ResultSet rs = suc.listadoSucursales(conn);
+        Object[] fila = new Object[6];
+        while (rs.next()) {
+            fila[0] = rs.getInt("ID_SUCUR");
+            fila[1] = rs.getString("NOMBRE");
+            fila[2] = rs.getString("DIRECCION");
+            fila[3] = rs.getString("FONO");
+            fila[4] = rs.getString("COMUNA");
+            fila[5] = rs.getString("EMPRESA_RUT");
+            modelo.addRow(fila);
+        }
+
+        tablaSucursales.setModel(modelo);
+        tablaSucursales.setVisible(true);
     }
 
     private void vistaDefault() {

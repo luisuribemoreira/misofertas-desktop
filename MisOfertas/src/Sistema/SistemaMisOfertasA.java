@@ -7,6 +7,7 @@ package Sistema;
 
 import Sistema.Administrador.Empresa_List;
 import Sistema.Administrador.Sucursal_List;
+import Sistema.Administrador.Usuario_List;
 
 /**
  *
@@ -20,7 +21,7 @@ public class SistemaMisOfertasA extends javax.swing.JFrame {
     public SistemaMisOfertasA() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Sucursal_List emp = new Sucursal_List();
+        Usuario_List emp = new Usuario_List();
         jDesktopPane1.add(emp);
         emp.setVisible(true);
     }
@@ -44,22 +45,22 @@ public class SistemaMisOfertasA extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 665, Short.MAX_VALUE)
+            .addGap(0, 876, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 784, Short.MAX_VALUE)
+            .addGap(0, 1076, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1076, Short.MAX_VALUE)
         );
 
         pack();
