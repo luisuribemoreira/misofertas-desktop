@@ -10,6 +10,7 @@ import MisPaquetes.Producto;
 import MisPaquetes.Sucursal;
 import Sistema.Administrador.Empresa_List;
 import static Sistema.MainSistema.conn;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -177,12 +178,32 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel4.setText("Stock Seguro:");
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
+            }
+        });
 
         txtEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtEstado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEstadoKeyTyped(evt);
+            }
+        });
 
         txtSeguro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSeguro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSeguroKeyTyped(evt);
+            }
+        });
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAgregar.setText("Guardar");
@@ -225,10 +246,25 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel11.setText("Valor:");
 
         txtDescRubro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDescRubro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescRubroKeyTyped(evt);
+            }
+        });
 
         txtRubro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRubro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRubroKeyTyped(evt);
+            }
+        });
 
         txtValor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlProductoLayout = new javax.swing.GroupLayout(pnlProducto);
         pnlProducto.setLayout(pnlProductoLayout);
@@ -471,53 +507,63 @@ public class pnlProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        Producto pro = new Producto();
-        pro.setNombre(txtNombre.getText());
-        pro.setDescripcion(txtDescripcion.getText());
-        java.util.Date utilDate = (java.util.Date) txtFechaIngreso.getDate();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        pro.setFecha_ing(sqlDate);
-        pro.setEstado(txtEstado.getText().charAt(0));
-        pro.setStk_seguro(Integer.parseInt(txtSeguro.getText()));
-        pro.setRubro(txtRubro.getText());
-        pro.setDesc_rubro(txtDescRubro.getText());
-        pro.setValor(Integer.parseInt(txtValor.getText()));
-        int respuesta = 0;
-        
-        if (txtNombre.isEnabled()) {
-            int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este producto?", "Message",  JOptionPane.YES_NO_OPTION);
-            if (a == 0 ) {
-                respuesta = pro.agregar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"El producto fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null,"El Producto ya fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
-                }
-            }
+        try{
             
-        }else{
-            int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar este Producto?", "Message",  JOptionPane.YES_NO_OPTION);
-            if(a == 0){
-                respuesta = pro.modificar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"El Producto fue Modificado",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+            if (!validadorCampos()){
+                throw new Exception ("Ingrese todos los datos");
+            }
+            Producto pro = new Producto();
+            pro.setNombre(txtNombre.getText());
+            pro.setDescripcion(txtDescripcion.getText());
+            java.util.Date utilDate = (java.util.Date) txtFechaIngreso.getDate();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            
+            pro.setFecha_ing(sqlDate);
+            pro.setEstado(txtEstado.getText().charAt(0));
+            pro.setStk_seguro(Integer.parseInt(txtSeguro.getText()));
+            pro.setRubro(txtRubro.getText());
+            pro.setDesc_rubro(txtDescRubro.getText());
+            pro.setValor(Integer.parseInt(txtValor.getText()));
+            int respuesta = 0;
+        
+   
+            if (txtNombre.isEnabled()) {
+                int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este producto?", "Message",  JOptionPane.YES_NO_OPTION);
+                if (a == 0 ) {
+                    respuesta = pro.agregar(conn);
+                    if(respuesta == 1){
+                        JOptionPane.showMessageDialog(null,"El producto fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
+                        try {
+                            cargarTabla();
+                            vistaDefault();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"El Producto ya fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.INFORMATION_MESSAGE, null);
+                }
+
+            }else{
+                int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar este Producto?", "Message",  JOptionPane.YES_NO_OPTION);
+                if(a == 0){
+                    respuesta = pro.modificar(conn);
+                    if(respuesta == 1){
+                        JOptionPane.showMessageDialog(null,"El Producto fue Modificado",null, JOptionPane.INFORMATION_MESSAGE, null);
+                        try {
+                            cargarTabla();
+                            vistaDefault();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    }
                 }
             }
-        }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"" + ex.getMessage(),null, JOptionPane.INFORMATION_MESSAGE, null);
+        }        
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -535,6 +581,71 @@ public class pnlProductos extends javax.swing.JPanel {
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void txtSeguroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSeguroKeyTyped
+        // TODO add your handling code here: 
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        if(txtSeguro.getText().length()>= 7){
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtSeguroKeyTyped
+
+    private void txtEstadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoKeyTyped
+        // TODO add your handling code here:
+        if(txtEstado.getText().length()>=1){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtEstadoKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        if(txtNombre.getText().length()>=25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+        // TODO add your handling code here:
+        if(txtDescripcion.getText().length()>= 200){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescripcionKeyTyped
+
+    private void txtRubroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRubroKeyTyped
+        // TODO add your handling code here:
+        if(txtRubro.getText().length()>= 25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRubroKeyTyped
+
+    private void txtDescRubroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescRubroKeyTyped
+        // TODO add your handling code here:
+        if(txtDescRubro.getText().length()>= 200){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescRubroKeyTyped
+
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        
+        if(txtValor.getText().length()>=1){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -648,6 +759,37 @@ public class pnlProductos extends javax.swing.JPanel {
             lblRespuestaBuscar.setText("No hay registros de la Sucursal con ID: " + txtBuscar.getText());
             vistaDefault();
         }
+    }
+    
+    private boolean validadorCampos() {
+        boolean validar = true;
+        if (txtNombre.getText().trim().isEmpty()) {
+            validar = false;
+        }
+        if (txtDescripcion.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtEstado.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtSeguro.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtRubro.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtDescRubro.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtValor.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtEstado.getText().isEmpty()) {
+            validar = false;
+        }if (txtFechaIngreso.getDate() == null) {
+            validar = false;
+        }
+        return validar;
     }
 
 }

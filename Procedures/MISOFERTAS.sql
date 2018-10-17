@@ -329,4 +329,102 @@ BEGIN
 END;
 /
 
+/*Primera version del procedimiento almacenado de BUSCAR_OFERTA*/
+CREATE OR REPLACE PROCEDURE BUSCAR_OFERTA(
+    v_id NUMBER,
+    v_descripcion         OUT VARCHAR2,
+    v_fec_inicio          OUT DATE,
+    v_fec_termino         OUT DATE,
+    v_img_oferta          OUT BLOB,
+    v_valoracion_total    OUT NUMBER,
+    v_porc_desc           OUT NUMBER,
+    v_sucursal_id_sucur   OUT NUMBER,
+    v_producto_id_prod    OUT NUMBER
+)
+AS
+BEGIN
+    SELECT DESCRIPCION, FEC_INICIO, FEC_TERMINO, IMG_OFERTA, VALORACION_TOTAL,PORC_DESC,SUCURSAL_ID_SUCUR,PRODUCTO_ID_PROD
+    INTO v_descripcion, v_fec_inicio, v_fec_termino, v_img_oferta, v_valoracion_total,v_porc_desc,v_sucursal_id_sucur,v_producto_id_prod
+    FROM OFERTA
+    WHERE ID_OFERTA = v_id;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_descripcion := 'ERROR';
+      v_fec_inicio := TO_DATE('00/00/0000','DD/MM/YYYY');
+      v_fec_termino := TO_DATE('00/00/0000','DD/MM/YYYY');
+      v_img_oferta := null;
+      v_valoracion_total := 0;
+      v_porc_desc := 0;
+      v_sucursal_id_sucur := 0;
+      v_producto_id_prod := 0;
+END;
 
+/
+
+/*Primera version del procedimineto almacenado de AGREGAR_OFERTA*/
+
+CREATE OR REPLACE PROCEDURE AGREGAR_SUCURSAL(
+    v_descripcion         VARCHAR2,
+    v_fec_inicio          DATE,
+    v_fec_termino         DATE,
+    v_img_oferta          BLOB,
+    v_valoracion_total    NUMBER,
+    v_porc_desc           NUMBER,
+    v_sucursal_id_sucur   NUMBER,
+    v_producto_id_prod    NUMBER,
+    v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO OFERTA VALUES (OFERTA_SEQ.NEXTVAL, v_descripcion, v_fec_inicio, v_fec_termino, v_img_oferta, v_valoracion_total,v_porc_desc,v_sucursal_id_sucur,v_producto_id_prod);
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+/*Primera version del procedimiento almacenado de ELIMINAR_OFERTA*/
+CREATE OR REPLACE PROCEDURE ELIMINAR_OFERTA(
+    v_id NUMBER, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    DELETE FROM OFERTA
+    WHERE ID_OFERTA = v_id;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+
+/
+/*Primera version del procedimiento almacenado de modificar oferta*/
+
+
+CREATE OR REPLACE PROCEDURE MODIFICAR_OFERTA(
+    v_id                  NUMBER,
+    v_descripcion         VARCHAR2,
+    v_fec_inicio          DATE,
+    v_fec_termino         DATE,
+    v_img_oferta          BLOB,
+    v_valoracion_total    NUMBER,
+    v_porc_desc           NUMBER,
+    v_sucursal_id_sucur   NUMBER,
+    v_producto_id_prod    NUMBER,
+    v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE OFERTA
+    SET DESCRIPCION = v_descripcion,FEC_INICIO = v_fec_inicio,FEC_TERMINO = v_fec_termino,IMG_OFERTA = v_img_oferta,VALORACION_TOTAL = v_valoracion_total,
+    PORC_DESC = v_porc_desc, SUCURSAL_ID_SUCUR = v_sucursal_id_sucur, PRODUCTO_ID_PROD = v_producto_id_prod
+    WHERE ID_OFERTA = v_id;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
