@@ -429,10 +429,14 @@ public class pnlProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNewProductoActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        txtNombre.setEnabled(false);
         txtDescripcion.setEnabled(true);
-        txtNombre.setEnabled(true);
+        txtFechaIngreso.setEnabled(true);
         txtEstado.setEnabled(true);
         txtSeguro.setEnabled(true);
+        txtRubro.setEnabled(true);
+        txtDescRubro.setEnabled(true);
+        txtValor.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -628,6 +632,7 @@ public class pnlProductos extends javax.swing.JPanel {
             txtNombre.setText(pro.getNombre());
             txtDescripcion.setText(pro.getDescripcion());
             txtFechaIngreso.setDate(pro.getFecha_ing());
+            txtEstado.setText(String.valueOf(pro.getEstado()));
             txtSeguro.setText(String.valueOf(pro.getStk_seguro()));
             txtRubro.setText(pro.getRubro());
             txtDescRubro.setText(pro.getDesc_rubro());

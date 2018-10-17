@@ -64,7 +64,7 @@ public class SingIn extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(63, 81, 181));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\Documentos\\GitHub\\misofertas-desktop\\MisOfertas\\src\\Icons\\icons8-administrator-male-256.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-administrator-male-256.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,10 +110,10 @@ public class SingIn extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 33, 33));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Inisiar Sesion");
+        jLabel1.setText("Iniciar Sesion");
 
         jButton1.setBackground(new java.awt.Color(255, 87, 34));
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Documentos\\GitHub\\misofertas-desktop\\MisOfertas\\src\\Icons\\icons8-enter-32 (1).png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-enter-32 (1).png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -136,7 +136,7 @@ public class SingIn extends javax.swing.JDialog {
         jLabel2.setBackground(new java.awt.Color(63, 81, 181));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Documentos\\GitHub\\misofertas-desktop\\MisOfertas\\src\\Icons\\icons8-cancel-32 (1).png")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-cancel-32 (1).png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
