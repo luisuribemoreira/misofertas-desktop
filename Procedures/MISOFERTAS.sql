@@ -1,12 +1,4 @@
-INSERT INTO USUARIO VALUES ('LUIS', 'LUIS', 'CONSUMIDOR');
-CREATE OR REPLACE PROCEDURE pl (
-   cadena VARCHAR2
-)
-AS
-BEGIN
-  dbms_output.put_line(cadena);
-END;
-/
+
 
 CREATE OR REPLACE PROCEDURE Login(
     v_username VARCHAR2, v_pass VARCHAR2, v_perfil OUT VARCHAR2
@@ -24,11 +16,6 @@ BEGIN
 END;
 /
 
-VARIABLE perfil VARCHAR2(50);
-
-EXEC Login('LUIS', 'LUIS', :perfil);
-
-EXEC pl('' || :perfil);
 
 /*Primera version del procedimiento almacenado de insertar producto*/
 
@@ -262,34 +249,127 @@ END;
 /
 
 
--- Procedimientos Almacenados la GESTIÓN DE USUARIOS (FALTA IMPLEMENTACION)
+-- Procedimientos Almacenados la GESTIÓN DE USUARIOS
 
 CREATE OR REPLACE PROCEDURE BUSCAR_USUARIO(
-    v_id NUMBER, v_nombre OUT VARCHAR2, v_direccion OUT VARCHAR2, v_fono OUT VARCHAR2, v_comuna OUT VARCHAR2, v_empresa_rut OUT VARCHAR2
+    v_user VARCHAR2, v_pass OUT VARCHAR2, v_perfil OUT VARCHAR2
 )
 AS
 BEGIN
-    SELECT nombre, direccion, fono, comuna, empresa_rut
-    INTO v_nombre, v_direccion, v_fono, v_comuna, v_empresa_rut
-    FROM SUCURSAL
-    WHERE id_sucur = v_id;
+    SELECT PASSWORD, PERFIL
+    INTO v_pass, v_perfil
+    FROM USUARIO
+    WHERE USERNAME = v_user AND NOT PERFIL = 'CONSUMIDOR';
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_pass := 'ERROR';
+      v_perfil := 'ERROR';
+END;
+/
+
+CREATE OR REPLACE PROCEDURE BUSCAR_PERSONA_USER(
+    v_user VARCHAR2, v_run OUT VARCHAR2, v_nombre OUT VARCHAR2, v_app OUT VARCHAR2, v_apm OUT VARCHAR2, v_sexo OUT VARCHAR2, v_email OUT VARCHAR2, v_fecha OUT DATE
+)
+AS
+    lrun VARCHAR2(15);
+BEGIN
+    SELECT PERSONA_RUN
+    INTO lrun
+    FROM EMPLEADO
+    WHERE USUARIO_USERNAME = v_user;
+    
+    SELECT RUN, NOMBRE, PATERNO, MATERNO, SEXO, EMAIL, FEC_NAC
+    INTO v_run, v_nombre, v_app, v_apm, v_sexo, v_email, v_fecha
+    FROM PERSONA
+    WHERE run = lrun;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_run := 'ERROR';
+      v_nombre := 'ERROR';
+      v_app := 'ERROR';
+      v_apm := 'ERROR';
+      v_sexo := 'ERROR';
+      v_email := 'ERROR';
+      v_fecha := TO_DATE('01/01/0001','DD-MM-YYYY');
+END;
+/
+
+CREATE OR REPLACE PROCEDURE BUSCAR_PERSONA(
+    v_run VARCHAR2, v_nombre OUT VARCHAR2, v_app OUT VARCHAR2, v_apm OUT VARCHAR2, v_sexo OUT VARCHAR2, v_email OUT VARCHAR2, v_fecha OUT DATE
+)
+AS
+BEGIN
+    
+    SELECT NOMBRE, PATERNO, MATERNO, SEXO, EMAIL, FEC_NAC
+    INTO v_nombre, v_app, v_apm, v_sexo, v_email, v_fecha
+    FROM PERSONA
+    WHERE run = v_run;
     
     EXCEPTION
     WHEN OTHERS THEN
       v_nombre := 'ERROR';
-      v_direccion := 'ERROR';
-      v_fono := 'ERROR';
-      v_comuna := 'ERROR';
-      v_empresa_rut := 'ERROR';
+      v_app := 'ERROR';
+      v_apm := 'ERROR';
+      v_sexo := 'ERROR';
+      v_email := 'ERROR';
+      v_fecha := TO_DATE('01/01/0001','DD-MM-YYYY');
+END;
+/
+
+CREATE OR REPLACE PROCEDURE BUSCAR_EMPLEADO(
+    v_run VARCHAR2, v_user OUT VARCHAR2, v_cargo OUT VARCHAR2
+)
+AS
+BEGIN
+    
+    SELECT USUARIO_USERNAME, CARGO
+    INTO v_user, v_cargo
+    FROM EMPLEADO
+    WHERE PERSONA_RUN = v_run;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_user := 'ERROR';
+      v_cargo := 'ERROR';
 END;
 /
 
 CREATE OR REPLACE PROCEDURE AGREGAR_USUARIO(
-    v_nombre VARCHAR2, v_direccion VARCHAR2, v_fono VARCHAR2, v_comuna VARCHAR2, v_empresa_rut VARCHAR2, v_respuesta OUT NUMBER
+    v_user VARCHAR2, v_pass VARCHAR2, v_perfil VARCHAR2, v_respuesta OUT NUMBER
 )
 AS
 BEGIN
-    INSERT INTO SUCURSAL VALUES (SUCURSAL_SEQ.NEXTVAL, v_nombre, v_direccion, v_fono, v_comuna, v_empresa_rut);
+    INSERT INTO USUARIO VALUES (v_user, v_pass, v_perfil);
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE AGREGAR_PERSONA(
+    v_run VARCHAR2, v_nombre VARCHAR2, v_app VARCHAR2, v_apm VARCHAR2, v_sexo VARCHAR2, v_email VARCHAR2, v_fecha DATE, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO PERSONA VALUES (v_run, v_nombre, v_app, v_apm, v_sexo, v_email,v_fecha);
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE AGREGAR_EMPLEADO(
+    v_user VARCHAR2, v_run VARCHAR2, v_cargo VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO EMPLEADO VALUES (v_cargo, v_run , v_user);
     v_respuesta := 1;
     
     EXCEPTION
@@ -299,13 +379,45 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE MODIFICAR_USUARIO(
-    v_id NUMBER, v_nombre VARCHAR2, v_direccion VARCHAR2, v_fono VARCHAR2, v_comuna VARCHAR2, v_empresa_rut VARCHAR2, v_respuesta OUT NUMBER
+    v_user VARCHAR2, v_pass VARCHAR2, v_perfil VARCHAR2, v_respuesta OUT NUMBER
 )
 AS
 BEGIN
-    UPDATE SUCURSAL
-    SET NOMBRE = v_nombre, DIRECCION = v_direccion, FONO = v_fono, COMUNA = v_comuna, EMPRESA_RUT = v_empresa_rut
-    WHERE ID_SUCUR = v_id;
+    UPDATE USUARIO
+    SET PASSWORD = v_pass, PERFIL = v_perfil
+    WHERE USERNAME = v_user;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE MODIFICAR_PERSONA(
+    v_run VARCHAR2, v_nombre VARCHAR2, v_app VARCHAR2, v_apm VARCHAR2, v_email VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE PERSONA
+    SET NOMBRE = v_nombre, PATERNO = v_app, MATERNO = v_apm, EMAIL = v_email
+    WHERE RUN = v_run;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE MODIFICAR_EMPLEADO(
+    v_user VARCHAR2, v_run VARCHAR2, v_cargo VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE EMPLEADO
+    SET CARGO = v_cargo
+    WHERE PERSONA_RUN = v_run and USUARIO_USERNAME = v_user;
     v_respuesta := 1;
     
     EXCEPTION

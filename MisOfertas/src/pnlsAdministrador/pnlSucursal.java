@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Sistema.Administrador;
+package pnlsAdministrador;
 
 import MisPaquetes.Empresa;
 import MisPaquetes.Sucursal;
+import Sistema.Administrador.Sucursal_List;
 import static Sistema.MainSistema.conn;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,19 +21,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Nicolás
  */
-public class Sucursal_List extends javax.swing.JInternalFrame {
+public class pnlSucursal extends javax.swing.JPanel {
 
     /**
-     * Creates new form Empresa_List
+     * Creates new form pnlSucursal
      */
-    public Sucursal_List() {
+    public pnlSucursal() {
         try {
             initComponents();
             cargarTabla();
             cargarComboBox();
             vistaDefault();
         } catch (SQLException ex) {
-            Logger.getLogger(Sucursal_List.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -46,11 +46,15 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnNewSucursal = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaSucursales = new javax.swing.JTable();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         pnlBusqueda = new javax.swing.JPanel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        lblRespuestaBuscar = new javax.swing.JLabel();
         pnSucursal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -67,13 +71,14 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         ddlEmpresa = new javax.swing.JComboBox<>();
         lblRespuestaSucursal = new javax.swing.JLabel();
-        btnNewSucursal = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
-        lblRespuestaBuscar = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
-        setBorder(null);
+        btnNewSucursal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnNewSucursal.setText("Nueva Sucursal");
+        btnNewSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewSucursalActionPerformed(evt);
+            }
+        });
 
         tablaSucursales.setBackground(new java.awt.Color(240, 240, 240));
         tablaSucursales.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -94,6 +99,22 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tablaSucursales);
+
+        btnModificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         pnlBusqueda.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255), 3), "Búsqueda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -137,6 +158,11 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
                 .addComponent(btnBuscar)
                 .addContainerGap())
         );
+
+        lblRespuestaBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblRespuestaBuscar.setForeground(java.awt.Color.red);
+        lblRespuestaBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRespuestaBuscar.setText("Respuesta");
 
         pnSucursal.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255), 3), "Sucursal", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -249,23 +275,21 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
                         .addComponent(ddlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(pnSucursalLayout.createSequentialGroup()
-                .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnSucursalLayout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnSucursalLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addGap(21, 21, 21)
-                        .addComponent(txtDireccion)))
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(21, 21, 21)
+                .addComponent(txtDireccion)
                 .addContainerGap())
+            .addGroup(pnSucursalLayout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSucursalLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblRespuestaSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
+                .addGap(141, 141, 141))
         );
         pnSucursalLayout.setVerticalGroup(
             pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,76 +321,50 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
                         .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(ddlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblRespuestaSucursal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        btnNewSucursal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnNewSucursal.setText("Nueva Sucursal");
-        btnNewSucursal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewSucursalActionPerformed(evt);
-            }
-        });
-
-        btnModificar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-
-        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
-        lblRespuestaBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblRespuestaBuscar.setForeground(java.awt.Color.red);
-        lblRespuestaBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRespuestaBuscar.setText("Respuesta");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(102, 102, 102)
                 .addComponent(btnNewSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98)
+                .addGap(106, 106, 106)
                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(79, 79, 79))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnlBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblRespuestaBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblRespuestaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(234, 234, 234))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pnlBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(257, 257, 257))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -376,20 +374,11 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
                 .addComponent(pnlBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRespuestaBuscar)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tablaSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalesMouseClicked
-        int seleccion = tablaSucursales.getSelectedRow();
-        int idSelect = (int) tablaSucursales.getModel().getValueAt(seleccion, 0);
-        txtBuscar.setText(String.valueOf(idSelect));
-        buscarSucursal();
-    }//GEN-LAST:event_tablaSucursalesMouseClicked
 
     private void btnNewSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewSucursalActionPerformed
         vistaDefault();
@@ -402,6 +391,13 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(true);
         txtNombre.requestFocus();
     }//GEN-LAST:event_btnNewSucursalActionPerformed
+
+    private void tablaSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalesMouseClicked
+        int seleccion = tablaSucursales.getSelectedRow();
+        int idSelect = (int) tablaSucursales.getModel().getValueAt(seleccion, 0);
+        txtBuscar.setText(String.valueOf(idSelect));
+        buscarSucursal();
+    }//GEN-LAST:event_tablaSucursalesMouseClicked
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtDireccion.setEnabled(true);
@@ -418,80 +414,21 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         suc.setId_sucur(Integer.parseInt(txtId.getText()));
         int respuesta = 0;
         int a = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar esta Sucursal?", "Message",  JOptionPane.YES_NO_OPTION);
-            if(a == 0){
-                respuesta = suc.eliminar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La Sucursal fue Eliminada",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Sucursal_List.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Error al Eliminar",null, JOptionPane.INFORMATION_MESSAGE, null);
+        if(a == 0){
+            respuesta = suc.eliminar(conn);
+            if(respuesta == 1){
+                JOptionPane.showMessageDialog(null,"La Sucursal fue Eliminada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                try {
+                    cargarTabla();
+                    vistaDefault();
+                } catch (SQLException ex) {
+                    Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }else{
+                JOptionPane.showMessageDialog(null,"Error al Eliminar",null, JOptionPane.INFORMATION_MESSAGE, null);
             }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        Sucursal suc = new Sucursal();
-        suc.setNombre(txtNombre.getText());
-        suc.setDireccion(txtDireccion.getText());
-        suc.setFono(txtFono.getText());
-        suc.setComuna(txtComuna.getText());
-        Empresa emp = new Empresa();
-        int respuesta = 0;
-
-        if (ddlEmpresa.getSelectedIndex() != 0) {
-            emp = (Empresa) ddlEmpresa.getModel().getSelectedItem();
-            suc.setEmpresaRut(emp.getRut());
-        }
-
-        
-        if (ddlEmpresa.getSelectedIndex() == 0) {
-            lblRespuestaSucursal.setText("Falta Seleccionar la Empresa de la Sucursal");
-        }else if (!validadorCampos()){
-            lblRespuestaSucursal.setText("Ingrese todos los datos");
-        }else if(txtId.getText().equals("")){
-            int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Sucursal?", "Message",  JOptionPane.YES_NO_OPTION);
-            if(a == 0){
-                respuesta = suc.agregar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La Sucursal fue Registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Sucursal_List.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null,"La Sucursal ya fue Registrada",null, JOptionPane.ERROR_MESSAGE, null);
-                }
-            } 
-        }else{
-            suc.setId_sucur(Integer.parseInt(txtId.getText()));
-            int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar esta Sucursal?", "Message",  JOptionPane.YES_NO_OPTION);
-            if(a == 0){
-                respuesta = suc.modificar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"La Sucursal fue Modificada",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Sucursal_List.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.ERROR_MESSAGE, null);
-                }
-            }
-        }
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        vistaDefault();
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
@@ -521,10 +458,6 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != '+' && txtFono.getText().length() > 0){
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
     }//GEN-LAST:event_txtFonoKeyTyped
 
     private void txtComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComunaKeyTyped
@@ -532,6 +465,64 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtComunaKeyTyped
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        Sucursal suc = new Sucursal();
+        suc.setNombre(txtNombre.getText());
+        suc.setDireccion(txtDireccion.getText());
+        suc.setFono(txtFono.getText());
+        suc.setComuna(txtComuna.getText());
+        Empresa emp = new Empresa();
+        int respuesta = 0;
+
+        if (ddlEmpresa.getSelectedIndex() != 0) {
+            emp = (Empresa) ddlEmpresa.getModel().getSelectedItem();
+            suc.setEmpresaRut(emp.getRut());
+        }
+
+        if (ddlEmpresa.getSelectedIndex() == 0) {
+            lblRespuestaSucursal.setText("Falta Seleccionar la Empresa de la Sucursal");
+        }else if (!validadorCampos()){
+            lblRespuestaSucursal.setText("Ingrese todos los datos");
+        }else if(txtId.getText().equals("")){
+            int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta Sucursal?", "Message",  JOptionPane.YES_NO_OPTION);
+            if(a == 0){
+                respuesta = suc.agregar(conn);
+                if(respuesta == 1){
+                    JOptionPane.showMessageDialog(null,"La Sucursal fue Registrada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    try {
+                        cargarTabla();
+                        vistaDefault();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"La Sucursal ya fue Registrada",null, JOptionPane.ERROR_MESSAGE, null);
+                }
+            }
+        }else{
+            suc.setId_sucur(Integer.parseInt(txtId.getText()));
+            int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar esta Sucursal?", "Message",  JOptionPane.YES_NO_OPTION);
+            if(a == 0){
+                respuesta = suc.modificar(conn);
+                if(respuesta == 1){
+                    JOptionPane.showMessageDialog(null,"La Sucursal fue Modificada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    try {
+                        cargarTabla();
+                        vistaDefault();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.ERROR_MESSAGE, null);
+                }
+            }
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        vistaDefault();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -562,6 +553,7 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
+    
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -667,4 +659,6 @@ public class Sucursal_List extends javax.swing.JInternalFrame {
         }
         return validar;
     }
+
+
 }

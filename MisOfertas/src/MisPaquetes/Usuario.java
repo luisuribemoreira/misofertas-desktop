@@ -105,28 +105,21 @@ public class Usuario {
         return usu;
     }
     
-    public int agregar(Conexion conn, Persona per){
+    public int agregar(Conexion conn){
         int respuesta = 0;
         try {
             
-            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_USUARIO (?,?,?,?,?,?,?,?,?,?,?)}");
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_USUARIO (?,?,?,?)}");
             
             cst.setString(1, this.username);
             cst.setString(2, this.password);
             cst.setString(3, this.perfil);
-            cst.setString(4, per.getRun());
-            cst.setString(5, per.getNombre());
-            cst.setString(6, per.getApellidoP());
-            cst.setString(7, per.getApellidoM());
-            cst.setString(8, per.getSexo());
-            cst.setString(9, per.getEmail());
-            cst.setString(10, per.getFec_nac().toString());
             
-            cst.registerOutParameter(6, java.sql.Types.NUMERIC);
+            cst.registerOutParameter(4, java.sql.Types.NUMERIC);
             
             cst.execute();
             
-            respuesta = cst.getInt(11);
+            respuesta = cst.getInt(4);
             
 
         } catch (SQLException ex) {
@@ -135,26 +128,21 @@ public class Usuario {
         return respuesta;
     }
     
-    public int modificar(Conexion conn, Persona per){
+    public int modificar(Conexion conn){
         int respuesta = 0;
         try {
             
-            CallableStatement cst = conn.getConexion_base().prepareCall("{call MODIFICAR_USUARIO (?,?,?,?,?,?,?,?,?)}");
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call MODIFICAR_USUARIO (?,?,?,?)}");
             
             cst.setString(1, this.username);
             cst.setString(2, this.password);
             cst.setString(3, this.perfil);
-            cst.setString(4, per.getRun());
-            cst.setString(5, per.getNombre());
-            cst.setString(6, per.getApellidoP());
-            cst.setString(7, per.getApellidoM());
-            cst.setString(8, per.getEmail());
             
-            cst.registerOutParameter(9, java.sql.Types.NUMERIC);
+            cst.registerOutParameter(4, java.sql.Types.NUMERIC);
             
             cst.execute();
             
-            respuesta = cst.getInt(9);
+            respuesta = cst.getInt(4);
             
 
         } catch (SQLException ex) {

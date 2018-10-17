@@ -150,4 +150,56 @@ public class Persona {
         return per;
     }
     
+    public Integer agregar(Conexion conn){
+        int respuesta = 0;
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_PERSONA (?,?,?,?,?,?,?,?)}");
+            
+            cst.setString(1, this.getRun());
+            cst.setString(2, this.getNombre());
+            cst.setString(3, this.getApellidoP());
+            cst.setString(4, this.getApellidoM());
+            cst.setString(5, this.getSexo());
+            cst.setString(6, this.getEmail());
+            cst.setDate(7, new java.sql.Date(this.getFec_nac().getTime()));
+            
+            cst.registerOutParameter(8, java.sql.Types.NUMERIC);
+            
+            cst.execute();
+            
+            respuesta = cst.getInt(8);
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
+    }
+    
+    public int modificar(Conexion conn){
+        int respuesta = 0;
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call MODIFICAR_PERSONA (?,?,?,?,?,?)}");
+            
+            cst.setString(1, this.getRun());
+            cst.setString(2, this.getNombre());
+            cst.setString(3, this.getApellidoP());
+            cst.setString(4, this.getApellidoM());
+            cst.setString(5, this.getEmail());
+            
+            cst.registerOutParameter(6, java.sql.Types.NUMERIC);
+            
+            cst.execute();
+            
+            respuesta = cst.getInt(6);
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
+    }
+    
 }
