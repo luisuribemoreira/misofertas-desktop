@@ -159,7 +159,7 @@
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Documentos\GitHub\misofertas-desktop\MisOfertas\src\Icons\icons8-administrator-male-256.png"/>
+              <Image iconType="3" name="/Icons/icons8-administrator-male-256.png"/>
             </Property>
           </Properties>
         </Component>
@@ -209,7 +209,7 @@
           <Color blue="21" green="21" red="21" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Inisiar Sesion"/>
+        <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
@@ -221,7 +221,7 @@
           <Color blue="22" green="57" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Documentos\GitHub\misofertas-desktop\MisOfertas\src\Icons\icons8-enter-32 (1).png"/>
+          <Image iconType="3" name="/Icons/icons8-enter-32 (1).png"/>
         </Property>
       </Properties>
       <Events>
@@ -260,7 +260,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Documentos\GitHub\misofertas-desktop\MisOfertas\src\Icons\icons8-cancel-32 (1).png"/>
+          <Image iconType="3" name="/Icons/icons8-cancel-32 (1).png"/>
         </Property>
       </Properties>
       <Events>

@@ -10,6 +10,7 @@ import MisPaquetes.Producto;
 import MisPaquetes.Sucursal;
 import Sistema.Administrador.Empresa_List;
 import static Sistema.MainSistema.conn;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -65,7 +66,6 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtDescripcion = new javax.swing.JTextField();
-        txtEstado = new javax.swing.JTextField();
         txtSeguro = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -80,6 +80,7 @@ public class pnlProductos extends javax.swing.JPanel {
         txtRubro = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
         txtFechaIngreso = new com.toedter.calendar.JDateChooser();
+        ddlEstado = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaProductos2 = new javax.swing.JTable();
 
@@ -177,12 +178,25 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel4.setText("Stock Seguro:");
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtEstado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
+            }
+        });
 
         txtSeguro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSeguro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSeguroKeyTyped(evt);
+            }
+        });
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnAgregar.setText("Guardar");
@@ -225,10 +239,27 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel11.setText("Valor:");
 
         txtDescRubro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDescRubro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescRubroKeyTyped(evt);
+            }
+        });
 
         txtRubro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtRubro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRubroKeyTyped(evt);
+            }
+        });
 
         txtValor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
+
+        ddlEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Fuera De Temporada", "Vencido" }));
 
         javax.swing.GroupLayout pnlProductoLayout = new javax.swing.GroupLayout(pnlProducto);
         pnlProducto.setLayout(pnlProductoLayout);
@@ -239,17 +270,6 @@ public class pnlProductos extends javax.swing.JPanel {
                 .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlProductoLayout.createSequentialGroup()
                         .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(pnlProductoLayout.createSequentialGroup()
-                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlProductoLayout.createSequentialGroup()
                                 .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -267,7 +287,21 @@ public class pnlProductos extends javax.swing.JPanel {
                                     .addGroup(pnlProductoLayout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(pnlProductoLayout.createSequentialGroup()
+                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(pnlProductoLayout.createSequentialGroup()
+                                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(163, 163, 163)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlProductoLayout.createSequentialGroup()
                         .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,10 +348,10 @@ public class pnlProductos extends javax.swing.JPanel {
                         .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
+                        .addGap(25, 25, 25)
                         .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -418,21 +452,25 @@ public class pnlProductos extends javax.swing.JPanel {
         txtNombre.setEnabled(true);
         txtDescripcion.setEnabled(true);
         txtFechaIngreso.setEnabled(true);
-        txtEstado.setEnabled(true);
         txtSeguro.setEnabled(true);
         txtRubro.setEnabled(true);
         txtDescRubro.setEnabled(true);
         txtValor.setEnabled(true);
+        ddlEstado.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
         txtNombre.requestFocus();
     }//GEN-LAST:event_btnNewProductoActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        txtNombre.setEnabled(false);
         txtDescripcion.setEnabled(true);
-        txtNombre.setEnabled(true);
-        txtEstado.setEnabled(true);
+        txtFechaIngreso.setEnabled(true);
         txtSeguro.setEnabled(true);
+        txtRubro.setEnabled(true);
+        ddlEstado.setEnabled(true);
+        txtDescRubro.setEnabled(true);
+        txtValor.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -467,53 +505,63 @@ public class pnlProductos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        Producto pro = new Producto();
-        pro.setNombre(txtNombre.getText());
-        pro.setDescripcion(txtDescripcion.getText());
-        java.util.Date utilDate = (java.util.Date) txtFechaIngreso.getDate();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        pro.setFecha_ing(sqlDate);
-        pro.setEstado(txtEstado.getText().charAt(0));
-        pro.setStk_seguro(Integer.parseInt(txtSeguro.getText()));
-        pro.setRubro(txtRubro.getText());
-        pro.setDesc_rubro(txtDescRubro.getText());
-        pro.setValor(Integer.parseInt(txtValor.getText()));
-        int respuesta = 0;
-        
-        if (txtNombre.isEnabled()) {
-            int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este producto?", "Message",  JOptionPane.YES_NO_OPTION);
-            if (a == 0 ) {
-                respuesta = pro.agregar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"El producto fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else{
-                    JOptionPane.showMessageDialog(null,"El Producto ya fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
-                }
-            }
+        try{
             
-        }else{
-            int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar este Producto?", "Message",  JOptionPane.YES_NO_OPTION);
-            if(a == 0){
-                respuesta = pro.modificar(conn);
-                if(respuesta == 1){
-                    JOptionPane.showMessageDialog(null,"El Producto fue Modificado",null, JOptionPane.INFORMATION_MESSAGE, null);
-                    try {
-                        cargarTabla();
-                        vistaDefault();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+            if (!validadorCampos()){
+                throw new Exception ("Ingrese todos los datos");
+            }
+            Producto pro = new Producto();
+            pro.setNombre(txtNombre.getText());
+            pro.setDescripcion(txtDescripcion.getText());
+            java.util.Date utilDate = (java.util.Date) txtFechaIngreso.getDate();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            pro.setFecha_ing(sqlDate);
+            char estado = cargarEstado();
+            pro.setEstado(estado);
+            pro.setStk_seguro(Integer.parseInt(txtSeguro.getText()));
+            pro.setRubro(txtRubro.getText());
+            pro.setDesc_rubro(txtDescRubro.getText());
+            pro.setValor(Integer.parseInt(txtValor.getText()));
+            int respuesta = 0;
+        
+   
+            if (txtNombre.isEnabled()) {
+                int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este producto?", "Message",  JOptionPane.YES_NO_OPTION);
+                if (a == 0 ) {
+                    respuesta = pro.agregar(conn);
+                    if(respuesta == 1){
+                        JOptionPane.showMessageDialog(null,"El producto fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
+                        try {
+                            cargarTabla();
+                            vistaDefault();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"El Producto ya fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
                     }
-                }else{
-                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.INFORMATION_MESSAGE, null);
+                }
+
+            }else{
+                int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar este Producto?", "Message",  JOptionPane.YES_NO_OPTION);
+                if(a == 0){
+                    respuesta = pro.modificar(conn);
+                    if(respuesta == 1){
+                        JOptionPane.showMessageDialog(null,"El Producto fue Modificado",null, JOptionPane.INFORMATION_MESSAGE, null);
+                        try {
+                            cargarTabla();
+                            vistaDefault();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    }
                 }
             }
-        }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null,"" + ex.getMessage(),null, JOptionPane.INFORMATION_MESSAGE, null);
+        }        
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -532,6 +580,64 @@ public class pnlProductos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
 
+    private void txtSeguroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSeguroKeyTyped
+        // TODO add your handling code here: 
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        if(txtSeguro.getText().length()>= 7){
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtSeguroKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // TODO add your handling code here:
+        if(txtNombre.getText().length()>=25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+        // TODO add your handling code here:
+        if(txtDescripcion.getText().length()>= 200){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescripcionKeyTyped
+
+    private void txtRubroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRubroKeyTyped
+        // TODO add your handling code here:
+        if(txtRubro.getText().length()>= 25){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRubroKeyTyped
+
+    private void txtDescRubroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescRubroKeyTyped
+        // TODO add your handling code here:
+        if(txtDescRubro.getText().length()>= 200){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescRubroKeyTyped
+
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        
+        if(txtValor.getText().length()>= 9){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtValorKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -540,6 +646,7 @@ public class pnlProductos extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNewProducto;
+    private javax.swing.JComboBox<String> ddlEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -558,7 +665,6 @@ public class pnlProductos extends javax.swing.JPanel {
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtDescRubro;
     private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtEstado;
     private com.toedter.calendar.JDateChooser txtFechaIngreso;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
@@ -595,10 +701,10 @@ public class pnlProductos extends javax.swing.JPanel {
         txtNombre.setEnabled(false);
         txtDescripcion.setEnabled(false);
         txtFechaIngreso.setEnabled(false);
-        txtEstado.setEnabled(false);
         txtSeguro.setEnabled(false);
         txtRubro.setEnabled(false);
         txtDescRubro.setEnabled(false);
+        ddlEstado.setEnabled(false);
         txtValor.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
@@ -607,7 +713,6 @@ public class pnlProductos extends javax.swing.JPanel {
         btnModificar.setEnabled(false);
         txtNombre.setText("");
         txtDescripcion.setText("");
-        txtEstado.setText("");
         txtSeguro.setText("");
         txtRubro.setText("");
         txtDescRubro.setText("");
@@ -628,6 +733,8 @@ public class pnlProductos extends javax.swing.JPanel {
             txtNombre.setText(pro.getNombre());
             txtDescripcion.setText(pro.getDescripcion());
             txtFechaIngreso.setDate(pro.getFecha_ing());
+            
+            ddlEstado.setSelectedIndex(cargarE(pro.getEstado()));
             txtSeguro.setText(String.valueOf(pro.getStk_seguro()));
             txtRubro.setText(pro.getRubro());
             txtDescRubro.setText(pro.getDesc_rubro());
@@ -636,13 +743,62 @@ public class pnlProductos extends javax.swing.JPanel {
             
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
-        }else if(txtNombre.getText().equals("Ingrese ID de la Sucursal")){
+        }else if(txtNombre.getText().equals("Ingrese ID del producto")){
             vistaDefault();
             lblRespuestaBuscar.setText("Ingrese ID antes de Buscar");
         }else{
             lblRespuestaBuscar.setText("No hay registros de la Sucursal con ID: " + txtBuscar.getText());
             vistaDefault();
         }
+    }
+    
+    private boolean validadorCampos() {
+        boolean validar = true;
+        if (txtNombre.getText().trim().isEmpty()) {
+            validar = false;
+        }
+        if (txtDescripcion.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtSeguro.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtRubro.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtDescRubro.getText().isEmpty()) {
+            validar = false;
+        }
+        if (txtValor.getText().isEmpty()) {
+            validar = false;
+        }if (txtFechaIngreso.getDate() == null) {
+            validar = false;
+        }
+        return validar;
+    }
+
+    private char cargarEstado() {
+        char var = 0;
+            if (ddlEstado.getSelectedIndex() == 0) {
+                var = 'd';
+            }else if (ddlEstado.getSelectedIndex() == 1) {
+                var = 'f';
+            }else if (ddlEstado.getSelectedIndex() == 2) {
+                var = 'v';
+            }
+        return var;
+    }
+
+    private int cargarE(char e) {
+        int index = 0;
+            if (e == 'd') {
+                index = 0;
+            }else if (e == 'f'){
+                index = 1;
+            }else if (e == 'v'){
+                index = 2;
+            }
+        return index;
     }
 
 }
