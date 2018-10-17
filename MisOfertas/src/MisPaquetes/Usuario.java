@@ -6,7 +6,9 @@
 package MisPaquetes;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,6 +72,116 @@ public class Usuario {
             user_conectado = null;
         } 
         return user_conectado;
+    }
+    
+    public ResultSet listadoUsuarios(Conexion conn) throws SQLException{
+        Statement stmt = conn.getConexion_base().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM USUARIO WHERE NOT PERFIL = 'CONSUMIDOR' ");
+        return rs;
+    }
+    
+    public Usuario buscar(String user,Conexion conn){
+        Usuario usu = new Usuario();
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call BUSCAR_USUARIO (?,?,?)}");
+            
+            cst.setString(1, user);
+            
+            cst.registerOutParameter(2, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(3, java.sql.Types.VARCHAR);
+            
+            cst.execute();
+            
+            usu.setUsername(user);
+            usu.setPassword(cst.getString(2));
+            usu.setPerfil(cst.getString(3));
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            usu = null;
+        }
+        return usu;
+    }
+    
+    public int agregar(Conexion conn, Persona per){
+        int respuesta = 0;
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_USUARIO (?,?,?,?,?,?,?,?,?,?,?)}");
+            
+            cst.setString(1, this.username);
+            cst.setString(2, this.password);
+            cst.setString(3, this.perfil);
+            cst.setString(4, per.getRun());
+            cst.setString(5, per.getNombre());
+            cst.setString(6, per.getApellidoP());
+            cst.setString(7, per.getApellidoM());
+            cst.setString(8, per.getSexo());
+            cst.setString(9, per.getEmail());
+            cst.setString(10, per.getFec_nac().toString());
+            
+            cst.registerOutParameter(6, java.sql.Types.NUMERIC);
+            
+            cst.execute();
+            
+            respuesta = cst.getInt(11);
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
+    }
+    
+    public int modificar(Conexion conn, Persona per){
+        int respuesta = 0;
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call MODIFICAR_USUARIO (?,?,?,?,?,?,?,?,?)}");
+            
+            cst.setString(1, this.username);
+            cst.setString(2, this.password);
+            cst.setString(3, this.perfil);
+            cst.setString(4, per.getRun());
+            cst.setString(5, per.getNombre());
+            cst.setString(6, per.getApellidoP());
+            cst.setString(7, per.getApellidoM());
+            cst.setString(8, per.getEmail());
+            
+            cst.registerOutParameter(9, java.sql.Types.NUMERIC);
+            
+            cst.execute();
+            
+            respuesta = cst.getInt(9);
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
+    }
+    
+    public int eliminar(Conexion conn){
+        int respuesta = 0;
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call ELIMINAR_USUARIO (?,?)}");
+            
+            cst.setString(1, this.username);
+            
+            cst.registerOutParameter(2, java.sql.Types.NUMERIC);
+            
+            cst.execute();
+            
+            respuesta = cst.getInt(2);
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
     }
     
 }
