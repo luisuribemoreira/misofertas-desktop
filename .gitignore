@@ -37,13 +37,13 @@ target/
 .project
 
 # NetBeans specific
-MisOfertas/nbproject/private/
-MisOfertas/build/
-MisOfertas/nbbuild/
-MisOfertas/dist/
-MisOfertas/nbdist/
-MisOfertas/nbactions.xml
-MisOfertas/nb-configuration.xml
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
 
 
 # OS
