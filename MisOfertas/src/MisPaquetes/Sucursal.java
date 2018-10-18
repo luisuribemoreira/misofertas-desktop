@@ -187,7 +187,7 @@ public class Sucursal {
 
     @Override
     public String toString() {
-        return "Sucursal{" + "id_sucur=" + id_sucur + ", nombre=" + nombre + '}';
+        return "" + nombre ;
     }
     
     

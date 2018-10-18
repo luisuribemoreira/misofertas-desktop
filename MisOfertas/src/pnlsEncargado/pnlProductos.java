@@ -535,7 +535,7 @@ public class pnlProductos extends javax.swing.JPanel {
                             cargarTabla();
                             vistaDefault();
                         } catch (SQLException ex) {
-                            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(pnlProductos.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"El Producto ya fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);

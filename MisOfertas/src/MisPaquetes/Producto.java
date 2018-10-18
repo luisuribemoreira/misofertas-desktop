@@ -106,7 +106,7 @@ public class Producto {
     }
     
     
-     public ResultSet listadoProductos(Conexion conn) throws SQLException{
+    public ResultSet listadoProductos(Conexion conn) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTO");
         return rs;
@@ -228,7 +228,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", estado=" + estado + ", valor=" + valor + '}';
+        return "" + nombre ;
     }
     
     

@@ -476,7 +476,7 @@ END;
 
 /*Primera version del procedimineto almacenado de AGREGAR_OFERTA*/
 
-CREATE OR REPLACE PROCEDURE AGREGAR_SUCURSAL(
+CREATE OR REPLACE PROCEDURE AGREGAR_OFERTA(
     v_descripcion         VARCHAR2,
     v_fec_inicio          DATE,
     v_fec_termino         DATE,
