@@ -259,6 +259,9 @@ public class pnlProductos extends javax.swing.JPanel {
             }
         });
 
+        txtFechaIngreso.setMaxSelectableDate(new java.util.Date(4102459296000L));
+        txtFechaIngreso.setMinSelectableDate(new java.util.Date(-2208968138000L));
+
         ddlEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Fuera De Temporada", "Vencido" }));
 
         javax.swing.GroupLayout pnlProductoLayout = new javax.swing.GroupLayout(pnlProducto);
@@ -506,7 +509,6 @@ public class pnlProductos extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try{
-            
             if (!validadorCampos()){
                 throw new Exception ("Ingrese todos los datos");
             }
@@ -518,13 +520,18 @@ public class pnlProductos extends javax.swing.JPanel {
             pro.setFecha_ing(sqlDate);
             char estado = cargarEstado();
             pro.setEstado(estado);
+            if (!validarStock(Integer.parseInt(txtSeguro.getText()))) {
+                throw new Exception ("El stock seguro no puede ser negativo");
+            }
             pro.setStk_seguro(Integer.parseInt(txtSeguro.getText()));
             pro.setRubro(txtRubro.getText());
             pro.setDesc_rubro(txtDescRubro.getText());
+            if (!validarValor(Integer.parseInt(txtValor.getText()))) {
+                throw new Exception ("El stock seguro no puede ser negativo");
+            }
             pro.setValor(Integer.parseInt(txtValor.getText()));
             int respuesta = 0;
         
-   
             if (txtNombre.isEnabled()) {
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este producto?", "Message",  JOptionPane.YES_NO_OPTION);
                 if (a == 0 ) {
@@ -799,6 +806,23 @@ public class pnlProductos extends javax.swing.JPanel {
                 index = 2;
             }
         return index;
+    }
+    
+    
+    public boolean validarStock(int stock){
+        boolean validar = true;
+        if (stock < 0) {
+            validar = false;
+        }
+        return validar;
+    }
+    
+    public boolean validarValor(int valor){
+        boolean validar = true;
+        if (valor < 0) {
+            validar = false;
+        }
+        return validar;
     }
 
 }

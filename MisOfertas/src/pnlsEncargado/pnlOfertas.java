@@ -17,12 +17,16 @@ import java.io.FileInputStream;
 import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import oracle.sql.BLOB;
+import pnlsAdministrador.pnlSucursal;
 
 /**
  *
@@ -162,9 +166,20 @@ public class pnlOfertas extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Fecha Inicio:");
 
+        cldFechaInicio.setMaxSelectableDate(new java.util.Date(4102459276000L));
+        cldFechaInicio.setMinSelectableDate(new java.util.Date(-62135751524000L));
+        cldFechaInicio.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                cldFechaInicioPropertyChange(evt);
+            }
+        });
+
         ddlSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona la sucursal" }));
 
         ddlProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el producto" }));
+
+        cldFechaTermino.setMaxSelectableDate(new java.util.Date(4102459276000L));
+        cldFechaTermino.setMinSelectableDate(new java.util.Date(-62135751524000L));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("% Descuento:");
@@ -275,6 +290,11 @@ public class pnlOfertas extends javax.swing.JPanel {
         txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscarActionPerformed(evt);
+            }
+        });
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
             }
         });
 
@@ -453,6 +473,9 @@ public class pnlOfertas extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try{
+            if (!validadorCampos()){
+                throw new Exception ("Ingrese todos los datos");
+            }
             Oferta ofer = new Oferta();
             ofer.setDescripcion(txtDescr.getText());
             java.util.Date utilDate = (java.util.Date) cldFechaInicio.getDate();
@@ -461,23 +484,11 @@ public class pnlOfertas extends javax.swing.JPanel {
             utilDate = (java.util.Date) cldFechaTermino.getDate();
             sqlDate = new java.sql.Date(utilDate.getTime());
             ofer.setFecha_termino(sqlDate);
-            /*Blob blob;
-            try {
-                FileInputStream archiv2  = new FileInputStream(archivo);
-                ofer.setImagen(archiv2);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(pnlOfertas.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
             ofer.setImagen(bytesImg);
-            /*
-            try {
-               blob = new oracle.sql.BLOB(bytesImg);
-               // ofer.setImagen(archiv2);
-            } catch (SQLException ex) {
-             Logger.getLogger(pnlOfertas.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
-            
             ofer.setValoracion_total(Integer.parseInt(txtValoracion.getText()));
+            if (!validarDescuento(Integer.parseInt(txtDescuento.getText()))){
+                throw new Exception ("Ingrese un porcentaje de descuento entre 1 y 100");
+            }
             ofer.setPorc_descuento(Integer.parseInt(txtDescuento.getText()));
             int respuesta = 0;
             Sucursal su =  new Sucursal();
@@ -485,22 +496,13 @@ public class pnlOfertas extends javax.swing.JPanel {
                 su = (Sucursal) ddlSucursal.getModel().getSelectedItem();
                 ofer.setId_sucursal(su.getId_sucur());
             }
-            if (ddlSucursal.getSelectedIndex() == 0) {
-                //throw new Exception ("Falta Seleccionar la Sucursal");
-            }
-            if (ddlProducto.getSelectedIndex() == 0) {
-                //throw new Exception ("Falta Seleccionar el producto");
-            }
-            if (archivo == null) {
-                //throw new Exception ("Debe seleccionar una imagen");
-            }
             Producto pro = new Producto();
             if (ddlProducto.getSelectedIndex() != 0) {
                 pro = (Producto) ddlProducto.getModel().getSelectedItem();
                 ofer.setId_producto(pro.getId());
             }  
             
-            if (txtDescr.isEnabled()) {
+            if (txtId.getText().equals("")) {
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta oferta?", "Message",  JOptionPane.YES_NO_OPTION);
                 if (a == 0 ) {
                     respuesta = ofer.agregar(conn);
@@ -517,10 +519,24 @@ public class pnlOfertas extends javax.swing.JPanel {
                     }
                 }
 
+            }else{
+            ofer.setId(Integer.parseInt(txtId.getText()));
+            int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar esta Oferta?", "Message",  JOptionPane.YES_NO_OPTION);
+            if(a == 0){
+                respuesta = ofer.modificar(conn);
+                if(respuesta == 1){
+                    JOptionPane.showMessageDialog(null,"La Oferta fue Modificada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                    try {
+                        cargarTabla();
+                        vistaDefault();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(pnlOfertas.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.ERROR_MESSAGE, null);
+                }
             }
-            
-            
-           
+        }
         }catch(Exception ex)
         {
             JOptionPane.showMessageDialog(null,"" + ex.getMessage(),null, JOptionPane.INFORMATION_MESSAGE, null);
@@ -533,7 +549,24 @@ public class pnlOfertas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        
+        Oferta ofer = new Oferta();
+        ofer.setId(Integer.parseInt(txtId.getText()));
+        int respuesta = 0;
+        int a = JOptionPane.showConfirmDialog(null, "¿Desea Eliminar esta Oferta?", "Message",  JOptionPane.YES_NO_OPTION);
+        if(a == 0){
+            respuesta = ofer.eliminar(conn);
+            if(respuesta == 1){
+                JOptionPane.showMessageDialog(null,"La Oferta fue Eliminada",null, JOptionPane.INFORMATION_MESSAGE, null);
+                try {
+                    cargarTabla();
+                    vistaDefault();
+                } catch (SQLException ex) {
+                    Logger.getLogger(pnlOfertas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Error al Eliminar",null, JOptionPane.INFORMATION_MESSAGE, null);
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
@@ -545,11 +578,11 @@ public class pnlOfertas extends javax.swing.JPanel {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        //buscarProducto();
+        buscarOferta();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        txtDescr.setEnabled(false);
+        txtDescr.setEnabled(true);
         txtDescuento.setEnabled(true);
         ddlSucursal.setEnabled(true);
         txtValoracion.setEnabled(true);
@@ -571,7 +604,7 @@ public class pnlOfertas extends javax.swing.JPanel {
         txtDescuento.setEnabled(true);
         ddlProducto.setEnabled(true);
         cldFechaInicio.setEnabled(true);
-        cldFechaTermino.setEnabled(true);
+        cldFechaTermino.setEnabled(false);
         btnBuscarImagen.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -579,22 +612,60 @@ public class pnlOfertas extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNewOfertaActionPerformed
 
     private void txtDescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyTyped
-        // TODO add your handling code here:
-        if(txtDescuento.getText().length()>= 200){
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        
+        if(txtDescuento.getText().length()>= 3){
             evt.consume();
         }
     }//GEN-LAST:event_txtDescuentoKeyTyped
 
     private void txtDescrKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescrKeyTyped
-        // TODO add your handling code here:
-        if(txtDescr.getText().length()>=25){
+        if(txtDescr.getText().length()>= 200){
             evt.consume();
         }
     }//GEN-LAST:event_txtDescrKeyTyped
 
     private void txtValoracionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValoracionKeyTyped
-        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        
+        if(txtValoracion.getText().length()>= 3){
+            evt.consume();
+        }
     }//GEN-LAST:event_txtValoracionKeyTyped
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        
+        if(txtDescuento.getText().length()>= 10){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void cldFechaInicioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cldFechaInicioPropertyChange
+        // TODO add your handling code here:
+        if (!(cldFechaInicio.getDate() == null)) {
+            cldFechaTermino.setEnabled(true);
+            cldFechaTermino.setMinSelectableDate(cldFechaInicio.getDate());
+        }
+    }//GEN-LAST:event_cldFechaInicioPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -695,10 +766,7 @@ public class pnlOfertas extends javax.swing.JPanel {
             v_pro.setDesc_rubro(rs1.getString("DESC_RUBRO"));
             v_pro.setValor(rs1.getInt("VALOR"));
             ddlProducto.addItem(v_pro);
-        }
-        
-        
-        
+        } 
     }
 
     private void vistaDefault(){
@@ -717,6 +785,11 @@ public class pnlOfertas extends javax.swing.JPanel {
         btnModificar.setEnabled(false);
         txtDescr.setText("");
         txtDescuento.setText("");
+        txtValoracion.setText("");
+        cldFechaInicio.setDate(null);
+        cldFechaTermino.setDate(null);
+        cldFechaInicio.setMinSelectableDate(new Date());
+        lblImagen.setIcon(null);
         ddlSucursal.setSelectedIndex(0);
         ddlProducto.setSelectedIndex(0);
         txtId.setText("");
@@ -737,11 +810,14 @@ public class pnlOfertas extends javax.swing.JPanel {
             txtDescuento.setText(String.valueOf(ofer.getPorc_descuento()));
             cldFechaInicio.setDate(ofer.getFecha_inicio());
             cldFechaTermino.setDate(ofer.getFecha_termino());
-            ddlSucursal.setSelectedItem(ofer.getId_sucursal());
-            ddlProducto.setSelectedItem(ofer.getId_producto());
+            Sucursal suc = new Sucursal();
+            suc = suc.buscar(ofer.getId_sucursal(), conn);
+            ddlSucursal.getModel().setSelectedItem(suc);
+            Producto pro = new Producto();
+            pro = pro.buscar(ofer.getId_producto(), conn);
+            ddlProducto.getModel().setSelectedItem(pro);
             lblImagen.setIcon(new ImageIcon(ofer.getImagen()));
-            
-            
+            bytesImg = ofer.getImagen();
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }else if(txtDescr.getText().equals("Ingrese ID de la oferta")){
@@ -753,5 +829,41 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }
     
+    private boolean validadorCampos() {
+        boolean validar = true;
+        if (txtDescr.getText().trim().isEmpty()) {
+            validar = false;
+        }
+        if (txtValoracion.getText().trim().isEmpty()) {
+            validar = false;
+        }
+        if (txtDescuento.getText().trim().isEmpty()) {
+            validar = false;
+        }
+        if (cldFechaInicio.getDate() == null) {
+            validar = false;
+        }
+        if (cldFechaTermino.getDate() == null) {
+            validar = false;
+        }
+        if(ddlSucursal.getSelectedIndex() == 0){
+            validar = false;
+        }
+        if(ddlProducto.getSelectedIndex() == 0){
+            validar = false;
+        }
+        if(archivo == null){
+            validar = false;
+        }
+        return validar;
+    }
+    
+    public boolean validarDescuento(int num){
+        boolean validar = true;
+        if ((num < 0) || (num > 100)) {
+            validar = false;
+        }
+        return validar;
+    }
     
 }
