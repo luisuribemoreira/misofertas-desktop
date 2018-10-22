@@ -6,7 +6,6 @@
 package pnlsAdministrador;
 
 import MisPaquetes.Empresa;
-import Sistema.Administrador.Empresa_List;
 import static Sistema.MainSistema.conn;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
@@ -31,7 +30,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
             cargarTabla();
             vistaDefault();
         } catch (SQLException ex) {
-            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnlEmpresa.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

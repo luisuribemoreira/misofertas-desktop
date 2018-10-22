@@ -19,12 +19,13 @@ END;
 
 /*Primera version del procedimiento almacenado de insertar producto*/
 
-CREATE OR REPLACE PROCEDURE AGREGAR_PRODUCTO(
+create or replace PROCEDURE AGREGAR_PRODUCTO(
     nombre        VARCHAR2,
     desc_prod     VARCHAR2,
     fec_ingreso   DATE,
     estado        CHAR,
     stk_seguro    NUMBER,
+    stk_sucur     NUMBER,
     rubro         VARCHAR2,
     desc_rubro    VARCHAR2,
     valor         NUMBER,
@@ -32,7 +33,7 @@ CREATE OR REPLACE PROCEDURE AGREGAR_PRODUCTO(
 )
 AS
 BEGIN
-    insert into PRODUCTO VALUES (PRODUCTO_SEQ.NEXTVAL,nombre,desc_prod,fec_ingreso,estado,stk_seguro,rubro,desc_rubro,valor);
+    insert into PRODUCTO VALUES (PRODUCTO_SEQ.NEXTVAL,nombre,desc_prod,fec_ingreso,estado,stk_seguro,stk_sucur,rubro,desc_rubro,valor);
      v_respuesta := 1;
     
     EXCEPTION
@@ -44,21 +45,22 @@ END;
 EXEC AGREGAR_PRODUCTO('Celular','Producto tecnologico', TO_DATE('10/10/2018','DD/MM/YYYY'),1,50,'Tecnologia','Productos tecnologicos',50000, :v_respuesta);
 /
 /*Primera version del procedimiento almacenado de buscar producto*/
-CREATE OR REPLACE PROCEDURE BUSCAR_PRODUCTO(
+create or replace PROCEDURE BUSCAR_PRODUCTO(
     v_id NUMBER, 
     v_nombre        OUT VARCHAR2,
     v_desc_prod     OUT VARCHAR2,
     v_fec_ingreso   OUT DATE,
     v_estado        OUT CHAR,
     v_stk_seguro    OUT NUMBER,
+    v_stk_sucur     OUT NUMBER,
     v_rubro         OUT VARCHAR2,
     v_desc_rubro    OUT VARCHAR2,
     v_valor         OUT NUMBER
 )
 AS
 BEGIN
-    SELECT NOMBRE, DESC_PROD, FEC_INGRESO,ESTADO,STK_SEGURO,RUBRO,DESC_RUBRO,VALOR
-    INTO v_nombre, v_desc_prod, v_fec_ingreso, v_estado,v_stk_seguro,v_rubro,v_desc_rubro,v_valor
+    SELECT NOMBRE, DESC_PROD, FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR
+    INTO v_nombre, v_desc_prod, v_fec_ingreso, v_estado,v_stk_seguro,v_stk_sucur,v_rubro,v_desc_rubro,v_valor
     FROM PRODUCTO
     WHERE ID_PROD = v_id;
     
@@ -69,6 +71,7 @@ BEGIN
       v_fec_ingreso := TO_DATE('00/00/0000','DD/MM/YYYY');
       v_estado := 0;
       v_stk_seguro := 0;
+      v_stk_sucur := 0;
       v_rubro := 'ERROR';
       v_desc_rubro := 'ERROR';
       v_valor := 0;
@@ -90,13 +93,14 @@ BEGIN
 END;
 /
 /*Primera version del procedimiento almacenado de modificar producto*/
-CREATE OR REPLACE PROCEDURE MODIFICAR_PRODUCTO(
+create or replace PROCEDURE MODIFICAR_PRODUCTO(
     v_id          NUMBER,
     v_nombre        VARCHAR2,
     v_desc_prod     VARCHAR2,
     v_fec_ingreso   DATE,
     v_estado        CHAR,
     v_stk_seguro    NUMBER,
+    v_stk_sucur     NUMBER,
     v_rubro         VARCHAR2,
     v_desc_rubro    VARCHAR2,
     v_valor         NUMBER,
@@ -105,7 +109,7 @@ CREATE OR REPLACE PROCEDURE MODIFICAR_PRODUCTO(
 AS
 BEGIN
     UPDATE PRODUCTO
-    SET NOMBRE = v_nombre,DESC_PROD = v_desc_prod,FEC_INGRESO = v_fec_ingreso,ESTADO = v_estado,STK_SEGURO = v_stk_seguro, RUBRO = v_rubro, DESC_RUBRO = v_desc_rubro, VALOR = v_valor
+    SET NOMBRE = v_nombre,DESC_PROD = v_desc_prod,FEC_INGRESO = v_fec_ingreso,ESTADO = v_estado,STK_SEGURO = v_stk_seguro,STK_SUCUR = v_stk_sucur, RUBRO = v_rubro, DESC_RUBRO = v_desc_rubro, VALOR = v_valor
     WHERE ID_PROD = v_id;
     v_respuesta := 1;
     

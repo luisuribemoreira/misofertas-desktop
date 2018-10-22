@@ -7,7 +7,6 @@ package pnlsAdministrador;
 
 import MisPaquetes.Empresa;
 import MisPaquetes.Sucursal;
-import Sistema.Administrador.Sucursal_List;
 import static Sistema.MainSistema.conn;
 import java.awt.Toolkit;
 import java.sql.ResultSet;

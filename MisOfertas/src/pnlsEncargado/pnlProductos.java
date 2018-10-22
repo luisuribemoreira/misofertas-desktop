@@ -8,7 +8,6 @@ package pnlsEncargado;
 import MisPaquetes.Empresa;
 import MisPaquetes.Producto;
 import MisPaquetes.Sucursal;
-import Sistema.Administrador.Empresa_List;
 import static Sistema.MainSistema.conn;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
@@ -74,13 +73,13 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         lblRespuestaEmpresa = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtDescRubro = new javax.swing.JTextField();
-        txtRubro = new javax.swing.JTextField();
         txtValor = new javax.swing.JTextField();
         txtFechaIngreso = new com.toedter.calendar.JDateChooser();
         ddlEstado = new javax.swing.JComboBox<>();
+        ddlRubro = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        txtStockSucur = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaProductos2 = new javax.swing.JTable();
 
@@ -232,25 +231,8 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Descripcion");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Descripcion Rubro:");
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Valor:");
-
-        txtDescRubro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtDescRubro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDescRubroKeyTyped(evt);
-            }
-        });
-
-        txtRubro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtRubro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtRubroKeyTyped(evt);
-            }
-        });
 
         txtValor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -264,69 +246,74 @@ public class pnlProductos extends javax.swing.JPanel {
 
         ddlEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Fuera De Temporada", "Vencido" }));
 
+        ddlRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el rubro", "Alimento", "Electronica", "Linea Blanca", "Vestuario", "Calzado" }));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Stock sucursal:");
+        jLabel10.setToolTipText("");
+
+        txtStockSucur.setMinimumSize(new java.awt.Dimension(6, 23));
+        txtStockSucur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStockSucurActionPerformed(evt);
+            }
+        });
+        txtStockSucur.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStockSucurKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlProductoLayout = new javax.swing.GroupLayout(pnlProducto);
         pnlProducto.setLayout(pnlProductoLayout);
         pnlProductoLayout.setHorizontalGroup(
             pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProductoLayout.createSequentialGroup()
+                .addComponent(lblRespuestaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
+            .addGroup(pnlProductoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlProductoLayout.createSequentialGroup()
                         .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlProductoLayout.createSequentialGroup()
-                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlProductoLayout.createSequentialGroup()
-                                        .addGap(21, 21, 21)
-                                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel8)))
-                                    .addGroup(pnlProductoLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(pnlProductoLayout.createSequentialGroup()
-                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(pnlProductoLayout.createSequentialGroup()
-                                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4)
-                                            .addComponent(jLabel5))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(163, 163, 163)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlProductoLayout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(21, 21, 21)
                         .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlProductoLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDescRubro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8)))
                             .addGroup(pnlProductoLayout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(70, 70, 70)
-                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlProductoLayout.createSequentialGroup()
-                                .addComponent(lblRespuestaEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProductoLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(163, 163, 163)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40))))))
+                                .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlProductoLayout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtStockSucur, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlProductoLayout.createSequentialGroup()
+                            .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel11))
+                            .addGap(18, 18, 18)
+                            .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ddlRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlProductoLayout.setVerticalGroup(
             pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,38 +334,34 @@ public class pnlProductos extends javax.swing.JPanel {
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlProductoLayout.createSequentialGroup()
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(txtDescRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 20, Short.MAX_VALUE))
-                    .addGroup(pnlProductoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblRespuestaEmpresa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel2)
+                    .addComponent(txtFechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(ddlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSeguro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(ddlRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtStockSucur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblRespuestaEmpresa, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
 
@@ -456,8 +439,8 @@ public class pnlProductos extends javax.swing.JPanel {
         txtDescripcion.setEnabled(true);
         txtFechaIngreso.setEnabled(true);
         txtSeguro.setEnabled(true);
-        txtRubro.setEnabled(true);
-        txtDescRubro.setEnabled(true);
+        txtStockSucur.setEnabled(true);
+        ddlRubro.setEnabled(true);
         txtValor.setEnabled(true);
         ddlEstado.setEnabled(true);
         btnAgregar.setEnabled(true);
@@ -470,9 +453,9 @@ public class pnlProductos extends javax.swing.JPanel {
         txtDescripcion.setEnabled(true);
         txtFechaIngreso.setEnabled(true);
         txtSeguro.setEnabled(true);
-        txtRubro.setEnabled(true);
+        txtStockSucur.setEnabled(true);
+        ddlRubro.setEnabled(true);
         ddlEstado.setEnabled(true);
-        txtDescRubro.setEnabled(true);
         txtValor.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -524,8 +507,9 @@ public class pnlProductos extends javax.swing.JPanel {
                 throw new Exception ("El stock seguro no puede ser negativo");
             }
             pro.setStk_seguro(Integer.parseInt(txtSeguro.getText()));
-            pro.setRubro(txtRubro.getText());
-            pro.setDesc_rubro(txtDescRubro.getText());
+            pro.setStk_sucur(Integer.parseInt(txtStockSucur.getText()));
+            pro.setRubro(obtenerRubro());
+            pro.setDesc_rubro(obtenerDescRubro());
             if (!validarValor(Integer.parseInt(txtValor.getText()))) {
                 throw new Exception ("El stock seguro no puede ser negativo");
             }
@@ -559,7 +543,7 @@ public class pnlProductos extends javax.swing.JPanel {
                             cargarTabla();
                             vistaDefault();
                         } catch (SQLException ex) {
-                            Logger.getLogger(Empresa_List.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(pnlProductos.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Ocurrio un error al Modificar",null, JOptionPane.INFORMATION_MESSAGE, null);
@@ -616,20 +600,6 @@ public class pnlProductos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtDescripcionKeyTyped
 
-    private void txtRubroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRubroKeyTyped
-        // TODO add your handling code here:
-        if(txtRubro.getText().length()>= 25){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtRubroKeyTyped
-
-    private void txtDescRubroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescRubroKeyTyped
-        // TODO add your handling code here:
-        if(txtDescRubro.getText().length()>= 200){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtDescRubroKeyTyped
-
     private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
         // TODO add your handling code here:
         char caracter = evt.getKeyChar();
@@ -645,6 +615,25 @@ public class pnlProductos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtValorKeyTyped
 
+    private void txtStockSucurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockSucurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStockSucurActionPerformed
+
+    private void txtStockSucurKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockSucurKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || 
+        (caracter > '9')) &&
+        (caracter != KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
+        
+        if(txtValor.getText().length()>= 9){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStockSucurKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -654,6 +643,7 @@ public class pnlProductos extends javax.swing.JPanel {
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNewProducto;
     private javax.swing.JComboBox<String> ddlEstado;
+    private javax.swing.JComboBox<String> ddlRubro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -670,13 +660,12 @@ public class pnlProductos extends javax.swing.JPanel {
     private javax.swing.JPanel pnlProducto;
     private javax.swing.JTable tablaProductos2;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtDescRubro;
     private javax.swing.JTextField txtDescripcion;
     private com.toedter.calendar.JDateChooser txtFechaIngreso;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtRubro;
     private javax.swing.JTextField txtSeguro;
+    private javax.swing.JTextField txtStockSucur;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
@@ -709,8 +698,8 @@ public class pnlProductos extends javax.swing.JPanel {
         txtDescripcion.setEnabled(false);
         txtFechaIngreso.setEnabled(false);
         txtSeguro.setEnabled(false);
-        txtRubro.setEnabled(false);
-        txtDescRubro.setEnabled(false);
+        txtStockSucur.setEnabled(false);
+        ddlRubro.setEnabled(false);
         ddlEstado.setEnabled(false);
         txtValor.setEnabled(false);
         btnAgregar.setEnabled(false);
@@ -721,8 +710,8 @@ public class pnlProductos extends javax.swing.JPanel {
         txtNombre.setText("");
         txtDescripcion.setText("");
         txtSeguro.setText("");
-        txtRubro.setText("");
-        txtDescRubro.setText("");
+        txtStockSucur.setText("");
+        ddlRubro.setSelectedIndex(0);
         txtValor.setText("");
         txtId.setText("");
         txtBuscar.setText("Ingrese ID del producto");
@@ -743,8 +732,8 @@ public class pnlProductos extends javax.swing.JPanel {
             
             ddlEstado.setSelectedIndex(cargarE(pro.getEstado()));
             txtSeguro.setText(String.valueOf(pro.getStk_seguro()));
-            txtRubro.setText(pro.getRubro());
-            txtDescRubro.setText(pro.getDesc_rubro());
+            txtStockSucur.setText(String.valueOf(pro.getStk_sucur()));
+            ddlRubro.setSelectedItem(pro.getRubro());
             txtValor.setText(String.valueOf(pro.getValor()));
             
             
@@ -770,15 +759,18 @@ public class pnlProductos extends javax.swing.JPanel {
         if (txtSeguro.getText().isEmpty()) {
             validar = false;
         }
-        if (txtRubro.getText().isEmpty()) {
-            validar = false;
-        }
-        if (txtDescRubro.getText().isEmpty()) {
+        if (ddlRubro.getSelectedIndex() == 0) {
             validar = false;
         }
         if (txtValor.getText().isEmpty()) {
             validar = false;
         }if (txtFechaIngreso.getDate() == null) {
+            validar = false;
+        }
+        if (txtStockSucur.getText().isEmpty()) {
+            validar = false;
+        }
+        if (ddlRubro.getSelectedIndex() == 0) {
             validar = false;
         }
         return validar;
@@ -823,6 +815,51 @@ public class pnlProductos extends javax.swing.JPanel {
             validar = false;
         }
         return validar;
+    }
+
+    private String obtenerRubro() {
+        String rubro = "";
+        switch (ddlRubro.getSelectedIndex()) {
+            case 1:
+                rubro = "Alimento";
+                break;
+            case 2:
+                rubro = "Electronica";
+                break;
+            case 3:
+                rubro = "Linea Blanca";
+                break;
+            case 4:
+                rubro = "Vestuario";
+                break;
+            case 5:
+                rubro = "Calzado";
+                break;
+        }
+        return rubro;
+    }
+
+    private String obtenerDescRubro() {
+        String descRubro = "";
+        switch (ddlRubro.getSelectedIndex()) {
+            case 1:
+                descRubro = "Sustancia normalmente ingeridas por seres vivos con fines nutricionales, sociales y psicológicos";
+                break;
+            case 2:
+                descRubro = "Productos que consisten en una combinacion de componentes electronicos organizados en circuitos, destinaods "
+                        + "a controlar y arovechar las señales electricas";
+                break;
+            case 3:
+                descRubro = "Conjunto de distintos productos comerciales de un mismo tipo, generalmente de la misma marca, que tienen algunas características comunes que dan cierta unidad al conjunto.";
+                break;
+            case 4:
+                descRubro = "refiere a las prendas de diferentes texturas fabricadas con diversas telas o pieles de animales, usadas por el ser humano para cubrir su cuerpo, incluyendo la ropa impermeable y otra para protegerse del clima adverso";
+                break;
+            case 5:
+                descRubro = "Cualquier prenda de vestir que cubre y resguarda el pie y a veces también parte de la pierna.";
+                break;
+        }
+        return descRubro;
     }
 
 }
