@@ -29,11 +29,12 @@ create or replace PROCEDURE AGREGAR_PRODUCTO(
     rubro         VARCHAR2,
     desc_rubro    VARCHAR2,
     valor         NUMBER,
+    id_sucursal   NUMBER,
     v_respuesta OUT NUMBER
 )
 AS
 BEGIN
-    insert into PRODUCTO VALUES (PRODUCTO_SEQ.NEXTVAL,nombre,desc_prod,fec_ingreso,estado,stk_seguro,stk_sucur,rubro,desc_rubro,valor);
+    insert into PRODUCTO VALUES (PRODUCTO_SEQ.NEXTVAL,nombre,desc_prod,fec_ingreso,estado,stk_seguro,stk_sucur,rubro,desc_rubro,valor,id_sucursal);
      v_respuesta := 1;
     
     EXCEPTION
@@ -55,12 +56,13 @@ create or replace PROCEDURE BUSCAR_PRODUCTO(
     v_stk_sucur     OUT NUMBER,
     v_rubro         OUT VARCHAR2,
     v_desc_rubro    OUT VARCHAR2,
-    v_valor         OUT NUMBER
+    v_valor         OUT NUMBER,
+    v_id_sucursal   OUT NUMBER
 )
 AS
 BEGIN
-    SELECT NOMBRE, DESC_PROD, FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR
-    INTO v_nombre, v_desc_prod, v_fec_ingreso, v_estado,v_stk_seguro,v_stk_sucur,v_rubro,v_desc_rubro,v_valor
+    SELECT NOMBRE, DESC_PROD, FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR,SUCURSAL_ID_SUCUR
+    INTO v_nombre, v_desc_prod, v_fec_ingreso, v_estado,v_stk_seguro,v_stk_sucur,v_rubro,v_desc_rubro,v_valor,v_id_sucursal
     FROM PRODUCTO
     WHERE ID_PROD = v_id;
     
@@ -75,6 +77,7 @@ BEGIN
       v_rubro := 'ERROR';
       v_desc_rubro := 'ERROR';
       v_valor := 0;
+      v_id_sucursal := 0;
 END;
 /
 /*Primera version del procedimiento almacenado de eliminar producto*/

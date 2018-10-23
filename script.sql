@@ -1,4 +1,4 @@
---Seccion Borrado
+--SECCION BORRADO
 DROP TABLE certificado CASCADE CONSTRAINTS;
 DROP TABLE consumidor CASCADE CONSTRAINTS;
 DROP TABLE detalle_oferta CASCADE CONSTRAINTS;
@@ -29,7 +29,7 @@ DROP SEQUENCE caso_seq;
 DROP SEQUENCE sucursal_seq;
 DROP SEQUENCE emitido_seq;
 
---Seccion Creacion Sequencias
+--SECCION CREACION SEQUENCIAS
 CREATE SEQUENCE certificado_seq MINVALUE 1 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE consumidor_seq MINVALUE 1 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE oferta_seq MINVALUE 1 START WITH 1 INCREMENT BY 1;
@@ -43,7 +43,7 @@ CREATE SEQUENCE caso_seq MINVALUE 1 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE sucursal_seq MINVALUE 1 START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE emitido_seq MINVALUE 1 START WITH 1 INCREMENT BY 1;
 
---Seccion Creacion Tabla
+--SECCION CREACION TABLAS
 CREATE TABLE certificado (
     id_cert     NUMBER(10) NOT NULL,
     pts_min     NUMBER(7) NOT NULL,
@@ -72,6 +72,12 @@ CREATE TABLE consumidor (
     usuario_username   VARCHAR2(25) NOT NULL
 );
 
+CREATE UNIQUE INDEX consumidor__idx ON
+    consumidor ( usuario_username ASC );
+
+CREATE UNIQUE INDEX consumidor__idxv1 ON
+    consumidor ( persona_run ASC );
+
 ALTER TABLE consumidor ADD CONSTRAINT consumidor_pk PRIMARY KEY ( usuario_username,
 persona_run );
 
@@ -96,6 +102,12 @@ CREATE TABLE empleado (
     persona_run        VARCHAR2(11) NOT NULL,
     usuario_username   VARCHAR2(25) NOT NULL
 );
+
+CREATE UNIQUE INDEX empleado__idx ON
+    empleado ( usuario_username ASC );
+
+CREATE UNIQUE INDEX empleado__idxv1 ON
+    empleado ( persona_run ASC );
 
 ALTER TABLE empleado ADD CONSTRAINT empleado_pk PRIMARY KEY ( usuario_username,
 persona_run );
@@ -152,23 +164,24 @@ CREATE TABLE persona (
     paterno   VARCHAR2(25) NOT NULL,
     materno   VARCHAR2(25),
     sexo      VARCHAR2(20),
-    email     VARCHAR2(35),
+    email     VARCHAR2(35) NOT NULL,
     fec_nac   DATE NOT NULL
 );
 
 ALTER TABLE persona ADD CONSTRAINT persona_pk PRIMARY KEY ( run );
 
 CREATE TABLE producto (
-    id_prod       NUMBER(12) NOT NULL,
-    nombre        VARCHAR2(25) NOT NULL,
-    desc_prod     VARCHAR2(200) NOT NULL,
-    fec_ingreso   DATE NOT NULL,
-    estado        CHAR(1) NOT NULL,
-    stk_seguro    NUMBER(7) NOT NULL,
-    stk_sucur     NUMBER(8) NOT NULL,
-    rubro         VARCHAR2(25) NOT NULL,
-    desc_rubro    VARCHAR2(200) NOT NULL,
-    valor         NUMBER(9) NOT NULL
+    id_prod             NUMBER(12) NOT NULL,
+    nombre              VARCHAR2(25) NOT NULL,
+    desc_prod           VARCHAR2(200) NOT NULL,
+    fec_ingreso         DATE NOT NULL,
+    estado              CHAR(1) NOT NULL,
+    stk_seguro          NUMBER(7) NOT NULL,
+    stk_sucur           NUMBER(8) NOT NULL,
+    rubro               VARCHAR2(25) NOT NULL,
+    desc_rubro          VARCHAR2(200) NOT NULL,
+    valor               NUMBER(9) NOT NULL,
+    sucursal_id_sucur   NUMBER(8) NOT NULL
 );
 
 ALTER TABLE producto ADD CONSTRAINT producto_pk PRIMARY KEY ( id_prod );
@@ -209,7 +222,7 @@ CREATE TABLE usuario (
 
 ALTER TABLE usuario ADD CONSTRAINT usuario_pk PRIMARY KEY ( username );
 
---Seccion Foreign Key
+--SECCION FOREIGN KEY
 ALTER TABLE certificado_emitido
     ADD CONSTRAINT emitido_certificado_fk FOREIGN KEY ( certificado_id_cert )
         REFERENCES certificado ( id_cert ) ON DELETE CASCADE;
@@ -270,6 +283,10 @@ ALTER TABLE oferta
 
 ALTER TABLE oferta
     ADD CONSTRAINT oferta_sucursal_fk FOREIGN KEY ( sucursal_id_sucur )
+        REFERENCES sucursal ( id_sucur ) ON DELETE CASCADE;
+
+ALTER TABLE producto
+    ADD CONSTRAINT producto_sucursal_fk FOREIGN KEY ( sucursal_id_sucur )
         REFERENCES sucursal ( id_sucur ) ON DELETE CASCADE;
 
 ALTER TABLE reg_error

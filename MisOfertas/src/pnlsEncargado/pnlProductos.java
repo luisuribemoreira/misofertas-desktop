@@ -514,6 +514,8 @@ public class pnlProductos extends javax.swing.JPanel {
                 throw new Exception ("El stock seguro no puede ser negativo");
             }
             pro.setValor(Integer.parseInt(txtValor.getText()));
+            //Sera cambiado 
+            pro.setId_sucur(1);
             int respuesta = 0;
         
             if (txtNombre.isEnabled()) {
