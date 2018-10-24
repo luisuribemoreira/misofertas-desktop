@@ -372,11 +372,11 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE AGREGAR_EMPLEADO(
-    v_user VARCHAR2, v_run VARCHAR2, v_cargo VARCHAR2, v_respuesta OUT NUMBER
+    v_user VARCHAR2, v_run VARCHAR2, v_cargo VARCHAR2, v_ref NUMBER, v_respuesta OUT NUMBER
 )
 AS
 BEGIN
-    INSERT INTO EMPLEADO VALUES (v_cargo, v_run , v_user);
+    INSERT INTO EMPLEADO VALUES (v_ref, v_cargo, v_run , v_user);
     v_respuesta := 1;
     
     EXCEPTION

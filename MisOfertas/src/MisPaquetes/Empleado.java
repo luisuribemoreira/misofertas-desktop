@@ -18,6 +18,7 @@ public class Empleado {
     private String cargo;
     private String run;
     private String username;
+    private int id_referencia;
 
     public String getCargo() {
         return cargo;
@@ -42,6 +43,16 @@ public class Empleado {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public int getId_referencia() {
+        return id_referencia;
+    }
+
+    public void setId_referencia(int id_referencia) {
+        this.id_referencia = id_referencia;
+    }
+    
+    
 
     public Empleado() {
     }
@@ -72,17 +83,18 @@ public class Empleado {
         int respuesta = 0;
         try {
             
-            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_EMPLEADO (?,?,?,?)}");
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_EMPLEADO (?,?,?,?,?)}");
             
             cst.setString(1, this.username);
             cst.setString(2, this.run);
             cst.setString(3, this.cargo);
+            cst.setInt(4, this.id_referencia);
             
-            cst.registerOutParameter(4, java.sql.Types.NUMERIC);
+            cst.registerOutParameter(5, java.sql.Types.NUMERIC);
             
             cst.execute();
             
-            respuesta = cst.getInt(4);
+            respuesta = cst.getInt(5);
             
 
         } catch (SQLException ex) {
