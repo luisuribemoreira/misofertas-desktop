@@ -107,12 +107,13 @@ create or replace PROCEDURE MODIFICAR_PRODUCTO(
     v_rubro         VARCHAR2,
     v_desc_rubro    VARCHAR2,
     v_valor         NUMBER,
+    v_id_sucur      NUMBER,
     v_respuesta OUT NUMBER
 )
 AS
 BEGIN
     UPDATE PRODUCTO
-    SET NOMBRE = v_nombre,DESC_PROD = v_desc_prod,FEC_INGRESO = v_fec_ingreso,ESTADO = v_estado,STK_SEGURO = v_stk_seguro,STK_SUCUR = v_stk_sucur, RUBRO = v_rubro, DESC_RUBRO = v_desc_rubro, VALOR = v_valor
+    SET NOMBRE = v_nombre,DESC_PROD = v_desc_prod,FEC_INGRESO = v_fec_ingreso,ESTADO = v_estado,STK_SEGURO = v_stk_seguro,STK_SUCUR = v_stk_sucur, RUBRO = v_rubro, DESC_RUBRO = v_desc_rubro, VALOR = v_valor,SUCURSAL_ID_SUCUR = v_id_sucur    
     WHERE ID_PROD = v_id;
     v_respuesta := 1;
     

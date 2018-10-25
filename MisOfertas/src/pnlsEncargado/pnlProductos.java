@@ -515,7 +515,7 @@ public class pnlProductos extends javax.swing.JPanel {
             }
             pro.setValor(Integer.parseInt(txtValor.getText()));
             //Sera cambiado 
-            pro.setId_sucur(1);
+            pro.setId_sucur(3);
             int respuesta = 0;
         
             if (txtNombre.isEnabled()) {
