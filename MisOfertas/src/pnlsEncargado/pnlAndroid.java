@@ -7,7 +7,7 @@ package pnlsEncargado;
 
 /**
  *
- * @author 
+ * @author Luis
  */
 public class pnlAndroid extends javax.swing.JPanel {
 

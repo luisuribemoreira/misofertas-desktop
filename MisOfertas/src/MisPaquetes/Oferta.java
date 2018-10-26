@@ -1,26 +1,22 @@
 
 package MisPaquetes;
 
-import java.io.FileInputStream;
-import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Date;
-import static java.sql.JDBCType.BLOB;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import static java.sql.Types.BLOB;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * 
+ * Clase oferta
  * @author Luis
  */
 public class Oferta {
     
     /**
-     * Declaracion de atributos
+     * Atributos de la clase oferta
      */
     int id;
     String descripcion;
@@ -32,9 +28,9 @@ public class Oferta {
     int id_sucursal;
     int id_producto;
     
+    
     /**
-     * Mutadores y accesadores
-     * @return 
+     * Mutadores y accesadores 
      */
     public int getId() {
         return id;
@@ -109,7 +105,10 @@ public class Oferta {
     }
     
     /**
-     * 
+     * Funcion que retorna el listado de ofertas que se encuentran en la base de datos
+     * @param conn Conexin con la base de datos
+     * @return Listado de ofertas
+     * @throws SQLException 
      */
     public ResultSet listadoOfertas(Conexion conn) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
@@ -117,6 +116,12 @@ public class Oferta {
         return rs;
     }
     
+    /**
+     * Funcion que busca una oferta por id en la base de datos
+     * @param id
+     * @param conn
+     * @return Oferta encontrada en la base de datos 
+     */
     public Oferta buscar(int id,Conexion conn){
         Oferta ofer = new Oferta();
         try {
@@ -153,7 +158,11 @@ public class Oferta {
         return ofer;
     }
     
-    
+    /***
+     * Funcion que agrega una oferta en la BD
+     * @param conn Conexion con la base de datos
+     * @return  retorna 1 positivo , 0 negativo
+     */
     public int agregar(Conexion conn){
         int respuesta = 0;
         try {
@@ -183,6 +192,11 @@ public class Oferta {
         return respuesta;
     }
     
+    /**
+     * Funcion que modifica una oferta en la base de datos segun id
+     * @param conn conexion con la base de datos
+     * @return retorna 1 positivo , 0 negativo
+     */
     public int modificar(Conexion conn){
         int respuesta = 0;
         try {
@@ -212,6 +226,11 @@ public class Oferta {
         return respuesta;
     }
     
+    /**
+     * Funcion que elimina una oferta en la base de datos
+     * @param conn Conexion con la base de datos
+     * @return Elimina una oferta en la base de datos
+     */
     public int eliminar(Conexion conn){
         int respuesta = 0;
         try {
@@ -233,6 +252,10 @@ public class Oferta {
         return respuesta;
     }
 
+    /**
+     * Funcion que returna algunos atributos de la clase oferta
+     * @return atributos de la clase oferta
+     */
     @Override
     public String toString() {
         return "Oferta{" + "id=" + id + ", descripcion=" + descripcion + ", fecha_inicio=" + fecha_inicio + ", fecha_termino=" + fecha_termino + ", valoracion_total=" + valoracion_total + ", porc_descuento=" + porc_descuento + '}';

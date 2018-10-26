@@ -15,7 +15,8 @@ import static Sistema.MainSistema.user_conectado;
 public class SingIn extends javax.swing.JDialog {
 
     /**
-     * Creates new form SingIn
+     * Creates new form SingIn 
+     * Constructor inicial de la clase SingIn
      */
     public SingIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -93,11 +94,6 @@ public class SingIn extends javax.swing.JDialog {
         );
 
         txtUser.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        txtUser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUserActionPerformed(evt);
-            }
-        });
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtPass.addActionListener(new java.awt.event.ActionListener() {
@@ -217,10 +213,10 @@ public class SingIn extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUserActionPerformed
-
+    /**
+     * Funcion que se activa al momento de presionar el boton para ingresar al sistema
+     * @param evt Evento de presionar el boton 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         String mensajeError = "";
@@ -326,7 +322,10 @@ public class SingIn extends javax.swing.JDialog {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
-    //Funcion que valida que los campos no esten vacios
+    /**
+     * Funcion que valida que los campos no esten vacios
+     * @return Retorna el mensaje correspondiente en caso de que alguno de los campos este vacio
+     */
     private String verificCamposVacios() {
         if (txtUser.getText().equals("")) {
             return "Ingrese el nombre de usuario";

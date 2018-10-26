@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MisPaquetes;
 
 import java.sql.CallableStatement;
@@ -16,9 +11,13 @@ import java.util.logging.Logger;
 /**
  *
  * @author Luis
+ * Clase Producto
  */
 public class Producto {
     
+    /**
+     * Atributos
+     */
     private int id;
     private String nombre;
     private String descripcion;
@@ -31,6 +30,15 @@ public class Producto {
     private int stk_sucur;
     private int id_sucur;
 
+    /**
+     * Constructor por defecto
+     */
+    public Producto() {
+    }
+    
+    /**
+     * Mutadores y accesadores
+     */
     public int getId_sucur() {
         return id_sucur;
     }
@@ -38,9 +46,7 @@ public class Producto {
     public void setId_sucur(int id_sucur) {
         this.id_sucur = id_sucur;
     }
-    
-    
-
+   
     public int getStk_sucur() {
         return stk_sucur;
     }
@@ -48,11 +54,6 @@ public class Producto {
     public void setStk_sucur(int stk_sucur) {
         this.stk_sucur = stk_sucur;
     }
-
-    
-    public Producto() {
-    }
-
     
     public int getId() {
         return id;
@@ -127,12 +128,24 @@ public class Producto {
     }
     
     
+    /**
+     * 
+     * @param conn conexion con la base de datos
+     * @return listado de productos
+     * @throws SQLException 
+     */
     public ResultSet listadoProductos(Conexion conn) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTO");
         return rs;
     }
      
+    /**
+     * 
+     * @param id identificar del objeto producto
+     * @param conn conexion con la base de datos
+     * @return Resultado de la busqueda de productos en la base datos
+     */
     public Producto buscar(int id,Conexion conn){
         Producto pro = new Producto();
         try {
@@ -173,6 +186,11 @@ public class Producto {
         return pro;
     }
     
+    /**
+     * Metodo que agrega un producto a la base de datos
+     * @param conn Conexion de la base de datos 
+     * @return retorna 1 positivo , 0 negativo
+     */
     public int agregar(Conexion conn){
         int respuesta = 0;
         try {
@@ -203,6 +221,11 @@ public class Producto {
         return respuesta;
     }
     
+    /***
+     * Funcion que modifica un producto de la base de datos
+     * @param conn  Conexion con la base datos
+     * @return retorna 1 positivo , 0 negativo 
+     */
     public int modificar(Conexion conn){
         int respuesta = 0;
         try {
@@ -234,6 +257,11 @@ public class Producto {
         return respuesta;
     }
     
+    /**
+     * Funcion que elimina un producto de la base de datos
+     * @param conn Conexion con la base de datos
+     * @return retorna 1 positivo , 0 negativo
+     */
     public int eliminar(Conexion conn){
         int respuesta = 0;
         try {
@@ -255,12 +283,23 @@ public class Producto {
         return respuesta;
     }
 
+    /**
+     * Funcion que retorna el listado de productos por rubro
+     * @param conn Conexion con la base de datos
+     * @param rubro Rubro por el cual se buscara en la base de datos
+     * @return Retorna el listado de productos por rubro
+     * @throws SQLException 
+     */
     public ResultSet listadoProductosPorRubro(Conexion conn,String rubro) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTO WHERE RUBRO = '"+ rubro+ "'");
         return rs;
     }
     
+    /**
+     * Funcion toString 
+     * @return retorna el nombre del producto
+     */
     @Override
     public String toString() {
         return "" + nombre ;
