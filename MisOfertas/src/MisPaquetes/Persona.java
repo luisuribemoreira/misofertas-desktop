@@ -215,7 +215,7 @@ public class Persona {
         ResultSet rs = null;
         try {
             Statement stmt = conn.getConexion_base().createStatement();
-            rs = stmt.executeQuery("SELECT pe.EMAIL FROM PERSONA pe INNER JOIN CONSUMIDOR co ON pe.RUN = co.PERSONA_RUN");
+            rs = stmt.executeQuery("SELECT * FROM CONSUMIDOR co INNER JOIN PERSONA pe ON co.PERSONA_RUN = pe.RUN");
             return rs;
         } catch (SQLException ex) {
             Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);

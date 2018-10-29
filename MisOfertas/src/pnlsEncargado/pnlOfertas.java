@@ -1076,7 +1076,7 @@ public class pnlOfertas extends javax.swing.JPanel {
      */
     public void enviarCorreo() {
         Persona per = new Persona();
-        ResultSet rs1 = per.listadoPersonas(conn);
+        ResultSet rs1 = per.listadoConsumidores(conn);
         try {
             while (rs1.next()) {
                 Persona v_per = new Persona();
