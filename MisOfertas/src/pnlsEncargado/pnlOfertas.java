@@ -6,6 +6,7 @@
 package pnlsEncargado;
 
 import MisPaquetes.Oferta;
+import MisPaquetes.Persona;
 import MisPaquetes.Producto;
 import MisPaquetes.Sucursal;
 import static Sistema.MainSistema.conn;
@@ -32,7 +33,7 @@ import javax.swing.table.DefaultTableModel;
  * @author 
  */
 public class pnlOfertas extends javax.swing.JPanel {
-    
+    //Atributos declarados necesarios para la conversion de la imagen
     JFileChooser seleccionado = new JFileChooser();
     File archivo = null;
     byte[] bytesImg;
@@ -309,11 +310,6 @@ public class pnlOfertas extends javax.swing.JPanel {
                 txtBuscarMouseClicked(evt);
             }
         });
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
         txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBuscarKeyTyped(evt);
@@ -471,6 +467,11 @@ public class pnlOfertas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Accion que evalua si el archivo que se quiere agregar es una imagen valida
+     * Si el archivo es valido la imagen se mostrara en el lblImagen
+     * @param evt Evento de presionar el boton buscar imagen
+     */
     private void btnBuscarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarImagenActionPerformed
         // TODO add your handling code here:
         if (seleccionado.showDialog(this, "Abrir Archivo") == JFileChooser.APPROVE_OPTION) {
@@ -487,6 +488,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnBuscarImagenActionPerformed
 
+    /**
+     * Funcion que busca una oferta seleccionada en la tabla de ofertas
+     * @param evt Evento de seleccionar un elemento de la tabla 
+     */
     private void tablaOfertasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaOfertasMouseClicked
         int seleccion = tablaOfertas.getSelectedRow();
         int idSelect = (int) tablaOfertas.getModel().getValueAt(seleccion, 0);
@@ -494,6 +499,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         buscarOferta();
     }//GEN-LAST:event_tablaOfertasMouseClicked
 
+    /**
+     * Funcion que agrega o modifica una oferta 
+     * @param evt Evento de presionar el boton agregar
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try{
             if (!validadorCampos()){
@@ -568,10 +577,18 @@ public class pnlOfertas extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Funcion que cancela la operacion que se este realizando en el momento
+     * @param evt Evento de presionar el boton cancelar
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Funcion que elimina un producto por ID
+     * @param evt Evento de presionar el boton eliminar
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Oferta ofer = new Oferta();
         ofer.setId(Integer.parseInt(txtId.getText()));
@@ -593,18 +610,26 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Funcion que limpia el campo de texto para buscar producto por ID 
+     * @param evt Evento de presionar el boton buscar
+     */
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
     }//GEN-LAST:event_txtBuscarMouseClicked
 
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
-
+    /**
+     * Funcion que se activa al momento de presionar el boton buscar
+     * @param evt Evento que se activa al momento de presionar el boton buscar
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarOferta();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Funcion que activa los campos de texto de una oferta
+     * @param evt Evento de presionar el boton agregar
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtDescr.setEnabled(true);
         txtDescuento.setEnabled(true);
@@ -620,6 +645,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Funcion que activa los campos de texto de una oferta
+     * @param evt Evento de presionar el boton agregar
+     */
     private void btnNewOfertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewOfertaActionPerformed
         vistaDefault();
         txtDescr.setEnabled(true);
@@ -651,12 +680,20 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtDescuentoKeyTyped
 
+    /**
+     * Restriccion de cantidad de caracteres para el campo de texto de descripcion de oferta
+     * @param evt Evento de presionar una tecla
+     */
     private void txtDescrKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescrKeyTyped
         if(txtDescr.getText().length()>= 200){
             evt.consume();
         }
     }//GEN-LAST:event_txtDescrKeyTyped
 
+    /**
+     * Restriccion de caracteres, solo numericos para el campo de texto de valoracion de oferta
+     * @param evt Evento de presionar una tecla
+     */
     private void txtValoracionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValoracionKeyTyped
         char caracter = evt.getKeyChar();
         if(((caracter < '0') || 
@@ -671,6 +708,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtValoracionKeyTyped
 
+    /**
+     * Restriccion de caracteres, solo numericos para el campo de texto de buscar oferta
+     * @param evt Evento de presionar una tecla
+     */
     private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
         char caracter = evt.getKeyChar();
         if(((caracter < '0') || 
@@ -685,6 +726,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
+    /**
+     * Funcion que activa el cld de fecha de termina de una oferta
+     * @param evt Evento de seleccionar una fecha del cldFechaInicio
+     */
     private void cldFechaInicioPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cldFechaInicioPropertyChange
         // TODO add your handling code here:
         if (!(cldFechaInicio.getDate() == null)) {
@@ -697,6 +742,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cldFechaInicioPropertyChange
 
+    /**
+     * funcion que carga los productos de acuerdo al rubro seleccionado 
+     * @param evt Evento de seleccionar un rubro
+     */
     private void ddlRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlRubroActionPerformed
         // TODO add your handling code here:
         if (ddlRubro.getSelectedIndex() != 0) {
@@ -755,6 +804,11 @@ public class pnlOfertas extends javax.swing.JPanel {
     private javax.swing.JTextField txtValoracion;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Funcion que convierte un File en una arreglo de bytes ncesarios para guardar la imagen en la base de datos
+     * @param archivo
+     * @return Arreglo de bytes
+     */
     private byte[] cargarImagen(File archivo) {
         FileInputStream entrada;
         FileOutputStream salida;
@@ -770,6 +824,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         return byteImg;
     }
 
+    /**
+     * Funcion que carga las ofertas de la base de datos en la table de ofertas
+     * @throws SQLException 
+     */
     private void cargarTabla() throws SQLException{
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -791,6 +849,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         tablaOfertas.setVisible(true);
     }
 
+    /**
+     * Funcion que carga el combobox de sucursales  en el ddlSucursal
+     * @throws SQLException 
+     */
     private void cargarComboBox() throws SQLException{
         Sucursal suc = new Sucursal();
         ResultSet rs = suc.listadoSucursales(conn);
@@ -807,6 +869,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         
     }
 
+    /**
+     *Los campos de texto para agregar cada inhabilitados
+     * Los campos de texto quedan seteados con cadenas vacias
+     */
     private void vistaDefault(){
         txtDescr.setEnabled(false);
         txtValoracion.setEnabled(false);
@@ -838,6 +904,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         lblRespuestaOferta.setText("");
     }
 
+    /**
+     * Funcion que busca una oferta en la base de datos por id 
+     * Luego de encontrada la oferta se despliegan sus datos en los campos de texto
+     */
     private void buscarOferta() {
         Oferta ofer = new Oferta();
         ofer = ofer.buscar(Integer.parseInt(txtBuscar.getText()), conn);
@@ -870,6 +940,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Funcion que valida los campos de texto de acuerdo a las reglas de negocio
+     * @return true o false dependiendo de si los campos de texto pasaron la prueba
+     */
     private boolean validadorCampos() {
         boolean validar = true;
         if (txtDescr.getText().trim().isEmpty()) {
@@ -902,6 +976,11 @@ public class pnlOfertas extends javax.swing.JPanel {
         return validar;
     }
     
+    /**
+     * Funcion que valida que el descuento sea valido
+     * @param num valor del descuento
+     * @return trueo o false dependiendo de si el valor del descuento es permitido 
+     */
     public boolean validarDescuento(int num){
         boolean validar = true;
         if ((num < 0) || (num > 100)) {
@@ -910,6 +989,11 @@ public class pnlOfertas extends javax.swing.JPanel {
         return validar;
     }
 
+    /**
+     * Funcion que carga el combobox de productos
+     * @return retorna el numero de productos que se cargaron por el rubro 
+     * @throws SQLException 
+     */
     private int cargaComboProductos() throws SQLException{
         int cont = 0;
         String rubro = "";
@@ -950,14 +1034,20 @@ public class pnlOfertas extends javax.swing.JPanel {
         return cont;
     }
     
+    /**
+     * Funcion que envia un correo utilizando la api de java javamail
+     * @param destinatario del correo
+     * @param asunto del correo 
+     * @param cuerpo del correo
+     */
     private static void enviarConGMail(String destinatario, String asunto, String cuerpo) {
         // Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el remitente también.
-        String remitente = "xxxx@gmail.com";  //Para la dirección nomcuenta@gmail.com
+        String remitente = "misofertasant@gmail.com";  //Para la dirección nomcuenta@gmail.com
 
         Properties props = System.getProperties();
         props.put("mail.smtp.host", "smtp.gmail.com");  //El servidor SMTP de Google
         props.put("mail.smtp.user", remitente);
-        props.put("mail.smtp.clave", "xxxx");    //La clave de la cuenta
+        props.put("mail.smtp.clave", "misofertas123");    //La clave de la cuenta
         props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
         props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
         props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
@@ -972,7 +1062,7 @@ public class pnlOfertas extends javax.swing.JPanel {
             message.setSubject(asunto);
             message.setText(cuerpo);
             Transport transport = session.getTransport("smtp");
-            transport.connect("smtp.gmail.com", "xxxx@gmail.com", "aquivalacontraseña");
+            transport.connect("smtp.gmail.com", "misofertasant@gmail.com", "misofertas123");
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
         }
@@ -981,13 +1071,29 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
     }
     
-    public void enviarCorreo(){
-        /*
-        String destinatario =  "luisuribemoreira@gmail.com"; //A quien le quieres escribir.
-        String asunto = "Correo de prueba enviado desde Java";
-        String cuerpo = "Esta es una prueba de correo...";
-
-        enviarConGMail(destinatario, asunto, cuerpo);*/
+    /**
+     * Funcion que determina envia un correo a los consumidores del sistema
+     */
+    public void enviarCorreo() {
+        Persona per = new Persona();
+        ResultSet rs1 = per.listadoPersonas(conn);
+        try {
+            while (rs1.next()) {
+                Persona v_per = new Persona();
+                //Definiendo el o los detinatarios del mensaje
+                v_per.setEmail(rs1.getString("EMAIL"));
+                String destinatario =  v_per.getEmail();
+                
+                //Definiendo el asunto y cuerpo del correo
+                String asunto = "Correo de prueba enviado desde Java";
+                String cuerpo = "Esta es una prueba de correo...";
+                
+                //llamado al metodo que enviara el correo
+                enviarConGMail(destinatario, asunto, cuerpo); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlOfertas.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
     
     

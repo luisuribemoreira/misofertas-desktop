@@ -6,7 +6,9 @@
 package MisPaquetes;
 
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -200,6 +202,38 @@ public class Persona {
             Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
         }
         return respuesta;
+    }
+    
+    /**
+     * Funcion que retorna todas las personas que son consumidores 
+     * @param conn Conexion con la base de datos
+     * @return Consumidores ingresados en la base de datos
+     * @throws SQLException 
+     */
+    public ResultSet listadoConsumidores(Conexion conn){
+        
+        ResultSet rs = null;
+        try {
+            Statement stmt = conn.getConexion_base().createStatement();
+            rs = stmt.executeQuery("SELECT pe.EMAIL FROM PERSONA pe INNER JOIN CONSUMIDOR co ON pe.RUN = co.PERSONA_RUN");
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+            return rs;
+        }
+    }
+    
+    public ResultSet listadoPersonas(Conexion conn){
+        
+        ResultSet rs = null;
+        try {
+            Statement stmt = conn.getConexion_base().createStatement();
+            rs = stmt.executeQuery("SELECT * FROM PERSONA");
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Persona.class.getName()).log(Level.SEVERE, null, ex);
+            return rs;
+        }
     }
     
 }

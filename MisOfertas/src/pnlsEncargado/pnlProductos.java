@@ -117,11 +117,6 @@ public class pnlProductos extends javax.swing.JPanel {
                 txtBuscarMouseClicked(evt);
             }
         });
-        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBuscarActionPerformed(evt);
-            }
-        });
 
         btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnBuscar.setText("Buscar");
@@ -253,11 +248,6 @@ public class pnlProductos extends javax.swing.JPanel {
         jLabel10.setToolTipText("");
 
         txtStockSucur.setMinimumSize(new java.awt.Dimension(6, 23));
-        txtStockSucur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtStockSucurActionPerformed(evt);
-            }
-        });
         txtStockSucur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtStockSucurKeyTyped(evt);
@@ -443,7 +433,10 @@ public class pnlProductos extends javax.swing.JPanel {
         pnlProducto.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
-    //Se activan los campos de textos para agregar un nuevo producto
+    /**
+     * Funcion que activa los campos de texto de un producto
+     * @param evt Evento de presionar el boton agregar
+     */
     private void btnNewProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewProductoActionPerformed
         vistaDefault();
         txtNombre.setEnabled(true);
@@ -459,6 +452,10 @@ public class pnlProductos extends javax.swing.JPanel {
         txtNombre.requestFocus();
     }//GEN-LAST:event_btnNewProductoActionPerformed
 
+    /**
+     * Funcion que activa los campos de texto de un producto
+     * @param evt Evento de presionar el boton agregar
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtNombre.setEnabled(false);
         txtDescripcion.setEnabled(true);
@@ -472,14 +469,26 @@ public class pnlProductos extends javax.swing.JPanel {
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Funcion que limpia el campo de texto para buscar producto por ID 
+     * @param evt Evento de presionar el boton buscar
+     */
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
     }//GEN-LAST:event_txtBuscarMouseClicked
 
+    /**
+     * Funcion que se activa al momento de presionar el boton buscar
+     * @param evt Evento que se activa al momento de presionar el boton buscar
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarProducto();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Funcion que elimina un producto por ID
+     * @param evt Evento de presionar el boton eliminar
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Producto pro = new Producto();
         pro.setId(Integer.parseInt(txtId.getText()));
@@ -501,6 +510,10 @@ public class pnlProductos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Funcion que agrega o modifica un producto 
+     * @param evt Evento de presionar el boton agregar
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         try{
             if (!validadorCampos()){
@@ -569,10 +582,18 @@ public class pnlProductos extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Funcion que cancela la operacion que se este realizando en el momento
+     * @param evt Evento de presionar el boton cancelar
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Funcion que busca un producto seleccionado en la tabla de productos
+     * @param evt Evento de seleccionar un elemento de la tabla 
+     */
     private void tablaProductos2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductos2MouseClicked
         int seleccion = tablaProductos2.getSelectedRow();
         int idSelect = (int) tablaProductos2.getModel().getValueAt(seleccion, 0);
@@ -580,10 +601,10 @@ public class pnlProductos extends javax.swing.JPanel {
         buscarProducto();
     }//GEN-LAST:event_tablaProductos2MouseClicked
 
-    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
-
+    /**
+     * Restriccion de caracteres, solo numericos para el campo de texto de stock seguro
+     * @param evt Evento de presionar una tecla
+     */
     private void txtSeguroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSeguroKeyTyped
         // TODO add your handling code here: 
         char caracter = evt.getKeyChar();
@@ -599,6 +620,10 @@ public class pnlProductos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtSeguroKeyTyped
 
+    /**
+     * Restriccionar de cantidad de caracteres para el campo de texto de nombre de producto
+     * @param evt Evento de presionar una tecla
+     */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         // TODO add your handling code here:
         if(txtNombre.getText().length()>=25){
@@ -606,6 +631,10 @@ public class pnlProductos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
+    /**
+     * Restriccionar de cantidad de caracteres para el campo de texto de nombre de descripcion
+     * @param evt Evento de presionar una tecla
+     */
     private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
         // TODO add your handling code here:
         if(txtDescripcion.getText().length()>= 200){
@@ -613,6 +642,10 @@ public class pnlProductos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtDescripcionKeyTyped
 
+    /**
+     * Restriccion de caracteres, solo numericos para el campo de texto de valor de producto
+     * @param evt Evento de presionar una tecla
+     */
     private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
         // TODO add your handling code here:
         char caracter = evt.getKeyChar();
@@ -628,10 +661,10 @@ public class pnlProductos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtValorKeyTyped
 
-    private void txtStockSucurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockSucurActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtStockSucurActionPerformed
-
+    /**
+     * Restriccion de caracteres, solo numericos para el campo de texto de stock en sucursal
+     * @param evt Evento de presionar una tecla
+     */
     private void txtStockSucurKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockSucurKeyTyped
         // TODO add your handling code here:
         char caracter = evt.getKeyChar();
@@ -682,8 +715,11 @@ public class pnlProductos extends javax.swing.JPanel {
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
-    //Carga de la tabla inferior correspondiente al listado de productos que
-    //que se encuentra en la base de datos
+    /**
+     * Carga de la tabla inferior correspondiente al listado de productos que
+     * que se encuentra en la base de datos
+     * @throws SQLException 
+     */
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo =  new DefaultTableModel();
             modelo.addColumn("ID");
@@ -703,8 +739,10 @@ public class pnlProductos extends javax.swing.JPanel {
             tablaProductos2.setVisible(true);
     }
 
-    //Los campos de texto para agregar cada inhabilitados
-    //Los campos de texto quedan seteados con cadenas vacias
+    /**
+     *Los campos de texto para agregar cada inhabilitados
+     * Los campos de texto quedan seteados con cadenas vacias
+     */
     private void vistaDefault() {
         
         txtNombre.setEnabled(false);
@@ -732,6 +770,10 @@ public class pnlProductos extends javax.swing.JPanel {
         lblRespuestaEmpresa.setText("");
     }
 
+    /**
+     * Funcion que busca un producto en la base de datos por id 
+     * Luego de encontrado el producto se despliegan sus datos en los campos de texto
+     */
     private void buscarProducto() {
         Producto pro = new Producto();
         pro = pro.buscar(Integer.parseInt(txtBuscar.getText()), conn);
@@ -761,6 +803,10 @@ public class pnlProductos extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Funcion que valida los campos de texto de acuerdo a las reglas de negocio
+     * @return true o false dependiendo de si los campos de texto pasaron la prueba
+     */
     private boolean validadorCampos() {
         boolean validar = true;
         if (txtNombre.getText().trim().isEmpty()) {
@@ -789,6 +835,10 @@ public class pnlProductos extends javax.swing.JPanel {
         return validar;
     }
 
+    /**
+     * Funcion que capta lo que se seleccionar en el ddlestado
+     * @return Recepciona un char representativo del estado en que se encuentra el producto 
+     */
     private char cargarEstado() {
         char var = 0;
             if (ddlEstado.getSelectedIndex() == 0) {
@@ -801,6 +851,11 @@ public class pnlProductos extends javax.swing.JPanel {
         return var;
     }
 
+    /**
+     * Funcion que carga el ddl estado de producto 
+     * @param e estado del producto en la base de datos 
+     * @return el numero del index el cual se cargara en el ddl 
+     */
     private int cargarE(char e) {
         int index = 0;
             if (e == 'd') {
@@ -813,7 +868,11 @@ public class pnlProductos extends javax.swing.JPanel {
         return index;
     }
     
-    
+    /**
+     * Funcion que valida que el sotck que se esta enviando sea valido
+     * @param stock numero del stock de un producto 
+     * @return true o false dependiendo de si el stock es mayor o menor a 0
+     */
     public boolean validarStock(int stock){
         boolean validar = true;
         if (stock < 0) {
@@ -822,6 +881,11 @@ public class pnlProductos extends javax.swing.JPanel {
         return validar;
     }
     
+    /**
+     * Funcion que valida si el valor de un producto es mayor a 0 o no 
+     * @param valor valor que se va a evaluar
+     * @return true o false dependiendo de si el valor es mayor a 0 o no
+     */
     public boolean validarValor(int valor){
         boolean validar = true;
         if (valor < 0) {
@@ -830,6 +894,10 @@ public class pnlProductos extends javax.swing.JPanel {
         return validar;
     }
 
+    /**
+     * Funcion que obtiene el rubro de un producto de acuerdo a lo que se alla seleccionado en el ddlRubro
+     * @return Rubro del producto
+     */
     private String obtenerRubro() {
         String rubro = "";
         switch (ddlRubro.getSelectedIndex()) {
@@ -852,6 +920,10 @@ public class pnlProductos extends javax.swing.JPanel {
         return rubro;
     }
 
+    /**
+     * Funcion que obtiene la descripcion de un rubro de acuerdo a lo que se alla seleccionado en el ddlRubro
+     * @return Descripcion del rubro
+     */
     private String obtenerDescRubro() {
         String descRubro = "";
         switch (ddlRubro.getSelectedIndex()) {
