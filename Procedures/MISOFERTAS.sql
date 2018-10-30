@@ -419,12 +419,12 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE MODIFICAR_EMPLEADO(
-    v_user VARCHAR2, v_run VARCHAR2, v_cargo VARCHAR2, v_respuesta OUT NUMBER
+    v_user VARCHAR2, v_run VARCHAR2, v_cargo VARCHAR2, v_idreferencia NUMBER, v_respuesta OUT NUMBER
 )
 AS
 BEGIN
     UPDATE EMPLEADO
-    SET CARGO = v_cargo
+    SET CARGO = v_cargo, IDREFERENCIA = v_idreferencia
     WHERE PERSONA_RUN = v_run and USUARIO_USERNAME = v_user;
     v_respuesta := 1;
     
@@ -548,3 +548,75 @@ BEGIN
     WHEN OTHERS THEN
       v_respuesta := 0;
 END;
+/
+
+
+
+-- Procedimientos Almacenados la GESTIÓN DE CERTIFICADOS (DESCUENTOS)
+
+CREATE OR REPLACE PROCEDURE BUSCAR_CERTIFICADO(
+    v_id NUMBER, v_pts_min OUT NUMBER, v_pts_max OUT NUMBER, v_descuento OUT NUMBER, v_tope OUT NUMBER, v_rubro OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT pts_min, pts_max, descuento, tope, rubro
+    INTO v_pts_min, v_pts_max, v_descuento, v_tope, v_rubro
+    FROM CERTIFICADO
+    WHERE id_cert = v_id;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_pts_min := -1;
+      v_pts_max := -1;
+      v_descuento := -1;
+      v_tope := -1;
+      v_rubro := 'ERROR';
+END;
+/
+
+CREATE OR REPLACE PROCEDURE AGREGAR_CERTIFICADO(
+    v_pts_min NUMBER, v_pts_max NUMBER, v_descuento NUMBER, v_tope NUMBER, v_rubro VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO CERTIFICADO VALUES (CERTIFICADO_SEQ.NEXTVAL, v_pts_min, v_pts_max, v_descuento, v_tope, v_rubro);
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE MODIFICAR_CERTIFICADO(
+    v_id NUMBER, v_pts_min NUMBER, v_pts_max NUMBER, v_descuento NUMBER, v_tope NUMBER, v_rubro VARCHAR2, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    UPDATE CERTIFICADO
+    SET PTS_MIN = v_pts_min, PTS_MAX = v_pts_max, DESCUENTO = v_descuento, TOPE = v_tope, RUBRO = v_rubro
+    WHERE ID_CERT = v_id;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE ELIMINAR_CERTIFICADO(
+    v_id NUMBER, v_respuesta OUT NUMBER
+)
+AS
+BEGIN
+    DELETE FROM CERTIFICADO
+    WHERE ID_CERT = v_id;
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
+/
+
+

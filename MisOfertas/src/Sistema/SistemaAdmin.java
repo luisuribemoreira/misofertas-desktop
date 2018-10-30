@@ -604,7 +604,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_seisActionPerformed
 
     private void cincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cincoActionPerformed
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlMarket());
+        new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlDescuento());
         if(this.cinco.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
@@ -658,7 +658,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseDragged
 
     private void cuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuatroActionPerformed
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlFeeBack());
+        new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlProductos());
         if(this.cuatro.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
