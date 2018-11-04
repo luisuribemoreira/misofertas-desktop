@@ -90,6 +90,35 @@ public class Empresa {
         return emp;
     }
     
+    
+    public Empresa buscarRef(String id,Conexion conn){
+        Empresa emp = new Empresa();
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call BUSCAR_EMPRESA_REF (?,?,?,?,?)}");
+            
+            cst.setString(1, id);
+            
+            cst.registerOutParameter(2, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(3, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(4, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(5, java.sql.Types.VARCHAR);
+            
+            cst.execute();
+            
+            emp.setRut(cst.getString(2));
+            emp.setNombre(cst.getString(3));
+            emp.setDireccion(cst.getString(4));
+            emp.setRazon_social(cst.getString(5));
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+            emp = null;
+        }
+        return emp;
+    }
+    
     public int agregar(Conexion conn){
         int respuesta = 0;
         try {

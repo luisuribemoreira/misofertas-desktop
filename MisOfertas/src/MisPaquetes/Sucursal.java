@@ -81,6 +81,12 @@ public class Sucursal {
         return rs;
     }
     
+    public ResultSet listadoSucursalesFiltro(Conexion conn, String rut) throws SQLException{
+        Statement stmt = conn.getConexion_base().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM SUCURSAL WHERE EMPRESA_RUT = '"+ rut +"'");
+        return rs;
+    }
+    
     public Sucursal buscar(int id,Conexion conn){
         Sucursal suc = new Sucursal();
         try {

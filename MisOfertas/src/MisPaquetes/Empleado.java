@@ -60,18 +60,20 @@ public class Empleado {
     public void buscarEmpleado(String run, Conexion conn){
         try {
             
-            CallableStatement cst = conn.getConexion_base().prepareCall("{call BUSCAR_EMPLEADO (?,?,?)}");
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call BUSCAR_EMPLEADO (?,?,?,?)}");
             
             cst.setString(1, run);
             
             cst.registerOutParameter(2, java.sql.Types.VARCHAR);
             cst.registerOutParameter(3, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(4, java.sql.Types.NUMERIC);
             
             cst.execute();
             
             this.setRun(run);
             this.setUsername(cst.getString(2));
             this.setCargo(cst.getString(3));
+            this.setId_referencia(cst.getInt(4));
             
 
         } catch (SQLException ex) {
