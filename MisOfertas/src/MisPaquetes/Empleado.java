@@ -15,11 +15,17 @@ import java.util.logging.Logger;
  * @author Nicolás
  */
 public class Empleado {
+    /**
+     * Atributos de la clase empleado
+     */
     private String cargo;
     private String run;
     private String username;
     private int id_referencia;
 
+    /**
+     * Accesarodores y mutadores
+     */
     public String getCargo() {
         return cargo;
     }
@@ -54,24 +60,35 @@ public class Empleado {
     
     
 
+    /**
+     * Constructor por defecto
+     */
     public Empleado() {
     }
     
+    /**
+     * Método el cual utiliza el procedimiento almacenado "Buscar Empleado" el cual busca el empleado
+     * registrado en la base de datos y modifica la información de los atributos acorde a lo encontrado
+     * @param run Run asociado al empleado a buscar
+     * @param conn Conexión a la base de datos
+     */
     public void buscarEmpleado(String run, Conexion conn){
         try {
             
-            CallableStatement cst = conn.getConexion_base().prepareCall("{call BUSCAR_EMPLEADO (?,?,?)}");
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call BUSCAR_EMPLEADO (?,?,?,?)}");
             
             cst.setString(1, run);
             
             cst.registerOutParameter(2, java.sql.Types.VARCHAR);
             cst.registerOutParameter(3, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(4, java.sql.Types.NUMERIC);
             
             cst.execute();
             
             this.setRun(run);
             this.setUsername(cst.getString(2));
             this.setCargo(cst.getString(3));
+            this.setId_referencia(cst.getInt(4));
             
 
         } catch (SQLException ex) {
@@ -79,6 +96,12 @@ public class Empleado {
         }
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Agregar Empleado" para así agregar
+     * la información del empleado registrado
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int agregar(Conexion conn){
         int respuesta = 0;
         try {
@@ -103,6 +126,12 @@ public class Empleado {
         return respuesta;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Modificar Empleado" para así Modificar
+     * la información del empleado registrado
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int modificar(Conexion conn){
         int respuesta = 0;
         try {

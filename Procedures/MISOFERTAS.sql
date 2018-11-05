@@ -143,6 +143,24 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE BUSCAR_EMPRESA_REF(
+    v_id VARCHAR2, v_rut OUT VARCHAR2, v_nombre OUT VARCHAR2, v_direccion OUT VARCHAR2, v_razon_social OUT VARCHAR2
+)
+AS
+BEGIN
+    SELECT rut, nombre, direccion, razon_social
+    INTO v_rut, v_nombre, v_direccion, v_razon_social
+    FROM EMPRESA
+    WHERE SUBSTR(rut,0,8) = v_id;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_nombre := 'ERROR';
+      v_direccion := 'ERROR';
+      v_razon_social := 'ERROR';
+END;
+/
+
 CREATE OR REPLACE PROCEDURE AGREGAR_EMPRESA(
     v_rut VARCHAR2, v_nombre VARCHAR2, v_direccion VARCHAR2, v_razon_social VARCHAR2, v_respuesta OUT NUMBER
 )
@@ -327,13 +345,13 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE BUSCAR_EMPLEADO(
-    v_run VARCHAR2, v_user OUT VARCHAR2, v_cargo OUT VARCHAR2
+    v_run VARCHAR2, v_user OUT VARCHAR2, v_cargo OUT VARCHAR2, v_id OUT NUMBER
 )
 AS
 BEGIN
     
-    SELECT USUARIO_USERNAME, CARGO
-    INTO v_user, v_cargo
+    SELECT USUARIO_USERNAME, CARGO, IDREFERENCIA
+    INTO v_user, v_cargo, v_id
     FROM EMPLEADO
     WHERE PERSONA_RUN = v_run;
     

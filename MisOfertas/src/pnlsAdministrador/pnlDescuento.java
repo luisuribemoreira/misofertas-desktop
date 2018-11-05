@@ -373,6 +373,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Función que se produce al apretar el boton "NewCertificado" el cual habilita los campos para su registro
+     * @param evt Evento que se produce al apretar el botón
+     */
     private void btnNewCertificadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewCertificadoActionPerformed
         vistaDefault();
         txtPtsMax.setEnabled(true);
@@ -385,6 +389,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         txtPtsMin.requestFocus();
     }//GEN-LAST:event_btnNewCertificadoActionPerformed
 
+    /**
+     * Función que se produce la hacer clic en la tabla certificado para realizar su busqueda a la fila seleccionada
+     * @param evt evento que se produce al dar clic en alguna fila de la tabla
+     */
     private void tablaCertificadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCertificadosMouseClicked
         int seleccion = tablaCertificados.getSelectedRow();
         int idSelect = (int) tablaCertificados.getModel().getValueAt(seleccion, 0);
@@ -392,6 +400,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         buscarCertificado();
     }//GEN-LAST:event_tablaCertificadosMouseClicked
 
+    /**
+     * Función que se produce al apretar el boton "Modificar" el cual habilita los campos para modificar la información
+     * @param evt Evento que se produce al apretar el botón
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtPtsMax.setEnabled(true);
         txtPtsMin.setEnabled(true);
@@ -402,6 +414,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Función que se produce al apretar el boton "Eliminar" el cual ejecuta la acción de eliminar la información seleccionada
+     * @param evt Evento que se produce al apretar el botón
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Certificado cer = new Certificado();
         cer.setId_cert(Integer.parseInt(txtId.getText()));
@@ -423,14 +439,26 @@ public class pnlDescuento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Función que se produce al hacer clic en el campo de buscar el cual modifica el texto del campo buscar
+     * @param evt Evento que se produce al hacer clic en el campo de buscar
+     */
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
     }//GEN-LAST:event_txtBuscarMouseClicked
 
+    /**
+     * Función que se produce al apretar el botón buscar el cual llama al método buscarCertificado para proporcionar la información asociada
+     * @param evt Evento que se produce al apretar el botón
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarCertificado();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Función el cual permitirá restringir los caracteres correspondiente al campo de puntos mínimos
+     * @param evt Evento que se produce al realizar tipeo del teclado
+     */
     private void txtPtsMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPtsMinKeyTyped
         if(txtPtsMin.getText().length()>=4){
             evt.consume();
@@ -441,6 +469,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtPtsMinKeyTyped
 
+    /**
+     * Función el cual permitirá restringir los caracteres correspondiente al campo de puntos máximos
+     * @param evt Evento que se produce al realizar tipeo del teclado
+     */
     private void txtPtsMaxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPtsMaxKeyTyped
         if(txtPtsMax.getText().length()>=4){
             evt.consume();
@@ -451,6 +483,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtPtsMaxKeyTyped
 
+    /**
+     * Función el cual permitirá restringir los caracteres correspondiente al campo de descuento
+     * @param evt Evento que se produce al realizar tipeo del teclado
+     */
     private void txtDescuentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescuentoKeyTyped
         if(txtDescuento.getText().length()>=2){
             evt.consume();
@@ -461,6 +497,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtDescuentoKeyTyped
 
+    /**
+     * Función el cual permitirá restringir los caracteres correspondiente al campo de tope
+     * @param evt Evento que se produce al realizar tipeo del teclado
+     */
     private void txtTopeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTopeKeyTyped
         if(txtTope.getText().length()>=9){
             evt.consume();
@@ -471,6 +511,11 @@ public class pnlDescuento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtTopeKeyTyped
 
+    /**
+     * Función que se produce al apretar el botón de "Guardar" el cual verficará y ejecutará el guardado o modificado de la información
+     * Acorde a las especificaciones entregadas
+     * @param evt Evento que se produce al apretar el botón guardar
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Certificado cer = new Certificado();
         cer.setPts_min(Integer.parseInt(txtPtsMin.getText()));
@@ -522,6 +567,10 @@ public class pnlDescuento extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Función que llama al método vistaDefault, para dejar todos los campos por defecto
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -556,6 +605,10 @@ public class pnlDescuento extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     
+    /**
+     * Método que carga la tabla de la interfaz con la información de los certificados registrados
+     * @throws SQLException 
+     */
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -582,6 +635,9 @@ public class pnlDescuento extends javax.swing.JPanel {
         tablaCertificados.setVisible(true);
     }
 
+    /**
+     * Método que deja todos los campos por defecto
+     */
     private void vistaDefault() {
         
         txtPtsMax.setEnabled(false);
@@ -605,6 +661,9 @@ public class pnlDescuento extends javax.swing.JPanel {
         lblRespuestaCertificado.setText("");
     }
 
+    /**
+     * Método que busca la información del certificado acorde a lo especificado en el campo de texto "Buscar"
+     */
     private void buscarCertificado() {
         Certificado cer = new Certificado();
         cer = cer.buscar(Integer.parseInt(txtBuscar.getText()), conn);
@@ -631,6 +690,10 @@ public class pnlDescuento extends javax.swing.JPanel {
     }
 
 
+    /**
+     * Método que valida los campos que no estén vacios
+     * @return Boolean que valida si los campos están o no vacios
+     */
     private boolean validadorCampos() {
         boolean validar = true;
         if (txtPtsMin.getText().trim().isEmpty()) {

@@ -379,6 +379,10 @@ public class pnlSucursal extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Función que habilita los campos para resgistrar la sucursal
+     * @param evt Evento que se produce al apretar el botón Nueva Sucursal
+     */
     private void btnNewSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewSucursalActionPerformed
         vistaDefault();
         txtDireccion.setEnabled(true);
@@ -391,6 +395,10 @@ public class pnlSucursal extends javax.swing.JPanel {
         txtNombre.requestFocus();
     }//GEN-LAST:event_btnNewSucursalActionPerformed
 
+    /**
+     * Función que toma el valor de la ID asociada a la fila seleccionada de la tabla
+     * @param evt Evento que se produce al seleccionar una fila
+     */
     private void tablaSucursalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSucursalesMouseClicked
         int seleccion = tablaSucursales.getSelectedRow();
         int idSelect = (int) tablaSucursales.getModel().getValueAt(seleccion, 0);
@@ -398,6 +406,10 @@ public class pnlSucursal extends javax.swing.JPanel {
         buscarSucursal();
     }//GEN-LAST:event_tablaSucursalesMouseClicked
 
+    /**
+     * Función que habilita los campos para modificar la información asociada a la sucursal
+     * @param evt Evento que se produce al presionar el botón Modificar
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtDireccion.setEnabled(true);
         txtNombre.setEnabled(true);
@@ -408,6 +420,10 @@ public class pnlSucursal extends javax.swing.JPanel {
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Función que ejecuta la eliminación de la sucursal seleccionada.
+     * @param evt Evento que se produce al presionar el botón Eliminar
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Sucursal suc = new Sucursal();
         suc.setId_sucur(Integer.parseInt(txtId.getText()));
@@ -429,26 +445,46 @@ public class pnlSucursal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Función que limpia el campo de texto de la busqueda
+     * @param evt Evento que se produce al hacer clic en el campo de texto de buscar
+     */
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
     }//GEN-LAST:event_txtBuscarMouseClicked
 
+    /**
+     * Función que llama al método de busqueda de la sucursal acorde al ID a buscar
+     * @param evt Evento que se produce al presionar el botón Buscar
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarSucursal();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Función que restringe los caracteres no asociados al nombre
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         if(txtNombre.getText().length()>=25){
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados a la dirección
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
         if(txtDireccion.getText().length()>=100){
             evt.consume();
         }
     }//GEN-LAST:event_txtDireccionKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al telefono
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtFonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFonoKeyTyped
         if(txtFono.getText().length()>=13){
             evt.consume();
@@ -459,12 +495,20 @@ public class pnlSucursal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtFonoKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados a la Comuna
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComunaKeyTyped
         if(txtComuna.getText().length()>=25){
             evt.consume();
         }
     }//GEN-LAST:event_txtComunaKeyTyped
 
+    /**
+     * Función que permite agregar o modificar la información asociada a los campos habilitados
+     * @param evt Evento que se produce al apretar el botón guardar
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Sucursal suc = new Sucursal();
         suc.setNombre(txtNombre.getText());
@@ -519,6 +563,10 @@ public class pnlSucursal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Función que llama al método de la vista por default para establecer todos los campos por defecto
+     * @param evt Evento que se produce al presionar el botón cancelar
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -552,7 +600,10 @@ public class pnlSucursal extends javax.swing.JPanel {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    
+    /**
+     * Método que carga la información de la tabla con el registro de la sucursal
+     * @throws SQLException 
+     */
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID");
@@ -579,6 +630,9 @@ public class pnlSucursal extends javax.swing.JPanel {
         tablaSucursales.setVisible(true);
     }
 
+    /**
+     * Método que deja todos los campos por defecto
+     */
     private void vistaDefault() {
         
         txtDireccion.setEnabled(false);
@@ -602,6 +656,9 @@ public class pnlSucursal extends javax.swing.JPanel {
         lblRespuestaSucursal.setText("");
     }
 
+    /**
+     * Método que busca la sucursal y transfiere la información a los campos asociados.
+     */
     private void buscarSucursal() {
         Sucursal suc = new Sucursal();
         suc = suc.buscar(Integer.parseInt(txtBuscar.getText()), conn);
@@ -629,6 +686,10 @@ public class pnlSucursal extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Método que carga la información del combobox de las empresas registradas
+     * @throws SQLException 
+     */
     private void cargarComboBox() throws SQLException {
         Empresa emp = new Empresa();
         ResultSet rs = emp.listadoEmpresas(conn);
@@ -642,6 +703,10 @@ public class pnlSucursal extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Método que valida que los campos no estén vacios
+     * @return Boolean que corresponde si hay o no campos vacios
+     */
     private boolean validadorCampos() {
         boolean validar = true;
         if (txtNombre.getText().trim().isEmpty()) {

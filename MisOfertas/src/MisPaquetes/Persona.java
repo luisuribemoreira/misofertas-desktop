@@ -18,6 +18,9 @@ import java.util.logging.Logger;
  * @author Nicolás
  */
 public class Persona {
+    /**
+     * Atributos de la clase Persona
+     */
     private String run;
     private String nombre;
     private String apellidoP;
@@ -26,6 +29,9 @@ public class Persona {
     private String email;
     private Date fec_nac;
 
+    /**
+     * Accesadores y mutadores
+     */
     public String getRun() {
         return run;
     }
@@ -82,9 +88,19 @@ public class Persona {
         this.fec_nac = fec_nac;
     }
 
+    /**
+     * Constructor por defecto
+     */
     public Persona() {
     }
     
+    /**
+     * Método el cual utiliza el procedimiento almacenado "Buscar Persona" el cual busca la persona
+     * registrada en la base de datos asociado al run especificado para luego ser obtener su información
+     * @param run Run asociado a la persona a buscar
+     * @param conn Conexión a la base de datos
+     * @return Persona asociada al run entregado
+     */
     public Persona buscarPersona(String run, Conexion conn){
         Persona per = new Persona();
         try {
@@ -118,6 +134,14 @@ public class Persona {
         return per;
     }
     
+    
+    /**
+     * Método el cual utiliza el procedimiento almacenado "Buscar Persona User" el cual busca la persona
+     * registrada en la base de datos acorde a su usuario para luego obtener su información
+     * @param username usuario asociado a la persona a buscar
+     * @param conn Conexión a la base de datos
+     * @return Persona asociada al run entregado
+     */
     public Persona buscarPersonaUser(String username, Conexion conn){
         Persona per = new Persona();
         try {
@@ -152,6 +176,12 @@ public class Persona {
         return per;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Agregar Persona" para así agregar
+     * la información de la persona a registrar
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public Integer agregar(Conexion conn){
         int respuesta = 0;
         try {
@@ -179,6 +209,12 @@ public class Persona {
         return respuesta;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Modificar Persona" para así modificar
+     * la información de la persona registrada
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int modificar(Conexion conn){
         int respuesta = 0;
         try {
@@ -207,7 +243,7 @@ public class Persona {
     /**
      * Funcion que retorna todas las personas que son consumidores 
      * @param conn Conexion con la base de datos
-     * @return Consumidores ingresados en la base de datos
+     * @return Resultset Consumidores ingresados en la base de datos
      * @throws SQLException 
      */
     public ResultSet listadoConsumidores(Conexion conn){
@@ -223,6 +259,12 @@ public class Persona {
         }
     }
     
+    /**
+     * Funcion que retorna todas las personas
+     * @param conn Conexion con la base de datos
+     * @return Resultset Personas ingresadas en la base de datos
+     * @throws SQLException 
+     */
     public ResultSet listadoPersonas(Conexion conn){
         
         ResultSet rs = null;

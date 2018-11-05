@@ -6,7 +6,9 @@
 package pnlsAdministrador;
 
 import MisPaquetes.Empleado;
+import MisPaquetes.Empresa;
 import MisPaquetes.Persona;
+import MisPaquetes.Sucursal;
 import MisPaquetes.Usuario;
 import static Sistema.MainSistema.conn;
 import java.awt.Toolkit;
@@ -32,6 +34,7 @@ public class pnlUsuario extends javax.swing.JPanel {
         try {
             initComponents();
             cargarTabla();
+            cargarEmpresas();
             vistaDefault();
         } catch (SQLException ex) {
             Logger.getLogger(pnlUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,6 +82,11 @@ public class pnlUsuario extends javax.swing.JPanel {
         txtPass = new javax.swing.JPasswordField();
         btnVerificar = new javax.swing.JButton();
         cldFechaNac = new com.toedter.calendar.JDateChooser();
+        jPanel1 = new javax.swing.JPanel();
+        ddlEmpresa = new javax.swing.JComboBox<>();
+        ddlSucursal = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         btnNewUsuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
@@ -228,7 +236,7 @@ public class pnlUsuario extends javax.swing.JPanel {
         });
 
         ddlSexo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        ddlSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Sexo", "Masculino", "Femenino" }));
+        ddlSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Sexo", "Hombre", "Mujer" }));
 
         pnCredencial.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)), "Credenciales", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
@@ -250,6 +258,11 @@ public class pnlUsuario extends javax.swing.JPanel {
 
         ddlCargo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         ddlCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Cargo", "Administrador", "Gerente de Asociación", "Encargado de Tienda" }));
+        ddlCargo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ddlCargoItemStateChanged(evt);
+            }
+        });
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -310,20 +323,78 @@ public class pnlUsuario extends javax.swing.JPanel {
 
         cldFechaNac.setMinSelectableDate(new java.util.Date(-62135751533000L));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 102, 255)), "Lugar de Trabajo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        ddlEmpresa.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ddlEmpresa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la empresa" }));
+        ddlEmpresa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ddlEmpresaItemStateChanged(evt);
+            }
+        });
+
+        ddlSucursal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ddlSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione la Sucursal" }));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Empresa");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Sucursal");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ddlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ddlSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12)
+                .addGap(117, 117, 117))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ddlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ddlSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout pnUsuarioLayout = new javax.swing.GroupLayout(pnUsuario);
         pnUsuario.setLayout(pnUsuarioLayout);
         pnUsuarioLayout.setHorizontalGroup(
             pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnUsuarioLayout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(180, 180, 180))
+                .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9))
+                    .addGroup(pnUsuarioLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnCredencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(48, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnUsuarioLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRespuestaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
             .addGroup(pnUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnUsuarioLayout.createSequentialGroup()
+                .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnUsuarioLayout.createSequentialGroup()
                         .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel10))
@@ -351,22 +422,15 @@ public class pnlUsuario extends javax.swing.JPanel {
                                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cldFechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(62, 62, 62))))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)))
-            .addGroup(pnUsuarioLayout.createSequentialGroup()
-                .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
                     .addGroup(pnUsuarioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel9))
-                    .addGroup(pnUsuarioLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(pnCredencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnUsuarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRespuestaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(180, 180, 180))))
         );
         pnUsuarioLayout.setVerticalGroup(
             pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +444,7 @@ public class pnlUsuario extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnUsuarioLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,9 +468,11 @@ public class pnlUsuario extends javax.swing.JPanel {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnCredencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblRespuestaUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -473,7 +539,7 @@ public class pnlUsuario extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -488,6 +554,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Función que habilita los campos para modificar la información asociada al usuario
+     * @param evt Evento que se produce al presionar el botón Modificar
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtNombre.setEnabled(true);
         txtApellidoP.setEnabled(true);
@@ -497,8 +567,31 @@ public class pnlUsuario extends javax.swing.JPanel {
         ddlCargo.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
+        
+        switch (ddlCargo.getSelectedIndex()) {
+            case 0:
+                ddlEmpresa.setEnabled(false);
+                ddlSucursal.setEnabled(false);
+                break;
+            case 1:
+                ddlEmpresa.setEnabled(false);
+                ddlSucursal.setEnabled(false);
+                break;
+            case 2:
+                ddlEmpresa.setEnabled(true);
+                ddlSucursal.setEnabled(false);
+                break;
+            default:
+                ddlEmpresa.setEnabled(true);
+                ddlSucursal.setEnabled(true);
+                break;
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Función que ejecuta la eliminación del usuario seleccionado.
+     * @param evt Evento que se produce al presionar el botón Eliminar
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Usuario usu = new Usuario();
         usu.setUsername(txtUser.getText());
@@ -520,14 +613,26 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Función que limpia el campo de texto de la busqueda
+     * @param evt Evento que se produce al hacer clic en el campo de texto de buscar
+     */
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
     }//GEN-LAST:event_txtBuscarMouseClicked
 
+    /**
+     * Función que llama al método de busqueda del suaurio acorde al Nombre de Usuario a buscar
+     * @param evt Evento que se produce al presionar el botón Buscar
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarUsuario();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Función que restringe los caracteres no asociados al Run
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtRunKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRunKeyTyped
         if(txtRun.getText().length()>=10){
             evt.consume();
@@ -546,6 +651,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtRunKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al apellido paterno
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPKeyTyped
         if(txtApellidoP.getText().length()>=100){
             evt.consume();
@@ -556,6 +665,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtApellidoPKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al apellido materno
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMKeyTyped
         if(txtApellidoM.getText().length()>=13){
             evt.consume();
@@ -566,6 +679,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtApellidoMKeyTyped
 
+    /**
+     * Función que permite agregar o modificar la información asociada a los campos habilitados
+     * @param evt Evento que se produce al apretar el botón guardar
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Usuario usu = new Usuario();
         usu.setUsername(txtUser.getText());
@@ -583,6 +700,25 @@ public class pnlUsuario extends javax.swing.JPanel {
         emp.setCargo(ddlCargo.getSelectedItem().toString());
         emp.setRun(txtRun.getText());
         emp.setUsername(txtUser.getText());
+        
+        if (ddlSucursal.isEnabled()) {
+            try{
+                Sucursal suc = (Sucursal)ddlSucursal.getModel().getSelectedItem();
+                emp.setId_referencia(suc.getId_sucur());
+            }catch(Exception e){
+                
+            }
+        }else if (ddlEmpresa.isEnabled()) {
+            try{
+                Empresa em = (Empresa)ddlEmpresa.getModel().getSelectedItem();
+                emp.setId_referencia(Integer.parseInt(em.getRut().substring(0, 8)));
+            }catch(Exception e){
+                
+            }
+        }else{
+            emp.setId_referencia(0);
+        }
+        
         int respuesta1 = 0;
         int respuesta2 = 1;
         int respuesta3 = 1;
@@ -632,16 +768,28 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Función que llama al método de la vista por default para establecer todos los campos por defecto
+     * @param evt Evento que se produce al presionar el botón cancelar
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Función que restringe los caracteres no asociados al email
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
         if(txtNombre.getText().length()>=35){
             evt.consume();
         }
     }//GEN-LAST:event_txtEmailKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al nombre
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         if(txtNombre.getText().length()>=25){
             evt.consume();
@@ -652,18 +800,22 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al nombre de usuario
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyTyped
         if(txtUser.getText().length()>=25){
             evt.consume();
         }
     }//GEN-LAST:event_txtUserKeyTyped
 
-    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
-        if(txtPass.getText().length()>=15){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtPassKeyTyped
-
+    /**
+     * Función que verifica si el Run entregado es válido y verifica si esta asociada la información con la base de datos
+     * La cual si encuentra información asociada a un empleado, entrega un mensaje informando que se encuentra registrado,
+     * en caso contrario, habilita los campos y transfiere información a los campos correspondientes
+     * @param evt Evento que se produce al presionar el botón Verificar
+     */
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         if (validarRun(txtRun.getText())) {
             Empleado emp = new Empleado();
@@ -707,6 +859,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnVerificarActionPerformed
 
+    /**
+     * Función que habilita el campo de Run para su posterior verificación
+     * @param evt Evento que se produce al presionar Nuevo Usuario
+     */
     private void btnNewUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUsuarioActionPerformed
         vistaDefault();
         txtRun.setEnabled(true);
@@ -715,6 +871,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         txtRun.requestFocus();
     }//GEN-LAST:event_btnNewUsuarioActionPerformed
 
+    /**
+     * Función que toma el valor del Nombre de Usuario asociado a la fila seleccionada de la tabla
+     * @param evt Evento que se produce al seleccionar una fila
+     */
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
         int seleccion = tablaUsuarios.getSelectedRow();
         String username = (String) tablaUsuarios.getModel().getValueAt(seleccion, 0);
@@ -725,6 +885,59 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void ddlCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddlCargoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ddlCargoActionPerformed
+
+    /**
+     * Función que restringe los caracteres no asociados a la dirección
+     * @param evt Evento que se produce al insertar un caracter
+     */
+    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
+        if(txtPass.getText().length()>=15){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPassKeyTyped
+
+    /**
+     * Función que habilita y desabilita los Combobox correspondientes al cargo asignado
+     * @param evt Evento que se produce al cambiar la selección del cargo
+     */
+    private void ddlCargoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ddlCargoItemStateChanged
+        switch (ddlCargo.getSelectedIndex()) {
+            case 0:
+                ddlEmpresa.setEnabled(false);
+                ddlSucursal.setEnabled(false);
+                break;
+            case 1:
+                ddlEmpresa.setEnabled(false);
+                ddlSucursal.setEnabled(false);
+                break;
+            case 2:
+                ddlEmpresa.setEnabled(true);
+                ddlSucursal.setEnabled(false);
+                break;
+            default:
+                ddlEmpresa.setEnabled(true);
+                ddlSucursal.setEnabled(true);
+                break;
+        }
+    }//GEN-LAST:event_ddlCargoItemStateChanged
+
+    /**
+     * Función que habilita y desabilita al combobox de sucursales, el cual llama al método de cargarSucursales para obtener su información a la empresa asociada
+     * @param evt Evento que se produce al cambiar la selección de la empresa
+     */
+    private void ddlEmpresaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ddlEmpresaItemStateChanged
+        if (ddlEmpresa.getSelectedIndex() != 0) {
+            Empresa emp = (Empresa) ddlEmpresa.getModel().getSelectedItem();
+            try {
+                cargarSucursales(emp.getRut());
+            } catch (SQLException ex) {
+                Logger.getLogger(pnlUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            ddlSucursal.removeAllItems();
+            ddlSucursal.addItem("Seleccione la Sucursal");
+        } 
+    }//GEN-LAST:event_ddlEmpresaItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -737,9 +950,13 @@ public class pnlUsuario extends javax.swing.JPanel {
     private javax.swing.JButton btnVerificar;
     private com.toedter.calendar.JDateChooser cldFechaNac;
     private javax.swing.JComboBox<Object> ddlCargo;
+    private javax.swing.JComboBox<Object> ddlEmpresa;
     private javax.swing.JComboBox<String> ddlSexo;
+    private javax.swing.JComboBox<Object> ddlSucursal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -748,6 +965,7 @@ public class pnlUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRespuestaBuscar;
     private javax.swing.JLabel lblRespuestaUsuario;
@@ -765,6 +983,9 @@ public class pnlUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método que deja todos los campos por defecto
+     */
     private void vistaDefault() {
         Calendar fecha = Calendar.getInstance();
         fecha.setTime(new Date());
@@ -783,6 +1004,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
         cldFechaNac.setMaxSelectableDate(fecha.getTime());
+        ddlEmpresa.setEnabled(false);
+        ddlSucursal.setEnabled(false);
+        ddlSucursal.removeAllItems();
+        ddlSucursal.addItem("Seleccione la Sucursal");
         
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
@@ -793,6 +1018,8 @@ public class pnlUsuario extends javax.swing.JPanel {
         txtEmail.setText("");
         ddlCargo.setSelectedIndex(0);
         ddlSexo.setSelectedIndex(0);
+        ddlEmpresa.setSelectedIndex(0);
+        ddlSucursal.setSelectedIndex(0);
         cldFechaNac.setDate(fecha.getTime());
         txtUser.setText("");
         txtPass.setText("");
@@ -801,6 +1028,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         lblRespuestaUsuario.setText("");
     }
 
+    /**
+     * Método que carga la información de la tabla con el registro de los usuarios empleados
+     * @throws SQLException 
+     */
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombre de Usuario");
@@ -821,6 +1052,9 @@ public class pnlUsuario extends javax.swing.JPanel {
         tablaUsuarios.setVisible(true);
     }
 
+    /**
+     * Método que busca al usuario y transfiere la información a los campos asociados.
+     */
     private void buscarUsuario() {
         Usuario usu = new Usuario();
         usu = usu.buscar(txtBuscar.getText(), conn);
@@ -835,6 +1069,22 @@ public class pnlUsuario extends javax.swing.JPanel {
             txtUser.setText(usu.getUsername());
             txtPass.setText(usu.getPassword());
             ddlCargo.setSelectedItem(emp.getCargo());
+            
+            if (ddlCargo.getSelectedIndex() == 2) {
+                Empresa em = new Empresa();
+                em = em.buscarRef(Integer.toString(emp.getId_referencia()), conn);
+                ddlEmpresa.getModel().setSelectedItem(em);
+            }else if(ddlCargo.getSelectedIndex() == 3){
+                Empresa em = new Empresa();
+                Sucursal suc = new Sucursal();
+                suc = suc.buscar(emp.getId_referencia(), conn);
+                em = em.buscar(suc.getEmpresaRut(), conn);
+                ddlEmpresa.getModel().setSelectedItem(em);
+                ddlSucursal.getModel().setSelectedItem(suc);
+            }
+            
+            ddlEmpresa.setEnabled(false);
+            ddlSucursal.setEnabled(false);
             
             txtRun.setText(per.getRun());
             txtNombre.setText(per.getNombre());
@@ -856,6 +1106,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Método que  establece el cargo asignado para el perfil del usuario empleado
+     * @return String con el nombre del perfil del cargo
+     */
     private String obtenerCargo() {
         String cargo = "";
         switch (ddlCargo.getSelectedIndex()) {
@@ -875,6 +1129,11 @@ public class pnlUsuario extends javax.swing.JPanel {
         return cargo;
     }
     
+    /**
+     * Método que valida el run entregado
+     * @param run Run entregado como parametro
+     * @return Boolean correspondiente si es o no valido el run
+     */
     private boolean validarRun(String run) {
         boolean validacion = false;
         try {
@@ -899,6 +1158,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         return validacion;
     }
 
+    /**
+     * Método que valida que los campos no estén vacios
+     * @return Boolean que corresponde si hay o no campos vacios
+     */
     private boolean validadorCampos() {
         boolean validar = true;
         if (txtNombre.getText().trim().isEmpty()) {
@@ -925,9 +1188,58 @@ public class pnlUsuario extends javax.swing.JPanel {
             lblRespuestaUsuario.setText("Seleccione el cargo");
             validar = false;
         }
+        if (ddlEmpresa.isEnabled()) {
+            if (ddlEmpresa.getSelectedIndex()==0) {
+                lblRespuestaUsuario.setText("Seleccione la Empresa");
+                validar = false;
+            }
+        }
+        if (ddlSucursal.isEnabled()) {
+            if (ddlSucursal.getSelectedIndex()==0) {
+                lblRespuestaUsuario.setText("Seleccione el cargo");
+                validar = false;
+            }
+        }
         return validar;
     }
 
+    /**
+     * Método que carga la información del combobox de empresas con la información registrada en la base de datos
+     * @throws SQLException 
+     */
+    private void cargarEmpresas() throws SQLException {
+        Empresa emp = new Empresa();
+        ResultSet rs = emp.listadoEmpresas(conn);
+        while (rs.next()) {
+            Empresa v_emp = new Empresa();
+            v_emp.setRut(rs.getString("RUT"));
+            v_emp.setNombre(rs.getString("NOMBRE"));
+            v_emp.setDireccion(rs.getString("DIRECCION"));
+            v_emp.setRazon_social(rs.getString("RAZON_SOCIAL"));
+            ddlEmpresa.addItem(v_emp);
+        }
+    }
+    
+    /**
+     * Método que carga la información del combobox de sucursales con la información asociada al rut de la empresa seleccionada
+     * @param rut Rut asociado a la empresa seleccionada
+     * @throws SQLException 
+     */
+    private void cargarSucursales(String rut) throws SQLException {
+        ddlSucursal.removeAllItems();
+        ddlSucursal.addItem("Seleccione la Sucursal");
+        Sucursal suc = new Sucursal();
+        ResultSet rs = suc.listadoSucursalesFiltro(conn, rut);
+        while (rs.next()) {
+            Sucursal v_suc = new Sucursal();
+            v_suc.setId_sucur(rs.getInt("ID_SUCUR"));
+            v_suc.setNombre(rs.getString("NOMBRE"));
+            v_suc.setDireccion(rs.getString("DIRECCION"));
+            v_suc.setComuna(rs.getString("COMUNA"));
+            v_suc.setEmpresaRut(rs.getString("EMPRESA_RUT"));
+            ddlSucursal.addItem(v_suc);
+        }
+    }
 
 
 }

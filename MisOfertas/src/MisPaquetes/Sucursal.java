@@ -17,6 +17,9 @@ import java.util.logging.Logger;
  * @author Nicolás
  */
 public class Sucursal {
+    /**
+     * Atributos de la clase sucursal
+     */
     private int id_sucur;
     private String nombre;
     private String direccion;
@@ -24,6 +27,9 @@ public class Sucursal {
     private String comuna;
     private String empresaRut;
 
+    /**
+     * Accesadores y mutadores
+     */
     public int getId_sucur() {
         return id_sucur;
     }
@@ -72,15 +78,43 @@ public class Sucursal {
         this.empresaRut = empresaRut;
     }
 
+    /**
+     * Constructor por defecto
+     */
     public Sucursal() {
     }
     
+    /**
+     * Método que devuelve el listado de las sucursales registradas en la base de datos
+     * @param conn Conexión a la base de datos
+     * @return Resultset Listado de las sucursales registradas
+     * @throws SQLException 
+     */
     public ResultSet listadoSucursales(Conexion conn) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM SUCURSAL");
         return rs;
     }
     
+    /**
+     * Método que devuelve el listado de las sucursales registradas en la base de datos asociados al Rut de la empresa
+     * @param conn Conexión a la base de datos
+     * @return Resultset Listado de las sucursales registradas asociadas al rut de la empresa
+     * @throws SQLException 
+     */
+    public ResultSet listadoSucursalesFiltro(Conexion conn, String rut) throws SQLException{
+        Statement stmt = conn.getConexion_base().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM SUCURSAL WHERE EMPRESA_RUT = '"+ rut +"'");
+        return rs;
+    }
+    
+    /**
+     * Método el cual utiliza el procedimiento almacenado "Buscar Sucursal" el cual busca la sucursal
+     * registrada en la base de datos asociado al Id especificado para luego obtener su información
+     * @param id Id asociado a la sucursal a buscar
+     * @param conn Conexión a la base de datos
+     * @return Persona asociada al run entregado
+     */
     public Sucursal buscar(int id,Conexion conn){
         Sucursal suc = new Sucursal();
         try {
@@ -112,6 +146,12 @@ public class Sucursal {
         return suc;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Agregar Sucursal" para así agregar
+     * la información de la sucursal a registrar
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int agregar(Conexion conn){
         int respuesta = 0;
         try {
@@ -137,6 +177,12 @@ public class Sucursal {
         return respuesta;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Modificar Sucursal" para así modificar
+     * la información de la sucursal registrada
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int modificar(Conexion conn){
         int respuesta = 0;
         try {
@@ -163,6 +209,13 @@ public class Sucursal {
         return respuesta;
     }
     
+    
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Eliminar Sucursal" para así eliminar
+     * la información de la sucursal registrada
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int eliminar(Conexion conn){
         int respuesta = 0;
         try {
@@ -185,6 +238,10 @@ public class Sucursal {
     }
     
 
+    /**
+     * Método que devuelve el String asociado al nombre de la sucursal para posterior visualización
+     * @return String nombre de la sucursal
+     */
     @Override
     public String toString() {
         return "" + nombre ;

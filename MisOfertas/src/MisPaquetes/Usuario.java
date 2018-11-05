@@ -17,10 +17,16 @@ import java.util.logging.Logger;
  * @author Nicolás
  */
 public class Usuario {
+    /**
+     * Atributos de la clase Usuario
+     */
     private String username;
     private String password;
     private String perfil;
 
+    /**
+     * Accesadores y mutadores
+     */
     public String getUsername() {
         return username;
     }
@@ -45,9 +51,20 @@ public class Usuario {
         this.perfil = perfil;
     }
 
+    /**
+     * Constructor por defecto
+     */
     public Usuario() {
     }
     
+    /**
+     * Método que utiliza el procedimiento almacenado "Login" el cual verifica si las credenciales son correctas
+     * y devuelve la información del usuario con su perfil
+     * @param user Nombre de usuario
+     * @param pass Contraseña de usuario
+     * @param conn Conexión de base de datos
+     * @return Usuario asociado a las credenciales
+     */
     public Usuario logear(String user, String pass, Conexion conn){
         Usuario user_conectado = new Usuario();
         try {
@@ -74,12 +91,25 @@ public class Usuario {
         return user_conectado;
     }
     
+    /**
+     * Método que devuelve el listado de usuario que son empleados registrados para su posterior visualización
+     * @param conn Conexión a la base de datos.
+     * @return Resultset del listado de usuario empleados
+     * @throws SQLException 
+     */
     public ResultSet listadoUsuarios(Conexion conn) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM USUARIO WHERE NOT PERFIL = 'CONSUMIDOR' ");
         return rs;
     }
     
+    /**
+     * Método el cual utiliza el procedimiento almacenado "Buscar Usuario" el cual busca al usuario
+     * registrado en la base de datos asociado al nombre de usuario "User" especificado para luego ser obtener su información
+     * @param user Nombre de usuario
+     * @param conn Conexión a la base de datos
+     * @return Usuario asociado a su nombre de usuario "User"
+     */
     public Usuario buscar(String user,Conexion conn){
         Usuario usu = new Usuario();
         try {
@@ -105,6 +135,12 @@ public class Usuario {
         return usu;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Agregar Usuario" para así agregar
+     * la información del usuario a registrar
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int agregar(Conexion conn){
         int respuesta = 0;
         try {
@@ -128,6 +164,12 @@ public class Usuario {
         return respuesta;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Modificar Usuario" para así modificar
+     * la información del usuario registrado
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int modificar(Conexion conn){
         int respuesta = 0;
         try {
@@ -151,6 +193,12 @@ public class Usuario {
         return respuesta;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Eliminar Usuario" para así eliminar
+     * la información del usuario registrado
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int eliminar(Conexion conn){
         int respuesta = 0;
         try {

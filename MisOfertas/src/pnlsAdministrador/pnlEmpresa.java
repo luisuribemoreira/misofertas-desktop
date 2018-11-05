@@ -331,6 +331,10 @@ public class pnlEmpresa extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Función que restringe los caracteres no asociados al rut
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
         if(txtRut.getText().length()>=10){
             evt.consume();
@@ -349,24 +353,40 @@ public class pnlEmpresa extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtRutKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al nombre
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         if(txtNombre.getText().length()>=25){
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados a la dirección
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionKeyTyped
         if(txtDireccion.getText().length()>=100){
             evt.consume();
         }
     }//GEN-LAST:event_txtDireccionKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados a la razon social
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtRazonSocialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRazonSocialKeyTyped
         if(txtRazonSocial.getText().length()>=25){
             evt.consume();
         }
     }//GEN-LAST:event_txtRazonSocialKeyTyped
 
+    /**
+     * Función que permite agregar o modificar la información asociada a los campos habilitados
+     * @param evt Evento que se produce al apretar el botón guardar
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Empresa emp = new Empresa();
         emp.setRut(txtRut.getText());
@@ -420,10 +440,18 @@ public class pnlEmpresa extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Función que permite dejar por defecto todos los campos
+     * @param evt Evento que se produce al apretar el botón cancelar
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Función que habilita los campos correspondiente al registro de empresa
+     * @param evt Evento que se produce al apretar el botón de Nueva Empresa
+     */
     private void btnNewEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewEmpresaActionPerformed
         vistaDefault();
         txtNombre.setEnabled(true);
@@ -435,6 +463,10 @@ public class pnlEmpresa extends javax.swing.JPanel {
         txtRut.requestFocus();
     }//GEN-LAST:event_btnNewEmpresaActionPerformed
 
+    /**
+     * Fúnción que habilita los campos para la modificación de la información encontrada
+     * @param evt Evento que se produce al apretar el botón modificar
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtNombre.setEnabled(true);
         txtRut.setEnabled(false);
@@ -444,6 +476,10 @@ public class pnlEmpresa extends javax.swing.JPanel {
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Función que ejecuta la eliminación de la información seleccionada
+     * @param evt Evento que se produce al apretar el botón Eliminar
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Empresa emp = new Empresa();
         emp.setRut(txtRut.getText());
@@ -465,6 +501,10 @@ public class pnlEmpresa extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Función que al seleccionar una fila, busca esa información y rellena los campos asociados a ella
+     * @param evt Evento que se produce al seleccionar una fila de la tabla
+     */
     private void tablaEmpresasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpresasMouseClicked
         int seleccion = tablaEmpresas.getSelectedRow();
         String rutSelect = (String) tablaEmpresas.getModel().getValueAt(seleccion, 0);
@@ -472,10 +512,18 @@ public class pnlEmpresa extends javax.swing.JPanel {
         buscarEmpresa();
     }//GEN-LAST:event_tablaEmpresasMouseClicked
 
+    /**
+     * Función que limpia el campo de texto de buscar
+     * @param evt Evento que se produce al hacer clic en el campo de texto
+     */
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
     }//GEN-LAST:event_txtBuscarMouseClicked
 
+    /**
+     * Función que permite buscar la información asociada al campo de texto
+     * @param evt Evento que se produce al hacer apretar el botón buscar.
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarEmpresa();
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -505,6 +553,10 @@ public class pnlEmpresa extends javax.swing.JPanel {
     private javax.swing.JTextField txtRut;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método que carga la información de la tabla con el registro de empresa
+     * @throws SQLException 
+     */
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo =  new DefaultTableModel();
             modelo.addColumn("Rut");
@@ -528,6 +580,9 @@ public class pnlEmpresa extends javax.swing.JPanel {
             tablaEmpresas.setVisible(true);
     }
 
+    /**
+     * Método que deja todos los campos por defecto
+     */
     private void vistaDefault() {
         
         txtNombre.setEnabled(false);
@@ -548,6 +603,9 @@ public class pnlEmpresa extends javax.swing.JPanel {
         lblRespuestaEmpresa.setText("");
     }
 
+    /**
+     * Método que busca la empresa y transfiere la información a los campos asociados.
+     */
     private void buscarEmpresa() {
         Empresa emp = new Empresa();
         emp = emp.buscar(txtBuscar.getText(), conn);
@@ -569,6 +627,11 @@ public class pnlEmpresa extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Método que valida el rut entregado
+     * @param rut Rut entregado como parametro
+     * @return Boolean correspondiente si es o no valido el rut
+     */
     private boolean validarRut(String rut) {
         boolean validacion = false;
         try {
@@ -593,6 +656,10 @@ public class pnlEmpresa extends javax.swing.JPanel {
         return validacion;
     }
 
+    /**
+     * Método que valida que los campos no estén vacios
+     * @return Boolean que corresponde si hay o no campos vacios
+     */
     private boolean validadorCampos() {
         boolean validador = true;
         if (txtNombre.getText().trim().isEmpty()) {

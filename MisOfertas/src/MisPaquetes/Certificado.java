@@ -17,6 +17,9 @@ import java.util.logging.Logger;
  * @author Nicolás
  */
 public class Certificado {
+    /**
+     * Atributos de la clase Certificado
+     */
     private int id_cert;
     private int pts_min;
     private int pts_max;
@@ -24,6 +27,9 @@ public class Certificado {
     private int tope;
     private String rubro;
 
+    /**
+     * Accesadores y mutadores 
+     */
     public int getId_cert() {
         return id_cert;
     }
@@ -72,15 +78,31 @@ public class Certificado {
         this.rubro = rubro;
     }
 
+    /**
+     * Constructor por defecto
+     */
     public Certificado() {
     }
     
+    /**
+     * Método que retorna el listado de los certificados generados en la base de datos, para posterior
+     * visualización en la tabla del panel de certificado
+     * @param conn  Conexión a la base de datos
+     * @return Resultset del listado de certificados
+     * @throws SQLException 
+     */
     public ResultSet listadoCertificados(Conexion conn) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM CERTIFICADO");
         return rs;
     }
     
+    /**
+     * Método que retorna el certificado asociado al número identificador (ID) a buscar
+     * @param id    Identificador del certificado a buscar
+     * @param conn  Conexión a la base de datos
+     * @return Certificado encontrado
+     */
     public Certificado buscar(int id,Conexion conn){
         Certificado cer = new Certificado();
         try {
@@ -112,6 +134,13 @@ public class Certificado {
         return cer;
     }
     
+    
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Agregar Certificado" para así agregar
+     * la información del certificado creado
+     * @param conn  Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int agregar(Conexion conn){
         int respuesta = 0;
         try {
@@ -137,6 +166,12 @@ public class Certificado {
         return respuesta;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Modificar Certificado" para así modificar
+     * la información del certificado registrado
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int modificar(Conexion conn){
         int respuesta = 0;
         try {
@@ -163,6 +198,12 @@ public class Certificado {
         return respuesta;
     }
     
+    /**
+     * Método que realiza un llamado al procedimiento almacenado "Eliminar Certificado" para así eliminar
+     * la información del certificado registrado
+     * @param conn Conexión a la base de datos
+     * @return número que identifica si se completó la operación 0=No | 1=Si 
+     */
     public int eliminar(Conexion conn){
         int respuesta = 0;
         try {

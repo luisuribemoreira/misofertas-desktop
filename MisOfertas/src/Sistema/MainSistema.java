@@ -6,6 +6,7 @@
 package Sistema;
 
 import MisPaquetes.Conexion;
+import MisPaquetes.Empleado;
 import MisPaquetes.Usuario;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -24,6 +25,7 @@ import javax.mail.internet.MimeMessage;
 public class MainSistema {
 
     public static MisPaquetes.Conexion conn = new Conexion();
+    public static MisPaquetes.Empleado empleado = new Empleado();
     static MisPaquetes.Usuario user_conectado = new Usuario();
     /**
      * @param args the command line arguments
