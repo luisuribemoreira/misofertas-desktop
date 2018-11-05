@@ -418,6 +418,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Funcion que se ejecuta al momento de presionar el primer boton del menu de navegacion
+     * @param evt Evento de presionar el boton uno
+     */
     private void unoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unoActionPerformed
         new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlEmpresa());
         if(this.uno.isSelected()){
@@ -452,6 +456,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_unoActionPerformed
 
+    /**
+     * Accion que se produce al presionar el boton uno
+     * @param evt Evento que se produce al presionar el boton uno 
+     */
     private void unoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_unoMousePressed
         this.uno.setSelected(true);
         this.dos.setSelected(false);
@@ -462,6 +470,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_unoMousePressed
 
+    /**
+     * Accion que se produce al presionar el boton tres
+     * @param evt Evento que se produce al presionar el boton tres
+     */
     private void tresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tresActionPerformed
         new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlUsuario());
         if(this.tres.isSelected()){
@@ -497,6 +509,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tresActionPerformed
 
+    /**
+     * Accion que se produce al presionar el boton tres
+     * @param evt Evento que se produce al presionar el boton uno
+     */
     private void tresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tresMousePressed
         this.uno.setSelected(false);
         this.dos.setSelected(false);
@@ -507,6 +523,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tresMousePressed
 
+    /**
+     * Accion que se produce al presionar el boton dos
+     * @param evt Evento que se produce al presionar el boton dos
+     */
     private void dosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dosMousePressed
         this.uno.setSelected(false);
         this.dos.setSelected(true);
@@ -517,6 +537,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dosMousePressed
 
+    /**
+     * Accion que se produce al presionar el boton dos
+     * @param evt Evento que se produce al presionar el boton dos
+     */
     private void dosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dosActionPerformed
         new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlSucursal());
         if(this.dos.isSelected()){
@@ -551,6 +575,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dosActionPerformed
 
+    /**
+     * Accion que esconde el panel de navegacion al presionar el boton 
+     * @param evt Evento que se produce al presionar el boton
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int posicion = pnlMenu.getX();
         if(posicion > -1){
@@ -560,6 +588,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Accion que se produce al presionar el boton seis
+     * @param evt Evento que se produce al presionar el boton seis
+     */
     private void seisMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_seisMousePressed
         this.uno.setSelected(false);
         this.dos.setSelected(false);
@@ -569,6 +601,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         this.seis.setSelected(true);
     }//GEN-LAST:event_seisMousePressed
 
+    /**
+     * Accion que se produce al presionar el boton seis
+     * @param evt Evento que se produce al presionar el boton seis
+     */
     private void seisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seisActionPerformed
         new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlAndroid());
         if(this.seis.isSelected()){
@@ -603,6 +639,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_seisActionPerformed
 
+    /**
+     * Evento que se produce al presionar el boton cinco
+     * @param evt Evento que se produce al presionar el boton cinco
+     */
     private void cincoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cincoActionPerformed
         new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlDescuento());
         if(this.cinco.isSelected()){
@@ -637,6 +677,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cincoActionPerformed
 
+    /**
+     * Evento que se produce al presionar el boton cinco
+     * @param evt Evento que se produce al presionar el boton cinco
+     */
     private void cincoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cincoMousePressed
         this.uno.setSelected(false);
         this.dos.setSelected(false);
@@ -647,16 +691,28 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cincoMousePressed
 
+    /**
+     * Evento que se produce al presionar el superior
+     * @param evt Evento que se produce al presionar el panel superior
+     */
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MousePressed
         x = evt.getX();
         y = evt.getY();
     }//GEN-LAST:event_jPanel2MousePressed
 
+    /**
+     * Evento que se produce al presionar el superior
+     * @param evt Evento que se produce al presionar el superior
+     */
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseDragged
         Point mueve = MouseInfo.getPointerInfo().getLocation();
         this.setLocation(mueve.x - x, mueve.y - y);
     }//GEN-LAST:event_jPanel2MouseDragged
 
+    /**
+     * Evento que se produce al presionar el boton cuatro
+     * @param evt Evento que se produce al presionar el boton cuatro
+     */
     private void cuatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cuatroActionPerformed
         new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlProductos());
         if(this.cuatro.isSelected()){
@@ -691,6 +747,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cuatroActionPerformed
 
+    /**
+     * Evento que se produce al presionar el boton cuatro
+     * @param evt Evento que se produce al presionar el boton cuatro
+     */
     private void cuatroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cuatroMousePressed
         this.uno.setSelected(false);
         this.dos.setSelected(false);

@@ -554,6 +554,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Función que habilita los campos para modificar la información asociada al usuario
+     * @param evt Evento que se produce al presionar el botón Modificar
+     */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtNombre.setEnabled(true);
         txtApellidoP.setEnabled(true);
@@ -584,6 +588,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    /**
+     * Función que ejecuta la eliminación del usuario seleccionado.
+     * @param evt Evento que se produce al presionar el botón Eliminar
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Usuario usu = new Usuario();
         usu.setUsername(txtUser.getText());
@@ -605,14 +613,26 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Función que limpia el campo de texto de la busqueda
+     * @param evt Evento que se produce al hacer clic en el campo de texto de buscar
+     */
     private void txtBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscarMouseClicked
         txtBuscar.setText("");
     }//GEN-LAST:event_txtBuscarMouseClicked
 
+    /**
+     * Función que llama al método de busqueda del suaurio acorde al Nombre de Usuario a buscar
+     * @param evt Evento que se produce al presionar el botón Buscar
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscarUsuario();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Función que restringe los caracteres no asociados al Run
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtRunKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRunKeyTyped
         if(txtRun.getText().length()>=10){
             evt.consume();
@@ -631,6 +651,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtRunKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al apellido paterno
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPKeyTyped
         if(txtApellidoP.getText().length()>=100){
             evt.consume();
@@ -641,6 +665,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtApellidoPKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al apellido materno
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMKeyTyped
         if(txtApellidoM.getText().length()>=13){
             evt.consume();
@@ -651,6 +679,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtApellidoMKeyTyped
 
+    /**
+     * Función que permite agregar o modificar la información asociada a los campos habilitados
+     * @param evt Evento que se produce al apretar el botón guardar
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         Usuario usu = new Usuario();
         usu.setUsername(txtUser.getText());
@@ -736,16 +768,28 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Función que llama al método de la vista por default para establecer todos los campos por defecto
+     * @param evt Evento que se produce al presionar el botón cancelar
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    /**
+     * Función que restringe los caracteres no asociados al email
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
         if(txtNombre.getText().length()>=35){
             evt.consume();
         }
     }//GEN-LAST:event_txtEmailKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al nombre
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         if(txtNombre.getText().length()>=25){
             evt.consume();
@@ -756,12 +800,22 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
+    /**
+     * Función que restringe los caracteres no asociados al nombre de usuario
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyTyped
         if(txtUser.getText().length()>=25){
             evt.consume();
         }
     }//GEN-LAST:event_txtUserKeyTyped
 
+    /**
+     * Función que verifica si el Run entregado es válido y verifica si esta asociada la información con la base de datos
+     * La cual si encuentra información asociada a un empleado, entrega un mensaje informando que se encuentra registrado,
+     * en caso contrario, habilita los campos y transfiere información a los campos correspondientes
+     * @param evt Evento que se produce al presionar el botón Verificar
+     */
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         if (validarRun(txtRun.getText())) {
             Empleado emp = new Empleado();
@@ -805,6 +859,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnVerificarActionPerformed
 
+    /**
+     * Función que habilita el campo de Run para su posterior verificación
+     * @param evt Evento que se produce al presionar Nuevo Usuario
+     */
     private void btnNewUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewUsuarioActionPerformed
         vistaDefault();
         txtRun.setEnabled(true);
@@ -813,6 +871,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         txtRun.requestFocus();
     }//GEN-LAST:event_btnNewUsuarioActionPerformed
 
+    /**
+     * Función que toma el valor del Nombre de Usuario asociado a la fila seleccionada de la tabla
+     * @param evt Evento que se produce al seleccionar una fila
+     */
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
         int seleccion = tablaUsuarios.getSelectedRow();
         String username = (String) tablaUsuarios.getModel().getValueAt(seleccion, 0);
@@ -824,12 +886,20 @@ public class pnlUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ddlCargoActionPerformed
 
+    /**
+     * Función que restringe los caracteres no asociados a la dirección
+     * @param evt Evento que se produce al insertar un caracter
+     */
     private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
         if(txtPass.getText().length()>=15){
             evt.consume();
         }
     }//GEN-LAST:event_txtPassKeyTyped
 
+    /**
+     * Función que habilita y desabilita los Combobox correspondientes al cargo asignado
+     * @param evt Evento que se produce al cambiar la selección del cargo
+     */
     private void ddlCargoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ddlCargoItemStateChanged
         switch (ddlCargo.getSelectedIndex()) {
             case 0:
@@ -851,6 +921,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ddlCargoItemStateChanged
 
+    /**
+     * Función que habilita y desabilita al combobox de sucursales, el cual llama al método de cargarSucursales para obtener su información a la empresa asociada
+     * @param evt Evento que se produce al cambiar la selección de la empresa
+     */
     private void ddlEmpresaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ddlEmpresaItemStateChanged
         if (ddlEmpresa.getSelectedIndex() != 0) {
             Empresa emp = (Empresa) ddlEmpresa.getModel().getSelectedItem();
@@ -909,6 +983,9 @@ public class pnlUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método que deja todos los campos por defecto
+     */
     private void vistaDefault() {
         Calendar fecha = Calendar.getInstance();
         fecha.setTime(new Date());
@@ -951,6 +1028,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         lblRespuestaUsuario.setText("");
     }
 
+    /**
+     * Método que carga la información de la tabla con el registro de los usuarios empleados
+     * @throws SQLException 
+     */
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombre de Usuario");
@@ -971,6 +1052,9 @@ public class pnlUsuario extends javax.swing.JPanel {
         tablaUsuarios.setVisible(true);
     }
 
+    /**
+     * Método que busca al usuario y transfiere la información a los campos asociados.
+     */
     private void buscarUsuario() {
         Usuario usu = new Usuario();
         usu = usu.buscar(txtBuscar.getText(), conn);
@@ -1022,6 +1106,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }
 
+    /**
+     * Método que  establece el cargo asignado para el perfil del usuario empleado
+     * @return String con el nombre del perfil del cargo
+     */
     private String obtenerCargo() {
         String cargo = "";
         switch (ddlCargo.getSelectedIndex()) {
@@ -1041,6 +1129,11 @@ public class pnlUsuario extends javax.swing.JPanel {
         return cargo;
     }
     
+    /**
+     * Método que valida el run entregado
+     * @param run Run entregado como parametro
+     * @return Boolean correspondiente si es o no valido el run
+     */
     private boolean validarRun(String run) {
         boolean validacion = false;
         try {
@@ -1065,6 +1158,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         return validacion;
     }
 
+    /**
+     * Método que valida que los campos no estén vacios
+     * @return Boolean que corresponde si hay o no campos vacios
+     */
     private boolean validadorCampos() {
         boolean validar = true;
         if (txtNombre.getText().trim().isEmpty()) {
@@ -1106,7 +1203,10 @@ public class pnlUsuario extends javax.swing.JPanel {
         return validar;
     }
 
-    
+    /**
+     * Método que carga la información del combobox de empresas con la información registrada en la base de datos
+     * @throws SQLException 
+     */
     private void cargarEmpresas() throws SQLException {
         Empresa emp = new Empresa();
         ResultSet rs = emp.listadoEmpresas(conn);
@@ -1120,6 +1220,11 @@ public class pnlUsuario extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Método que carga la información del combobox de sucursales con la información asociada al rut de la empresa seleccionada
+     * @param rut Rut asociado a la empresa seleccionada
+     * @throws SQLException 
+     */
     private void cargarSucursales(String rut) throws SQLException {
         ddlSucursal.removeAllItems();
         ddlSucursal.addItem("Seleccione la Sucursal");

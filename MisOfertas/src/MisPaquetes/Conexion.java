@@ -14,9 +14,14 @@ import java.sql.SQLException;
  * @author Nicolás
  */
 public class Conexion {
-    
+    /**
+     * Atributos de la clase conexión
+     */
     private Connection conexion_base;
 
+    /**
+     * Accesadores y mutadores
+     */
     public Connection getConexion_base() {
         return conexion_base;
     }
@@ -25,6 +30,12 @@ public class Conexion {
         this.conexion_base = conexion_base;
     }
     
+    /**
+     * Método que entrega la conexión a la base de datos
+     * @return Conexión a la base de datos
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public Conexion Conectar() throws ClassNotFoundException, SQLException{
         Class.forName("oracle.jdbc.OracleDriver");
         String url = "jdbc:oracle:thin:@localhost:1521:XE";
