@@ -484,7 +484,7 @@ END;
 
 /*Primera version del procedimineto almacenado de AGREGAR_OFERTA*/
 
-CREATE OR REPLACE PROCEDURE AGREGAR_OFERTA(
+create or replace PROCEDURE AGREGAR_OFERTA(
     v_descripcion         VARCHAR2,
     v_fec_inicio          DATE,
     v_fec_termino         DATE,
@@ -493,11 +493,14 @@ CREATE OR REPLACE PROCEDURE AGREGAR_OFERTA(
     v_porc_desc           NUMBER,
     v_sucursal_id_sucur   NUMBER,
     v_producto_id_prod    NUMBER,
-    v_respuesta OUT NUMBER
+    v_respuesta           OUT NUMBER,
+    v_id_oferta           OUT NUMBER
 )
 AS
 BEGIN
-    INSERT INTO OFERTA VALUES (OFERTA_SEQ.NEXTVAL, v_descripcion, v_fec_inicio, v_fec_termino, v_img_oferta, v_valoracion_total,v_porc_desc,v_sucursal_id_sucur,v_producto_id_prod);
+    INSERT INTO OFERTA VALUES (OFERTA_SEQ.NEXTVAL, v_descripcion, v_fec_inicio, v_fec_termino, v_img_oferta, v_valoracion_total,v_porc_desc,v_sucursal_id_sucur,v_producto_id_prod)
+    returning ID_OFERTA INTO v_id_oferta;
+    
     v_respuesta := 1;
     
     EXCEPTION
@@ -617,6 +620,29 @@ BEGIN
     WHEN OTHERS THEN
       v_respuesta := 0;
 END;
+
 /
+/*Procedimiento almacenado para dejar registro en la base de datos del envio de un correo electronico*/
+create or replace PROCEDURE AGREGAR_MENSAJERIA(
+    v_asunto           VARCHAR2,
+    v_mensaje          VARCHAR2,
+    v_cupon            BLOB,
+    v_img_oferta       BLOB,
+    v_sucursal_id      NUMBER,
+    v_oferta_id        NUMBER,
+    v_consumidor_name  VARCHAR2,
+    v_consumidor_run   VARCHAR2,
+    v_respuesta        OUT NUMBER
+)
+AS
+BEGIN
+    INSERT INTO MENSAJERIA VALUES (MSJ_SEQ.NEXTVAL, v_asunto, v_mensaje, v_cupon, v_img_oferta, v_sucursal_id,v_oferta_id,v_consumidor_name,v_consumidor_run);
+    
+    v_respuesta := 1;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_respuesta := 0;
+END;
 
 

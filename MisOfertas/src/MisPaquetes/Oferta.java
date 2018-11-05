@@ -165,9 +165,10 @@ public class Oferta {
      */
     public int agregar(Conexion conn){
         int respuesta = 0;
+        int id = 0;
         try {
             
-            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_OFERTA (?,?,?,?,?,?,?,?,?)}");
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_OFERTA (?,?,?,?,?,?,?,?,?,?)}");
             
             cst.setString(1, this.descripcion);
             cst.setDate(2, this.fecha_inicio);
@@ -180,11 +181,12 @@ public class Oferta {
             
             
             cst.registerOutParameter(9, java.sql.Types.NUMERIC);
+            cst.registerOutParameter(10, java.sql.Types.NUMERIC);
             
             cst.execute();
             
             respuesta = cst.getInt(9);
-            
+            setId(cst.getInt(10));
 
         } catch (SQLException ex) {
             Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
