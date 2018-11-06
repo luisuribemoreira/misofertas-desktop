@@ -8,7 +8,9 @@ package pnlsEncargado;
 import MisPaquetes.Empresa;
 import MisPaquetes.Producto;
 import MisPaquetes.Sucursal;
+import Sistema.MainSistema;
 import static Sistema.MainSistema.conn;
+import static Sistema.MainSistema.emp_conectado;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -539,7 +541,7 @@ public class pnlProductos extends javax.swing.JPanel {
             }
             pro.setValor(Integer.parseInt(txtValor.getText()));
             //Sera cambiado 
-            pro.setId_sucur(3);
+            pro.setId_sucur(emp_conectado.getId_referencia());
             int respuesta = 0;
         
             if (txtNombre.isEnabled()) {

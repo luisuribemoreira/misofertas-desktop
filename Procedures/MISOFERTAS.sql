@@ -664,3 +664,24 @@ BEGIN
 END;
 
 
+
+/*Procedimiento almacenaod para buscar un usuario por username*/
+create or replace PROCEDURE BUSCAR_EMPLEADO_LOGEADO(
+    v_user VARCHAR2,
+    v_run OUT VARCHAR2,
+    v_cargo OUT VARCHAR2,
+    v_id OUT NUMBER
+)
+AS
+BEGIN
+    
+    SELECT PERSONA_RUN, CARGO, IDREFERENCIA
+    INTO v_run, v_cargo, v_id
+    FROM EMPLEADO
+    WHERE USUARIO_USERNAME = v_user;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_run := 'ERROR';
+      v_cargo := 'ERROR';
+END;

@@ -156,4 +156,33 @@ public class Empleado {
         return respuesta;
     }
     
+    /**
+     * Método el cual utiliza el procedimiento almacenado "Buscar Empleado" el cual busca el empleado
+     * registrado en la base de datos y modifica la información de los atributos acorde a lo encontrado
+     * @param run Run asociado al empleado a buscar
+     * @param conn Conexión a la base de datos
+     */
+    public void buscarEmpleadoPorUserName(String userName, Conexion conn){
+        try {
+            
+            CallableStatement cst = conn.getConexion_base().prepareCall("{call BUSCAR_EMPLEADO_LOGEADO (?,?,?,?)}");
+            
+            cst.setString(1, userName);
+            
+            cst.registerOutParameter(2, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(3, java.sql.Types.VARCHAR);
+            cst.registerOutParameter(4, java.sql.Types.NUMERIC);
+            
+            cst.execute();
+            
+            this.setUsername(userName);
+            this.setRun(cst.getString(2));
+            this.setCargo(cst.getString(3));
+            this.setId_referencia(cst.getInt(4));
+            
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Empleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

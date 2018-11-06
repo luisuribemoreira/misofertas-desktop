@@ -27,6 +27,7 @@ public class MainSistema {
     public static MisPaquetes.Conexion conn = new Conexion();
     public static MisPaquetes.Empleado empleado = new Empleado();
     static MisPaquetes.Usuario user_conectado = new Usuario();
+    public static MisPaquetes.Empleado emp_conectado = new Empleado();
     /**
      * @param args the command line arguments
      */

@@ -6,6 +6,7 @@
 package Sistema;
 
 import static Sistema.MainSistema.conn;
+import static Sistema.MainSistema.emp_conectado;
 import static Sistema.MainSistema.user_conectado;
 
 /**
@@ -226,7 +227,7 @@ public class SingIn extends javax.swing.JDialog {
         user_conectado = user_conectado.logear(txtUser.getText(), txtPass.getText(), conn);
 
         if(!user_conectado.getPerfil().equals("ERROR")){
-            
+            emp_conectado.buscarEmpleadoPorUserName(user_conectado.getUsername(), conn);
             if (user_conectado.getPerfil().equals("CONSUMIDOR")) {
                 lblMsgError.setText("Usuario no tiene permisos");
             }else if(user_conectado.getPerfil().equals("GERENTE")) {
