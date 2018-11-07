@@ -664,7 +664,7 @@ BEGIN
 END;
 
 
-
+/
 /*Procedimiento almacenaod para buscar un usuario por username*/
 create or replace PROCEDURE BUSCAR_EMPLEADO_LOGEADO(
     v_user VARCHAR2,

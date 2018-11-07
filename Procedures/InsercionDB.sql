@@ -47,5 +47,12 @@ Insert into MISOFERTAS.CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO
 Insert into MISOFERTAS.CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'500','1000','15','300000','Linea Blanca');
 Insert into MISOFERTAS.CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'500','1000','15','300000','Ropa');
 
+-- INSERCION DE PRODUCTOS
+
+Insert into MISOFERTAS.PRODUCTO (ID_PROD,NOMBRE,DESC_PROD,FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR,SUCURSAL_ID_SUCUR) values ('1','Television','TV de 42 pulgadas Smart TV LED',to_date('07/11/18','DD/MM/RR'),'d','50','150','Electronica','Productos que consisten en una combinacion de componentes electronicos organizados en circuitos, destinaods a controlar y arovechar las señales electricas','600000','1');
+Insert into MISOFERTAS.PRODUCTO (ID_PROD,NOMBRE,DESC_PROD,FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR,SUCURSAL_ID_SUCUR) values ('2','Leche','Leche soprole Entera 1 litro ',to_date('07/11/18','DD/MM/RR'),'d','200','300','Alimento','Sustancia normalmente ingeridas por seres vivos con fines nutricionales, sociales y psicológicos','500','1');
+Insert into MISOFERTAS.PRODUCTO (ID_PROD,NOMBRE,DESC_PROD,FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR,SUCURSAL_ID_SUCUR) values ('3','Alfombra','Alfombra Touch Café 160 x 230 cm Dib',to_date('07/11/18','DD/MM/RR'),'d','50','90','Linea Blanca','Conjunto de distintos productos comerciales de un mismo tipo, generalmente de la misma marca, que tienen algunas características comunes que dan cierta unidad al conjunto.','51990','1');
+
+
 
 
