@@ -1,0 +1,58 @@
+-- INSERCIÓN DE USUARIOS
+
+Insert into USUARIO (USERNAME,PASSWORD,PERFIL) values ('g.espoz','123','CONSUMIDOR');
+Insert into USUARIO (USERNAME,PASSWORD,PERFIL) values ('NICO','NICO','ADMINISTRADOR');
+Insert into USUARIO (USERNAME,PASSWORD,PERFIL) values ('SOLE','SOLE','ENCARGADO');
+Insert into USUARIO (USERNAME,PASSWORD,PERFIL) values ('NATALIA','NATY','GERENTE');
+
+
+-- INSERCIÓN DE PERSONAS
+
+Insert into PERSONA (RUN,NOMBRE,PATERNO,MATERNO,SEXO,EMAIL,FEC_NAC) values ('19308344-7','Gabriel','Espoz','Aliaga','Hombre','g.espoz@alumnos.duoc.cl',to_date('30/04/96','DD/MM/RR'));
+Insert into PERSONA (RUN,NOMBRE,PATERNO,MATERNO,SEXO,EMAIL,FEC_NAC) values ('18906760-7','Nicolas','Rojas','Cisterna','Hombre','nicol.rojasc@alumnos.duoc.cl',to_date('16/11/94','DD/MM/RR'));
+Insert into PERSONA (RUN,NOMBRE,PATERNO,MATERNO,SEXO,EMAIL,FEC_NAC) values ('11362633-K','SOLANGE','CISTERNA','MATURANA','Mujer','SOLE@GMAIL.COM',to_date('04/11/72','DD/MM/RR'));
+Insert into PERSONA (RUN,NOMBRE,PATERNO,MATERNO,SEXO,EMAIL,FEC_NAC) values ('8585368-6','Natalia','Valdivia','Cisterna','Mujer','Natalia@gmail.com',to_date('02/11/70','DD/MM/RR'));
+
+
+-- INSERCIÓN DE CONSUMIDOR
+
+Insert into CONSUMIDOR (PUNTOS,PERSONA_RUN,USUARIO_USERNAME) values ('20','19308344-7','g.espoz');
+
+-- INSERCIÓN DE EMPRESAS
+Insert into EMPRESA (RUT,NOMBRE,DIRECCION,RAZON_SOCIAL) values ('24082641-0','SANTA ISABEL','SARGENTO ALDEA 820','FERRETERIA');
+Insert into EMPRESA (RUT,NOMBRE,DIRECCION,RAZON_SOCIAL) values ('20336836-4','UNIMARC','LO VARGAS','SUPERMERCADO');
+
+
+-- INSERCIÓN DE SUCURSALES
+
+Insert into SUCURSAL (ID_SUCUR,NOMBRE,DIRECCION,FONO,COMUNA,EMPRESA_RUT) values (SUCURSAL_SEQ.NEXTVAL,'SANTA ISABEL LAMPA','SARGENTO ALDEA #820','+56979479822','LAMPA','24082641-0');
+Insert into SUCURSAL (ID_SUCUR,NOMBRE,DIRECCION,FONO,COMUNA,EMPRESA_RUT) values (SUCURSAL_SEQ.NEXTVAL,'UNIMARC LAMPA','LO VARGAS #22','56979479822','LAMPA','20336836-4');
+
+
+-- INSERCIÓN DE EMPLEADOS
+
+Insert into EMPLEADO (IDREFERENCIA,CARGO,PERSONA_RUN,USUARIO_USERNAME) values ('0','Administrador','18906760-7','NICO');
+Insert into EMPLEADO (IDREFERENCIA,CARGO,PERSONA_RUN,USUARIO_USERNAME) values ('1','Encargado de Tienda','11362633-K','SOLE');
+Insert into EMPLEADO (IDREFERENCIA,CARGO,PERSONA_RUN,USUARIO_USERNAME) values (24082641,'Gerente de Asociación','8585368-6','NATALIA');
+
+
+-- INSERCIÓN DE CERTIFICADOS
+
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'0','100','5','100000','Alimento');
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'101','500','10','150000','Alimento');
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'101','500','10','150000','Electrónica');
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'101','500','10','150000','Linea Blanca');
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'500','1000','15','300000','Alimento');
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'500','1000','15','300000','Electrónica');
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'500','1000','15','300000','Linea Blanca');
+Insert into CERTIFICADO (ID_CERT,PTS_MIN,PTS_MAX,DESCUENTO,TOPE,RUBRO) values (CERTIFICADO_SEQ.NEXTVAL,'500','1000','15','300000','Ropa');
+
+-- INSERCION DE PRODUCTOS
+
+Insert into PRODUCTO (ID_PROD,NOMBRE,DESC_PROD,FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR,SUCURSAL_ID_SUCUR) values ('1','Television','TV de 42 pulgadas Smart TV LED',to_date('07/11/18','DD/MM/RR'),'d','50','150','Electronica','Productos que consisten en una combinacion de componentes electronicos organizados en circuitos, destinaods a controlar y arovechar las señales electricas','600000','1');
+Insert into PRODUCTO (ID_PROD,NOMBRE,DESC_PROD,FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR,SUCURSAL_ID_SUCUR) values ('2','Leche','Leche soprole Entera 1 litro ',to_date('07/11/18','DD/MM/RR'),'d','200','300','Alimento','Sustancia normalmente ingeridas por seres vivos con fines nutricionales, sociales y psicológicos','500','1');
+Insert into PRODUCTO (ID_PROD,NOMBRE,DESC_PROD,FEC_INGRESO,ESTADO,STK_SEGURO,STK_SUCUR,RUBRO,DESC_RUBRO,VALOR,SUCURSAL_ID_SUCUR) values ('3','Alfombra','Alfombra Touch Café 160 x 230 cm Dib',to_date('07/11/18','DD/MM/RR'),'d','50','90','Linea Blanca','Conjunto de distintos productos comerciales de un mismo tipo, generalmente de la misma marca, que tienen algunas características comunes que dan cierta unidad al conjunto.','51990','1');
+
+
+
+
