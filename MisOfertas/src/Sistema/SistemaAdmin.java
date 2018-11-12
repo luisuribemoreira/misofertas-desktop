@@ -59,7 +59,6 @@ public class SistemaAdmin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jCTextField1 = new app.bolivia.swing.JCTextField();
         pnlCentro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlPrincipal = new javax.swing.JPanel();
@@ -336,13 +335,6 @@ public class SistemaAdmin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Administrador");
 
-        jCTextField1.setBackground(new java.awt.Color(38, 86, 186));
-        jCTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        jCTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        jCTextField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jCTextField1.setPhColor(new java.awt.Color(255, 255, 255));
-        jCTextField1.setPlaceholder("SEARCH");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -352,9 +344,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 867, Short.MAX_VALUE)
-                .addComponent(jCTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(1158, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +352,6 @@ public class SistemaAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -606,7 +595,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
      * @param evt Evento que se produce al presionar el boton seis
      */
     private void seisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seisActionPerformed
-        new CambiaPanel(pnlPrincipal, new pnlsEncargado.pnlAndroid());
+        new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlAndroid());
         if(this.seis.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
@@ -768,7 +757,6 @@ public class SistemaAdmin extends javax.swing.JFrame {
     private rsbuttom.RSButtonMetro cuatro;
     private rsbuttom.RSButtonMetro dos;
     private javax.swing.JButton jButton1;
-    private app.bolivia.swing.JCTextField jCTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
