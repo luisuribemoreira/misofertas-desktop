@@ -5,23 +5,14 @@
  */
 package pnlsEncargado;
 
-import MisPaquetes.Empresa;
 import MisPaquetes.Producto;
-import MisPaquetes.Sucursal;
-import Sistema.MainSistema;
 import static Sistema.MainSistema.conn;
 import static Sistema.MainSistema.emp_conectado;
 import java.awt.event.KeyEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

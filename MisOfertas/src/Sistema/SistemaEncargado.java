@@ -5,6 +5,9 @@
  */
 package Sistema;
 
+import MisPaquetes.Empleado;
+import MisPaquetes.Usuario;
+import static Sistema.MainSistema.user_conectado;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -46,6 +49,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         dos = new rsbuttom.RSButtonMetro();
         jPanel5 = new javax.swing.JPanel();
+        CerrarSesion = new rsbuttom.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -141,8 +145,32 @@ public class SistemaEncargado extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 56, Short.MAX_VALUE)
+            .addGap(0, 113, Short.MAX_VALUE)
         );
+
+        CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
+        CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-exit-32.png"))); // NOI18N
+        CerrarSesion.setText("Cerrar Sesion");
+        CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
+        CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
+        CerrarSesion.setColorPressed(new java.awt.Color(204, 204, 204));
+        CerrarSesion.setColorTextHover(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        CerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        CerrarSesion.setIconTextGap(25);
+        CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CerrarSesionMousePressed(evt);
+            }
+        });
+        CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
@@ -153,8 +181,9 @@ public class SistemaEncargado extends javax.swing.JFrame {
             .addGroup(pnlMenuLayout.createSequentialGroup()
                 .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,11 +191,13 @@ public class SistemaEncargado extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(144, 144, 144)
+                .addGap(146, 146, 146)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(251, 251, 251))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addComponent(CerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -223,7 +254,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -248,7 +279,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
         pnlCentro.setLayout(pnlCentroLayout);
         pnlCentroLayout.setHorizontalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
         pnlCentroLayout.setVerticalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -374,9 +405,29 @@ public class SistemaEncargado extends javax.swing.JFrame {
         this.setLocation(mueve.x - x, mueve.y - y);
     }//GEN-LAST:event_jPanel2MouseDragged
 
+    private void CerrarSesionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CerrarSesionMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CerrarSesionMousePressed
+
+    private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
+        // TODO add your handling code here:
+        SingIn dialog = new SingIn(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                user_conectado = new Usuario();
+                Sistema.MainSistema.emp_conectado = new Empleado();
+                this.setVisible(false);
+                dialog.setVisible(true);
+    }//GEN-LAST:event_CerrarSesionActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rsbuttom.RSButtonMetro CerrarSesion;
     private rsbuttom.RSButtonMetro dos;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

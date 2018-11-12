@@ -165,7 +165,6 @@ public class Oferta {
      */
     public int agregar(Conexion conn){
         int respuesta = 0;
-        int id = 0;
         try {
             
             CallableStatement cst = conn.getConexion_base().prepareCall("{call AGREGAR_OFERTA (?,?,?,?,?,?,?,?,?,?)}");

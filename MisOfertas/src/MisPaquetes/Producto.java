@@ -39,6 +39,7 @@ public class Producto {
     /**
      * Mutadores y accesadores
      */
+    
     public int getId_sucur() {
         return id_sucur;
     }

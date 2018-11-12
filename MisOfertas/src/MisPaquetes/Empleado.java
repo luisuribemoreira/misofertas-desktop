@@ -159,7 +159,7 @@ public class Empleado {
     /**
      * Método el cual utiliza el procedimiento almacenado "Buscar Empleado" el cual busca el empleado
      * registrado en la base de datos y modifica la información de los atributos acorde a lo encontrado
-     * @param run Run asociado al empleado a buscar
+     * @param userName  asociado al empleado a buscar
      * @param conn Conexión a la base de datos
      */
     public void buscarEmpleadoPorUserName(String userName, Conexion conn){
