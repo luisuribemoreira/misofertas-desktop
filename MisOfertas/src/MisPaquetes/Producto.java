@@ -293,7 +293,8 @@ public class Producto {
      */
     public ResultSet listadoProductosPorRubro(Conexion conn,String rubro) throws SQLException{
         Statement stmt = conn.getConexion_base().createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTO WHERE RUBRO = '"+ rubro+ "'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTO WHERE RUBRO = '"+ rubro+ "'"
+                + " AND SUCURSAL_ID_SUCUR= '" + this.id_sucur+ "'");
         return rs;
     }
     
@@ -304,6 +305,18 @@ public class Producto {
     @Override
     public String toString() {
         return "" + nombre ;
+    }
+    
+    /**
+     * 
+     * @param conn conexion con la base de datos
+     * @return listado de productos por sucursal
+     * @throws SQLException 
+     */
+    public ResultSet listadoProductosSucur(Conexion conn) throws SQLException{
+        Statement stmt = conn.getConexion_base().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTO WHERE SUCURSAL_ID_SUCUR = '" + this.id_sucur+ "'");
+        return rs;
     }
     
     

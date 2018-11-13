@@ -450,7 +450,7 @@ public class pnlProductos extends javax.swing.JPanel {
      * @param evt Evento de presionar el boton agregar
      */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        txtNombre.setEnabled(false);
+        txtNombre.setEnabled(true);
         txtDescripcion.setEnabled(true);
         txtFechaIngreso.setEnabled(true);
         txtSeguro.setEnabled(true);
@@ -531,11 +531,10 @@ public class pnlProductos extends javax.swing.JPanel {
                 throw new Exception ("El stock seguro no puede ser negativo");
             }
             pro.setValor(Integer.parseInt(txtValor.getText()));
-            //Sera cambiado 
             pro.setId_sucur(emp_conectado.getId_referencia());
             int respuesta = 0;
         
-            if (txtNombre.isEnabled()) {
+            if (txtId.getText().equals("")) {
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este producto?", "Message",  JOptionPane.YES_NO_OPTION);
                 if (a == 0 ) {
                     respuesta = pro.agregar(conn);
@@ -551,10 +550,10 @@ public class pnlProductos extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null,"El Producto ya fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
                     }
                 }
-
             }else{
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar este Producto?", "Message",  JOptionPane.YES_NO_OPTION);
                 if(a == 0){
+                    pro.setId(Integer.parseInt(txtId.getText()));
                     respuesta = pro.modificar(conn);
                     if(respuesta == 1){
                         JOptionPane.showMessageDialog(null,"El Producto fue Modificado",null, JOptionPane.INFORMATION_MESSAGE, null);
@@ -717,9 +716,9 @@ public class pnlProductos extends javax.swing.JPanel {
         DefaultTableModel modelo =  new DefaultTableModel();
             modelo.addColumn("ID");
             modelo.addColumn("Nombre");
-            
             Producto pro = new Producto();
-            ResultSet rs = pro.listadoProductos(conn);
+            pro.setId_sucur(emp_conectado.getId_referencia());
+            ResultSet rs = pro.listadoProductosSucur(conn);
             Object [] fila = new Object[6];
             while(rs.next()){
                 fila[0] = rs.getInt("ID_PROD");
