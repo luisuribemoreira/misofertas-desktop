@@ -5,6 +5,7 @@
  */
 package pnlsEncargado;
 
+import MisPaquetes.Consumidor;
 import MisPaquetes.Mensajeria;
 import MisPaquetes.Oferta;
 import MisPaquetes.Persona;
@@ -1124,8 +1125,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         msj.setImgOfer(oferta.getImagen());
         msj.setIdSucur(oferta.getId_sucursal());
         msj.setIfOfer(oferta.getId());
-        msj.setNomConsumidor(persona.getNombre());
-        msj.setRunConsumidor(persona.getRun());
+        Consumidor con = new Consumidor();
+        con.buscarConsumidorPorRun(persona.getRun(), conn);
+        msj.setNomConsumidor(con.getUsername());
+        msj.setRunConsumidor(con.getRun());
         int respuesta = msj.agregar(conn);
     }
     

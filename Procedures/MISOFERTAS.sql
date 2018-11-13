@@ -685,3 +685,24 @@ BEGIN
       v_run := 'ERROR';
       v_cargo := 'ERROR';
 END;
+
+/*Procedimiento almacenado de buscar un consumidor por run*/
+
+create or replace PROCEDURE BUSCAR_CONSUMIDOR_RUN(
+    v_run VARCHAR2,
+    v_puntos OUT VARCHAR2,
+    v_username OUT VARCHAR2
+)
+AS
+BEGIN
+    
+    SELECT PUNTOS, USUARIO_USERNAME
+    INTO v_puntos, v_username
+    FROM CONSUMIDOR
+    WHERE PERSONA_RUN = v_run;
+    
+    EXCEPTION
+    WHEN OTHERS THEN
+      v_puntos := 0;
+      v_username := 'ERROR';
+END;
