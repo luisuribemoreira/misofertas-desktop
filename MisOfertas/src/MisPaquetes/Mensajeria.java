@@ -9,12 +9,13 @@ import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingWorker;
 
 /**
  * Clase mensajeria
  * @author Luis
  */
-public class Mensajeria {
+public class Mensajeria{
     
     //Seccion de atributos de la clase
     private int id;
@@ -137,5 +138,5 @@ public class Mensajeria {
         }
         return respuesta;
     }
-    
+ 
 }
