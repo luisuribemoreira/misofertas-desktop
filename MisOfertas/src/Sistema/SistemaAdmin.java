@@ -5,6 +5,9 @@
  */
 package Sistema;
 
+import MisPaquetes.Empleado;
+import MisPaquetes.Usuario;
+import static Sistema.MainSistema.user_conectado;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -59,6 +62,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        CerrarSesion = new rsbuttom.RSButtonMetro();
         pnlCentro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlPrincipal = new javax.swing.JPanel();
@@ -335,6 +339,25 @@ public class SistemaAdmin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Administrador");
 
+        CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
+        CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-exit-32.png"))); // NOI18N
+        CerrarSesion.setText("Cerrar Sesion");
+        CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
+        CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
+        CerrarSesion.setColorPressed(new java.awt.Color(204, 204, 204));
+        CerrarSesion.setColorTextHover(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        CerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        CerrarSesion.setIconTextGap(25);
+        CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -344,15 +367,19 @@ public class SistemaAdmin extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(1158, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 945, Short.MAX_VALUE)
+                .addComponent(CerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(CerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -377,7 +404,9 @@ public class SistemaAdmin extends javax.swing.JFrame {
         pnlCentro.setLayout(pnlCentroLayout);
         pnlCentroLayout.setHorizontalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
+            .addGroup(pnlCentroLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 242, Short.MAX_VALUE))
         );
         pnlCentroLayout.setVerticalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -750,9 +779,29 @@ public class SistemaAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_cuatroMousePressed
 
+    /**
+     * Función de cerrar sesión del usuario, el cual el sistema redirecciona al login de usuario y elimina las credenciales de sesión
+     * @param evt Evento al dar clic en el botón cerrar Sesión
+     */
+    private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
+        // TODO add your handling code here:
+        SingIn dialog = new SingIn(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                user_conectado = new Usuario();
+                Sistema.MainSistema.emp_conectado = new Empleado();
+                this.setVisible(false);
+                dialog.setVisible(true);
+    }//GEN-LAST:event_CerrarSesionActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private rsbuttom.RSButtonMetro CerrarSesion;
     private rsbuttom.RSButtonMetro cinco;
     private rsbuttom.RSButtonMetro cuatro;
     private rsbuttom.RSButtonMetro dos;

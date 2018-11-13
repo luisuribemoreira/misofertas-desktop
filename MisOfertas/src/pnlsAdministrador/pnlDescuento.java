@@ -70,6 +70,7 @@ public class pnlDescuento extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         ddlRubro = new javax.swing.JComboBox<>();
         lblRespuestaCertificado = new javax.swing.JLabel();
+        lblPts = new javax.swing.JLabel();
 
         btnNewCertificado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNewCertificado.setText("Nueva Sucursal");
@@ -241,6 +242,11 @@ public class pnlDescuento extends javax.swing.JPanel {
         lblRespuestaCertificado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRespuestaCertificado.setText("Respuesta");
 
+        lblPts.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblPts.setForeground(java.awt.Color.red);
+        lblPts.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPts.setText("Respuesta");
+
         javax.swing.GroupLayout pnSucursalLayout = new javax.swing.GroupLayout(pnSucursal);
         pnSucursal.setLayout(pnSucursalLayout);
         pnSucursalLayout.setHorizontalGroup(
@@ -265,13 +271,19 @@ public class pnlDescuento extends javax.swing.JPanel {
                                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtPtsMax, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                                     .addComponent(txtPtsMin))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(pnSucursalLayout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(92, 92, 92))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(pnSucursalLayout.createSequentialGroup()
+                                                .addGap(10, 10, 10)
+                                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(92, 92, 92))
+                                    .addGroup(pnSucursalLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblPts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addContainerGap())))))
                     .addGroup(pnSucursalLayout.createSequentialGroup()
                         .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -300,7 +312,9 @@ public class pnlDescuento extends javax.swing.JPanel {
                         .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(pnSucursalLayout.createSequentialGroup()
-                                .addComponent(txtPtsMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtPtsMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPts))
                                 .addGap(18, 18, 18)
                                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,10 +361,13 @@ public class pnlDescuento extends javax.swing.JPanel {
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblRespuestaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(lblRespuestaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pnlBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -591,6 +608,7 @@ public class pnlDescuento extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPts;
     private javax.swing.JLabel lblRespuestaBuscar;
     private javax.swing.JLabel lblRespuestaCertificado;
     private javax.swing.JPanel pnSucursal;
@@ -659,6 +677,7 @@ public class pnlDescuento extends javax.swing.JPanel {
         txtBuscar.setText("Ingrese ID del Certificado");
         lblRespuestaBuscar.setText("");
         lblRespuestaCertificado.setText("");
+        lblPts.setText("");
     }
 
     /**
@@ -706,6 +725,14 @@ public class pnlDescuento extends javax.swing.JPanel {
             validar = false;
         }
         if (txtTope.getText().isEmpty()) {
+            validar = false;
+        }
+        try {
+            if (Integer.parseInt(txtPtsMin.getText()) > Integer.parseInt(txtPtsMax.getText())) {
+                validar = false;
+                lblPts.setText("Debe ser mayor o igual a los puntos Mínimos");
+            }
+        } catch (Exception e) {
             validar = false;
         }
         return validar;

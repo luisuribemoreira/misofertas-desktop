@@ -87,6 +87,7 @@ public class pnlUsuario extends javax.swing.JPanel {
         ddlSucursal = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        lblRutRespuesta = new javax.swing.JLabel();
         btnNewUsuario = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
@@ -372,23 +373,17 @@ public class pnlUsuario extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        lblRutRespuesta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblRutRespuesta.setForeground(java.awt.Color.red);
+        lblRutRespuesta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRutRespuesta.setText("Respuesta");
+
         javax.swing.GroupLayout pnUsuarioLayout = new javax.swing.GroupLayout(pnUsuario);
         pnUsuario.setLayout(pnUsuarioLayout);
         pnUsuarioLayout.setHorizontalGroup(
             pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnUsuarioLayout.createSequentialGroup()
-                .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnUsuarioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel9))
-                    .addGroup(pnUsuarioLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnCredencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnUsuarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(135, Short.MAX_VALUE)
                 .addComponent(lblRespuestaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134))
             .addGroup(pnUsuarioLayout.createSequentialGroup()
@@ -431,6 +426,20 @@ public class pnlUsuario extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(180, 180, 180))))
+            .addGroup(pnUsuarioLayout.createSequentialGroup()
+                .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel9))
+                    .addGroup(pnUsuarioLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnCredencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblRutRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnUsuarioLayout.setVerticalGroup(
             pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,7 +453,9 @@ public class pnlUsuario extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnUsuarioLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblRutRespuesta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(pnUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -527,12 +538,14 @@ public class pnlUsuario extends javax.swing.JPanel {
                                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(244, 244, 244)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblRespuestaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pnlBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lblRespuestaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(pnUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -636,16 +649,13 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void txtRunKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRunKeyTyped
         if(txtRun.getText().length()>=10){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
-        if(!Character.isDigit(evt.getKeyChar()) && txtRun.getText().length() <= 7){
+        if(!Character.isDigit(evt.getKeyChar()) && txtRun.getText().length() < 7){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-        if(evt.getKeyChar() != '-' && txtRun.getText().length() == 8){
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
-        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != 'k' && evt.getKeyChar() != 'K' && txtRun.getText().length() == 9){
+        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != 'k' && evt.getKeyChar() != 'K' && txtRun.getText().length() >= 7 && evt.getKeyChar() != '-'){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
@@ -658,8 +668,9 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void txtApellidoPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoPKeyTyped
         if(txtApellidoP.getText().length()>=100){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
-        if(Character.isDigit(evt.getKeyChar())){
+        if(!Character.isAlphabetic(evt.getKeyChar())){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
@@ -672,8 +683,9 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void txtApellidoMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoMKeyTyped
         if(txtApellidoM.getText().length()>=13){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
-        if(Character.isDigit(evt.getKeyChar())){
+        if(!Character.isAlphabetic(evt.getKeyChar())){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
@@ -783,6 +795,7 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void txtEmailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyTyped
         if(txtNombre.getText().length()>=35){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtEmailKeyTyped
 
@@ -793,8 +806,9 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         if(txtNombre.getText().length()>=25){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
-        if(Character.isDigit(evt.getKeyChar())){
+        if(!Character.isAlphabetic(evt.getKeyChar())){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
@@ -807,6 +821,11 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void txtUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyTyped
         if(txtUser.getText().length()>=25){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+        if(!Character.isLetter(evt.getKeyChar()) || !Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtUserKeyTyped
 
@@ -828,6 +847,7 @@ public class pnlUsuario extends javax.swing.JPanel {
                 txtRun.setEnabled(false);
                 btnVerificar.setEnabled(false);
                 lblRespuestaUsuario.setText("");
+                lblRutRespuesta.setText("");
                 if (per.getNombre().equals("ERROR")) {
                     txtNombre.setEnabled(true);
                     txtApellidoP.setEnabled(true);
@@ -855,7 +875,9 @@ public class pnlUsuario extends javax.swing.JPanel {
                 }
             }
         }else{
-            lblRespuestaUsuario.setText("El Run es Incorrecto");
+            if (lblRutRespuesta.getText().length() == 0) {
+                lblRutRespuesta.setText("El Run es Incorrecto");
+            }
         }
     }//GEN-LAST:event_btnVerificarActionPerformed
 
@@ -893,6 +915,11 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
         if(txtPass.getText().length()>=15){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+        if(!Character.isAlphabetic(evt.getKeyChar()) || !Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtPassKeyTyped
 
@@ -969,6 +996,7 @@ public class pnlUsuario extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRespuestaBuscar;
     private javax.swing.JLabel lblRespuestaUsuario;
+    private javax.swing.JLabel lblRutRespuesta;
     private javax.swing.JPanel pnCredencial;
     private javax.swing.JPanel pnUsuario;
     private javax.swing.JPanel pnlBusqueda;
@@ -1026,6 +1054,7 @@ public class pnlUsuario extends javax.swing.JPanel {
         txtBuscar.setText("Ingrese Nombre de Usuario");
         lblRespuestaBuscar.setText("");
         lblRespuestaUsuario.setText("");
+        lblRutRespuesta.setText("");
     }
 
     /**
@@ -1035,7 +1064,6 @@ public class pnlUsuario extends javax.swing.JPanel {
     private void cargarTabla() throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombre de Usuario");
-        modelo.addColumn("Contraseña");
         modelo.addColumn("Perfil");
 
         Usuario usu = new Usuario();
@@ -1043,7 +1071,6 @@ public class pnlUsuario extends javax.swing.JPanel {
         Object[] fila = new Object[3];
         while (rs.next()) {
             fila[0] = rs.getString("USERNAME");
-            fila[1] = rs.getString("PASSWORD");
             fila[2] = rs.getString("PERFIL");
             modelo.addRow(fila);
         }
@@ -1136,11 +1163,20 @@ public class pnlUsuario extends javax.swing.JPanel {
      */
     private boolean validarRun(String run) {
         boolean validacion = false;
+        boolean isRut = run.matches("^[0-9]+[-|‐]{1}[0-9kK]{1}$");
+        if (!isRut) {
+            lblRutRespuesta.setText("El Formato del Rut es Incorrecto");
+            return false;
+        }
+        lblRutRespuesta.setText("");
         try {
             run =  run.toUpperCase();
             run = run.replace(".", "");
             run = run.replace("-", "");
             int rutAux = Integer.parseInt(run.substring(0, run.length() - 1));
+            if (rutAux == 0) {
+                return validacion;
+            }
 
             char dv = run.charAt(run.length() - 1);
 
@@ -1197,6 +1233,15 @@ public class pnlUsuario extends javax.swing.JPanel {
         if (ddlSucursal.isEnabled()) {
             if (ddlSucursal.getSelectedIndex()==0) {
                 lblRespuestaUsuario.setText("Seleccione el cargo");
+                validar = false;
+            }
+        }
+        if (txtEmail.getText().length() > 0) {
+            String email = txtEmail.getText();
+            boolean isEmail = email.matches("^[_aA-zZ0-9-]+(\\.[_aA-zZ0-9-]+)*@" +
+                                            "[aA-zZ0-9-]+(\\.[aA-zZ0-9-]+)*(\\.[aA-zZ]{2,4})$");
+            if (!isEmail) {
+                lblRespuestaUsuario.setText("El email es Incorrecto");
                 validar = false;
             }
         }
