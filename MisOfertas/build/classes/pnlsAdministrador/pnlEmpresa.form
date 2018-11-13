@@ -116,14 +116,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                   <Component id="btnAgregar" min="-2" pref="129" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="329" max="32767" attributes="0"/>
                   <Component id="btnCancelar" min="-2" pref="129" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="lblRespuestaEmpresa" min="-2" pref="462" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

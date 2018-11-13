@@ -611,7 +611,7 @@ public class pnlProductos extends javax.swing.JPanel {
             }
             int respuesta = 0;
         
-            if (txtNombre.isEnabled()) {
+            if (txtId.getText().equals("")) {
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar este producto?", "Message",  JOptionPane.YES_NO_OPTION);
                 if (a == 0 ) {
                     respuesta = pro.agregar(conn);
@@ -627,10 +627,10 @@ public class pnlProductos extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null,"El Producto ya fue registrado",null, JOptionPane.INFORMATION_MESSAGE, null);
                     }
                 }
-
             }else{
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea Modificar este Producto?", "Message",  JOptionPane.YES_NO_OPTION);
                 if(a == 0){
+                    pro.setId(Integer.parseInt(txtId.getText()));
                     respuesta = pro.modificar(conn);
                     if(respuesta == 1){
                         JOptionPane.showMessageDialog(null,"El Producto fue Modificado",null, JOptionPane.INFORMATION_MESSAGE, null);
@@ -647,7 +647,7 @@ public class pnlProductos extends javax.swing.JPanel {
             }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null,"" + ex.getMessage(),null, JOptionPane.INFORMATION_MESSAGE, null);
-        }        
+        } 
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 

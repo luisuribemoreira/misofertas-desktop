@@ -9,8 +9,10 @@ import MisPaquetes.Empleado;
 import MisPaquetes.Usuario;
 import static Sistema.MainSistema.user_conectado;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -30,7 +32,11 @@ public class SistemaAdmin extends javax.swing.JFrame {
     
     public SistemaAdmin() {
         initComponents();
+        Dimension screensize = Toolkit.getDefaultToolkit().getScreenSize();
+        
         this.setExtendedState(MAXIMIZED_BOTH);
+        this.setSize(screensize);
+        this.setResizable(false);
         this.setLocationRelativeTo(this);
         this.uno.setSelected(true);
         

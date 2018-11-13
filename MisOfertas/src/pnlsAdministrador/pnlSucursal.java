@@ -11,6 +11,7 @@ import static Sistema.MainSistema.conn;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -30,6 +31,7 @@ public class pnlSucursal extends javax.swing.JPanel {
             initComponents();
             cargarTabla();
             cargarComboBox();
+            cargarRegion();
             vistaDefault();
         } catch (SQLException ex) {
             Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +64,6 @@ public class pnlSucursal extends javax.swing.JPanel {
         txtNombre = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtFono = new javax.swing.JTextField();
-        txtComuna = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -70,6 +71,9 @@ public class pnlSucursal extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         ddlEmpresa = new javax.swing.JComboBox<>();
         lblRespuestaSucursal = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        ddlRegion = new javax.swing.JComboBox<>();
+        ddlComuna = new javax.swing.JComboBox<>();
 
         btnNewSucursal.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnNewSucursal.setText("Nueva Sucursal");
@@ -166,16 +170,16 @@ public class pnlSucursal extends javax.swing.JPanel {
         pnSucursal.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255), 3), "Sucursal", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Nombre");
+        jLabel1.setText("Nombre:");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Dirección");
+        jLabel2.setText("Dirección:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Teléfono:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Comuna:");
+        jLabel4.setText("Región:");
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -195,13 +199,6 @@ public class pnlSucursal extends javax.swing.JPanel {
         txtFono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtFonoKeyTyped(evt);
-            }
-        });
-
-        txtComuna.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtComuna.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtComunaKeyTyped(evt);
             }
         });
 
@@ -239,6 +236,20 @@ public class pnlSucursal extends javax.swing.JPanel {
         lblRespuestaSucursal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRespuestaSucursal.setText("Respuesta");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Comuna:");
+
+        ddlRegion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ddlRegion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE LA REGIÓN" }));
+        ddlRegion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ddlRegionItemStateChanged(evt);
+            }
+        });
+
+        ddlComuna.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        ddlComuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONE LA COMUNA" }));
+
         javax.swing.GroupLayout pnSucursalLayout = new javax.swing.GroupLayout(pnSucursal);
         pnSucursal.setLayout(pnSucursalLayout);
         pnSucursalLayout.setHorizontalGroup(
@@ -251,15 +262,18 @@ public class pnlSucursal extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnSucursalLayout.createSequentialGroup()
                                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
                                 .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnSucursalLayout.createSequentialGroup()
-                                        .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtFono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtComuna, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 420, Short.MAX_VALUE))
+                                        .addComponent(ddlRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addGap(244, 244, 244))
+                                    .addGroup(pnSucursalLayout.createSequentialGroup()
+                                        .addComponent(txtFono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 473, Short.MAX_VALUE))
                                     .addGroup(pnSucursalLayout.createSequentialGroup()
                                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -268,15 +282,17 @@ public class pnlSucursal extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel5)))
                         .addGap(57, 57, 57))
-                    .addGroup(pnSucursalLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSucursalLayout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(ddlEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ddlComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68))))
             .addGroup(pnSucursalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtDireccion)
                 .addContainerGap())
             .addGroup(pnSucursalLayout.createSequentialGroup()
@@ -315,7 +331,9 @@ public class pnlSucursal extends javax.swing.JPanel {
                         .addGap(20, 20, 20)
                         .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(txtComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7)
+                            .addComponent(ddlRegion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ddlComuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(pnSucursalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
@@ -387,8 +405,9 @@ public class pnlSucursal extends javax.swing.JPanel {
         txtDireccion.setEnabled(true);
         txtNombre.setEnabled(true);
         txtFono.setEnabled(true);
-        txtComuna.setEnabled(true);
         ddlEmpresa.setEnabled(true);
+        ddlRegion.setEnabled(true);
+        ddlComuna.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
         txtNombre.requestFocus();
@@ -413,7 +432,8 @@ public class pnlSucursal extends javax.swing.JPanel {
         txtDireccion.setEnabled(true);
         txtNombre.setEnabled(true);
         txtFono.setEnabled(true);
-        txtComuna.setEnabled(true);
+        ddlComuna.setEnabled(true);
+        ddlRegion.setEnabled(true);
         ddlEmpresa.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -500,20 +520,6 @@ public class pnlSucursal extends javax.swing.JPanel {
     }//GEN-LAST:event_txtFonoKeyTyped
 
     /**
-     * Función que restringe los caracteres no asociados a la Comuna
-     * @param evt Evento que se produce al insertar un caracter
-     */
-    private void txtComunaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtComunaKeyTyped
-        if(txtComuna.getText().length()>=25){
-            evt.consume();
-        }
-        if(!Character.isAlphabetic(evt.getKeyChar())){
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }//GEN-LAST:event_txtComunaKeyTyped
-
-    /**
      * Función que permite agregar o modificar la información asociada a los campos habilitados
      * @param evt Evento que se produce al apretar el botón guardar
      */
@@ -522,7 +528,7 @@ public class pnlSucursal extends javax.swing.JPanel {
         suc.setNombre(txtNombre.getText());
         suc.setDireccion(txtDireccion.getText());
         suc.setFono(txtFono.getText());
-        suc.setComuna(txtComuna.getText());
+        suc.setComuna(ddlComuna.getSelectedItem().toString());
         Empresa emp = new Empresa();
         int respuesta = 0;
 
@@ -579,6 +585,15 @@ public class pnlSucursal extends javax.swing.JPanel {
         vistaDefault();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void ddlRegionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ddlRegionItemStateChanged
+        if (ddlRegion.getSelectedIndex() != 0) {
+            cargarComuna();
+        }else{
+            ddlComuna.removeAllItems();
+            ddlComuna.addItem("SELECCIONE LA COMUNA");
+        } 
+    }//GEN-LAST:event_ddlRegionItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -587,13 +602,16 @@ public class pnlSucursal extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNewSucursal;
+    private javax.swing.JComboBox<String> ddlComuna;
     private javax.swing.JComboBox<Object> ddlEmpresa;
+    private javax.swing.JComboBox<String> ddlRegion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRespuestaBuscar;
     private javax.swing.JLabel lblRespuestaSucursal;
@@ -601,7 +619,6 @@ public class pnlSucursal extends javax.swing.JPanel {
     private javax.swing.JPanel pnlBusqueda;
     private javax.swing.JTable tablaSucursales;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtComuna;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtFono;
     private javax.swing.JTextField txtId;
@@ -646,7 +663,6 @@ public class pnlSucursal extends javax.swing.JPanel {
         txtDireccion.setEnabled(false);
         txtNombre.setEnabled(false);
         txtFono.setEnabled(false);
-        txtComuna.setEnabled(false);
         ddlEmpresa.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
@@ -656,8 +672,12 @@ public class pnlSucursal extends javax.swing.JPanel {
         txtNombre.setText("");
         txtDireccion.setText("");
         txtFono.setText("");
-        txtComuna.setText("");
         ddlEmpresa.setSelectedIndex(0);
+        ddlRegion.setSelectedIndex(0);
+        ddlRegion.setEnabled(false);
+        ddlComuna.setEnabled(false);
+        ddlComuna.removeAllItems();
+        ddlComuna.addItem("SELECCIONE LA COMUNA");
         txtId.setText("");
         txtBuscar.setText("Ingrese ID de la Sucursal");
         lblRespuestaBuscar.setText("");
@@ -677,11 +697,14 @@ public class pnlSucursal extends javax.swing.JPanel {
             txtNombre.setText(suc.getNombre());
             txtDireccion.setText(suc.getDireccion());
             txtFono.setText(suc.getFono());
-            txtComuna.setText(suc.getComuna());
             
             Empresa emp = new Empresa();
             emp = emp.buscar(suc.getEmpresaRut(), conn);
             ddlEmpresa.getModel().setSelectedItem(emp);
+            
+            String region = buscarRegion(suc.getComuna());
+            ddlRegion.setSelectedItem(region);
+            ddlComuna.setSelectedItem(suc.getComuna());
             
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
@@ -726,10 +749,67 @@ public class pnlSucursal extends javax.swing.JPanel {
         if (txtFono.getText().isEmpty()){
             validar = false;
         }
-        if (txtComuna.getText().isEmpty()) {
+        if (ddlRegion.getSelectedIndex() == 0) {
+            validar = false;
+        }
+        if (ddlComuna.getSelectedIndex() == 0) {
             validar = false;
         }
         return validar;
+    }
+
+    /**
+     * Método que carga la información del combobox de sucursales con la información asociada al rut de la empresa seleccionada
+     * @param rut Rut asociado a la empresa seleccionada
+     * @throws SQLException 
+     */
+    private void cargarRegion() {
+        try {
+            Statement stmt = conn.getConexion_base().createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT DISTINCT REGION FROM COMUNA");
+            while (rs.next()) {
+                ddlRegion.addItem(rs.getString("REGION"));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Método que carga la información del combobox de sucursales con la información asociada al rut de la empresa seleccionada
+     * @param rut Rut asociado a la empresa seleccionada
+     * @throws SQLException 
+     */
+    private void cargarComuna(){
+        ddlComuna.removeAllItems();
+        ddlComuna.addItem("SELECCIONE LA COMUNA");
+        try {
+            Statement stmt = conn.getConexion_base().createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT NOMBRE FROM COMUNA WHERE REGION = '" + ddlRegion.getSelectedItem().toString() + "'");
+            while (rs.next()) {
+                ddlComuna.addItem(rs.getString("NOMBRE"));
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Método el cual busca la región asociada a la comuna seleccionada
+     * @param comuna Nombre de la comuna a buscar
+     * @return Region asociada a la comuna
+     */
+    private String buscarRegion(String comuna) {
+        try {
+            Statement stmt = conn.getConexion_base().createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT REGION FROM COMUNA WHERE NOMBRE = '" + comuna + "'");
+            while (rs.next()) {
+                return rs.getString("REGION");
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlSucursal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 
 
