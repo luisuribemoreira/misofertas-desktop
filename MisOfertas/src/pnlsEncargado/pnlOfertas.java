@@ -11,6 +11,7 @@ import MisPaquetes.Persona;
 import MisPaquetes.Producto;
 import MisPaquetes.Sucursal;
 import static Sistema.MainSistema.conn;
+import static Sistema.MainSistema.emp_conectado;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.io.FileInputStream;
@@ -80,7 +81,6 @@ public class pnlOfertas extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtDescr = new javax.swing.JTextField();
         txtDescuento = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -88,7 +88,6 @@ public class pnlOfertas extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cldFechaInicio = new com.toedter.calendar.JDateChooser();
-        ddlSucursal = new javax.swing.JComboBox<>();
         ddlProducto = new javax.swing.JComboBox<>();
         cldFechaTermino = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
@@ -149,9 +148,6 @@ public class pnlOfertas extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Valoracion Total:");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Sucursal: ");
-
         txtDescr.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtDescr.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -186,8 +182,6 @@ public class pnlOfertas extends javax.swing.JPanel {
                 cldFechaInicioPropertyChange(evt);
             }
         });
-
-        ddlSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecciona la sucursal" }));
 
         ddlProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el producto" }));
 
@@ -231,7 +225,7 @@ public class pnlOfertas extends javax.swing.JPanel {
                             .addComponent(txtDescr, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cldFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cldFechaTermino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,15 +237,9 @@ public class pnlOfertas extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtValoracion, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlOfertaLayout.createSequentialGroup()
-                                .addGroup(pnlOfertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlOfertaLayout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtDescuento))
-                                    .addGroup(pnlOfertaLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(ddlSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtDescuento)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnlOfertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
@@ -294,8 +282,6 @@ public class pnlOfertas extends javax.swing.JPanel {
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(pnlOfertaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ddlSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
                     .addComponent(ddlProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addContainerGap(90, Short.MAX_VALUE))
@@ -533,11 +519,7 @@ public class pnlOfertas extends javax.swing.JPanel {
             }
             ofer.setPorc_descuento(Integer.parseInt(txtDescuento.getText()));
             int respuesta = 0;
-            Sucursal su =  new Sucursal();
-            if (ddlSucursal.getSelectedIndex() != 0) {
-                su = (Sucursal) ddlSucursal.getModel().getSelectedItem();
-                ofer.setId_sucursal(su.getId_sucur());
-            }
+            ofer.setId_sucursal(emp_conectado.getId_referencia());
             Producto pro = new Producto();
             if (ddlProducto.getSelectedIndex() != 0) {
                 pro = (Producto) ddlProducto.getModel().getSelectedItem();
@@ -545,6 +527,9 @@ public class pnlOfertas extends javax.swing.JPanel {
             }  
             
             if (txtId.getText().equals("")) {
+                if(archivo == null){
+                    throw new Exception ("Ingrese la imagen de la oferta");
+                }
                 int a = JOptionPane.showConfirmDialog(null, "¿Desea Registrar esta oferta?", "Message",  JOptionPane.YES_NO_OPTION);
                 if (a == 0 ) {
                     respuesta = ofer.agregar(conn);
@@ -643,7 +628,6 @@ public class pnlOfertas extends javax.swing.JPanel {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         txtDescr.setEnabled(true);
         txtDescuento.setEnabled(true);
-        ddlSucursal.setEnabled(true);
         txtValoracion.setEnabled(false);
         ddlProducto.setEnabled(true);
         ddlRubro.setEnabled(true);
@@ -663,7 +647,6 @@ public class pnlOfertas extends javax.swing.JPanel {
         vistaDefault();
         txtDescr.setEnabled(true);
         txtDescuento.setEnabled(true);
-        ddlSucursal.setEnabled(true);
         txtValoracion.setEnabled(false);
         ddlRubro.setEnabled(true);
         txtDescuento.setEnabled(true);
@@ -789,12 +772,10 @@ public class pnlOfertas extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser cldFechaTermino;
     private javax.swing.JComboBox<Object> ddlProducto;
     private javax.swing.JComboBox<String> ddlRubro;
-    private javax.swing.JComboBox<Object> ddlSucursal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -874,7 +855,6 @@ public class pnlOfertas extends javax.swing.JPanel {
             v_suc.setDireccion(rs.getString("DIRECCION"));
             v_suc.setComuna(rs.getString("COMUNA"));
             v_suc.setEmpresaRut(rs.getString("EMPRESA_RUT"));
-            ddlSucursal.addItem(v_suc);
         }
         
     }
@@ -886,7 +866,6 @@ public class pnlOfertas extends javax.swing.JPanel {
     private void vistaDefault(){
         txtDescr.setEnabled(false);
         txtValoracion.setEnabled(false);
-        ddlSucursal.setEnabled(false);
         ddlProducto.setEnabled(false);
         ddlRubro.setEnabled(false);
         cldFechaInicio.setEnabled(false);
@@ -905,7 +884,6 @@ public class pnlOfertas extends javax.swing.JPanel {
         cldFechaTermino.setDate(null);
         cldFechaInicio.setMinSelectableDate(new Date());
         lblImagen.setIcon(null);
-        ddlSucursal.setSelectedIndex(0);
         ddlProducto.setSelectedIndex(0);
         ddlRubro.setSelectedIndex(0);
         txtId.setText("");
@@ -932,7 +910,6 @@ public class pnlOfertas extends javax.swing.JPanel {
             cldFechaTermino.setDate(ofer.getFecha_termino());
             Sucursal suc = new Sucursal();
             suc = suc.buscar(ofer.getId_sucursal(), conn);
-            ddlSucursal.getModel().setSelectedItem(suc);
             Producto pro = new Producto();
             pro = pro.buscar(ofer.getId_producto(), conn);
             ddlRubro.setSelectedItem(pro.getRubro());
@@ -971,16 +948,10 @@ public class pnlOfertas extends javax.swing.JPanel {
         if (cldFechaTermino.getDate() == null) {
             validar = false;
         }
-        if(ddlSucursal.getSelectedIndex() == 0){
-            validar = false;
-        }
         if (ddlRubro.getSelectedIndex() == 0) {
             validar = false;
         }
         if(ddlProducto.getSelectedIndex() == 0){
-            validar = false;
-        }
-        if(archivo == null){
             validar = false;
         }
         return validar;
@@ -1026,6 +997,7 @@ public class pnlOfertas extends javax.swing.JPanel {
         }
         
         Producto pro = new Producto();
+        pro.setId_sucur(emp_conectado.getId_referencia());
         ResultSet rs1 = pro.listadoProductosPorRubro(conn,rubro);
         while (rs1.next()) {
             cont++;
