@@ -8,6 +8,7 @@ package Sistema;
 import static Sistema.MainSistema.conn;
 import static Sistema.MainSistema.emp_conectado;
 import static Sistema.MainSistema.user_conectado;
+import java.awt.Toolkit;
 
 /**
  *
@@ -95,11 +96,21 @@ public class SingIn extends javax.swing.JDialog {
         );
 
         txtUser.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUserKeyTyped(evt);
+            }
+        });
 
         txtPass.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPassActionPerformed(evt);
+            }
+        });
+        txtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPassKeyTyped(evt);
             }
         });
 
@@ -263,6 +274,36 @@ public class SingIn extends javax.swing.JDialog {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    /**
+     * Función que restringe los caracteres no asociados al nombre de usuario
+     * @param evt Evento que se produce al insertar un caracter
+     */
+    private void txtUserKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserKeyTyped
+        if(txtUser.getText().length()>=25){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+        if(!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!='_'){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtUserKeyTyped
+
+    /**
+     * Función que restringe los caracteres no asociados a la dirección
+     * @param evt Evento que se produce al insertar un caracter
+     */
+    private void txtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPassKeyTyped
+        if(txtPass.getText().length()>=15){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+        if(!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+            Toolkit.getDefaultToolkit().beep();
+        }
+    }//GEN-LAST:event_txtPassKeyTyped
 
     /**
      * @param args the command line arguments

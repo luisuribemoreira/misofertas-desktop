@@ -382,7 +382,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
         if(txtDireccion.getText().length()>=100){
             evt.consume();
         }
-        if(!Character.isLetter(evt.getKeyChar()) || !Character.isDigit(evt.getKeyChar())){
+        if(!Character.isLetter(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!=' ' && evt.getKeyChar()!='#'){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
@@ -396,7 +396,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
         if(txtRazonSocial.getText().length()>=25){
             evt.consume();
         }
-        if(!Character.isLetter(evt.getKeyChar())){
+        if(!Character.isLetter(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!=' ' && evt.getKeyChar()!='#'){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }

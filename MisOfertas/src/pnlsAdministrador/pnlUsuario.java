@@ -831,7 +831,7 @@ public class pnlUsuario extends javax.swing.JPanel {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-        if(!Character.isLetter(evt.getKeyChar()) || !Character.isDigit(evt.getKeyChar())){
+        if(!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar()) && evt.getKeyChar()!='_'){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
@@ -926,7 +926,7 @@ public class pnlUsuario extends javax.swing.JPanel {
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-        if(!Character.isAlphabetic(evt.getKeyChar()) || !Character.isDigit(evt.getKeyChar())){
+        if(!Character.isAlphabetic(evt.getKeyChar()) && !Character.isDigit(evt.getKeyChar())){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
