@@ -83,6 +83,11 @@ public class pnlSucursal extends javax.swing.JPanel {
             }
         });
 
+        tablaSucursales = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaSucursales.setBackground(new java.awt.Color(240, 240, 240));
         tablaSucursales.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaSucursales.setModel(new javax.swing.table.DefaultTableModel(
@@ -391,8 +396,8 @@ public class pnlSucursal extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRespuestaBuscar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -408,6 +413,7 @@ public class pnlSucursal extends javax.swing.JPanel {
         ddlEmpresa.setEnabled(true);
         ddlRegion.setEnabled(true);
         ddlComuna.setEnabled(true);
+        btnNewSucursal.setEnabled(false);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
         txtNombre.requestFocus();
@@ -435,6 +441,9 @@ public class pnlSucursal extends javax.swing.JPanel {
         ddlComuna.setEnabled(true);
         ddlRegion.setEnabled(true);
         ddlEmpresa.setEnabled(true);
+        btnNewSucursal.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -667,6 +676,7 @@ public class pnlSucursal extends javax.swing.JPanel {
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
         
+        btnNewSucursal.setEnabled(true);
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         txtNombre.setText("");
@@ -706,6 +716,7 @@ public class pnlSucursal extends javax.swing.JPanel {
             ddlRegion.setSelectedItem(region);
             ddlComuna.setSelectedItem(suc.getComuna());
             
+            btnNewSucursal.setEnabled(true);
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }else if(txtNombre.getText().equals("Ingrese ID de la Sucursal")){

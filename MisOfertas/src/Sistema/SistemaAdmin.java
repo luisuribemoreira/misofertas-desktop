@@ -65,10 +65,10 @@ public class SistemaAdmin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         seis = new rsbuttom.RSButtonMetro();
         cuatro = new rsbuttom.RSButtonMetro();
+        CerrarSesion = new rsbuttom.RSButtonMetro();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        CerrarSesion = new rsbuttom.RSButtonMetro();
         pnlCentro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlPrincipal = new javax.swing.JPanel();
@@ -270,6 +270,25 @@ public class SistemaAdmin extends javax.swing.JFrame {
             }
         });
 
+        CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
+        CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-exit-32.png"))); // NOI18N
+        CerrarSesion.setText("Cerrar Sesion");
+        CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
+        CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
+        CerrarSesion.setColorPressed(new java.awt.Color(204, 204, 204));
+        CerrarSesion.setColorTextHover(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setColorTextNormal(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setColorTextPressed(new java.awt.Color(128, 128, 131));
+        CerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        CerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        CerrarSesion.setIconTextGap(25);
+        CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CerrarSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
@@ -277,13 +296,14 @@ public class SistemaAdmin extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlMenuLayout.createSequentialGroup()
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(uno, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dos, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tres, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cuatro, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cinco, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seis, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(uno, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(dos, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(tres, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(cuatro, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(cinco, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(seis, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addComponent(CerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlMenuLayout.setVerticalGroup(
@@ -305,7 +325,8 @@ public class SistemaAdmin extends javax.swing.JFrame {
                     .addComponent(cinco, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addComponent(seis, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(311, 311, 311))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
+                .addComponent(CerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -345,25 +366,6 @@ public class SistemaAdmin extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Administrador");
 
-        CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
-        CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
-        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-exit-32.png"))); // NOI18N
-        CerrarSesion.setText("Cerrar Sesion");
-        CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
-        CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
-        CerrarSesion.setColorPressed(new java.awt.Color(204, 204, 204));
-        CerrarSesion.setColorTextHover(new java.awt.Color(128, 128, 131));
-        CerrarSesion.setColorTextNormal(new java.awt.Color(128, 128, 131));
-        CerrarSesion.setColorTextPressed(new java.awt.Color(128, 128, 131));
-        CerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        CerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        CerrarSesion.setIconTextGap(25);
-        CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CerrarSesionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -373,19 +375,15 @@ public class SistemaAdmin extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 945, Short.MAX_VALUE)
-                .addComponent(CerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(1158, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(CerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

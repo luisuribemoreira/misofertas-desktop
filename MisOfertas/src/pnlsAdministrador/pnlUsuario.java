@@ -498,6 +498,11 @@ public class pnlUsuario extends javax.swing.JPanel {
             }
         });
 
+        tablaUsuarios = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaUsuarios.setBackground(new java.awt.Color(240, 240, 240));
         tablaUsuarios.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -562,8 +567,8 @@ public class pnlUsuario extends javax.swing.JPanel {
                 .addGap(1, 1, 1)
                 .addComponent(lblRespuestaBuscar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -578,6 +583,9 @@ public class pnlUsuario extends javax.swing.JPanel {
         txtEmail.setEnabled(true);
         txtPass.setEnabled(true);
         ddlCargo.setEnabled(true);
+        btnNewUsuario.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
         
@@ -890,6 +898,7 @@ public class pnlUsuario extends javax.swing.JPanel {
         txtRun.setEnabled(true);
         btnVerificar.setEnabled(true);
         btnCancelar.setEnabled(true);
+        btnNewUsuario.setEnabled(false);
         txtRun.requestFocus();
     }//GEN-LAST:event_btnNewUsuarioActionPerformed
 
@@ -1037,6 +1046,7 @@ public class pnlUsuario extends javax.swing.JPanel {
         ddlSucursal.removeAllItems();
         ddlSucursal.addItem("Seleccione la Sucursal");
         
+        btnNewUsuario.setEnabled(true);
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
         txtRun.setText("");
@@ -1068,10 +1078,10 @@ public class pnlUsuario extends javax.swing.JPanel {
 
         Usuario usu = new Usuario();
         ResultSet rs = usu.listadoUsuarios(conn);
-        Object[] fila = new Object[3];
+        Object[] fila = new Object[2];
         while (rs.next()) {
             fila[0] = rs.getString("USERNAME");
-            fila[2] = rs.getString("PERFIL");
+            fila[1] = rs.getString("PERFIL");
             modelo.addRow(fila);
         }
 
@@ -1121,7 +1131,7 @@ public class pnlUsuario extends javax.swing.JPanel {
             ddlSexo.setSelectedItem(per.getSexo());
             cldFechaNac.setDate(per.getFec_nac());
             
-            
+            btnNewUsuario.setEnabled(true);
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }else if(txtNombre.getText().equals("Ingrese Nombre de Usuario")){

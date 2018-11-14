@@ -102,6 +102,11 @@ public class pnlOfertas extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(lblImagen);
 
+        tablaOfertas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaOfertas.setBackground(new java.awt.Color(240, 240, 240));
         tablaOfertas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaOfertas.setModel(new javax.swing.table.DefaultTableModel(

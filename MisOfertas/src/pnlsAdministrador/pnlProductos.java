@@ -428,6 +428,11 @@ public class pnlProductos extends javax.swing.JPanel {
                         .addContainerGap())))
         );
 
+        tablaProductos2 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaProductos2.setBackground(new java.awt.Color(240, 240, 240));
         tablaProductos2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaProductos2.setModel(new javax.swing.table.DefaultTableModel(
@@ -511,6 +516,7 @@ public class pnlProductos extends javax.swing.JPanel {
         ddlEstado.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
+        btnNewProducto.setEnabled(false);
         txtNombre.requestFocus();
     }//GEN-LAST:event_btnNewProductoActionPerformed
 
@@ -519,7 +525,7 @@ public class pnlProductos extends javax.swing.JPanel {
      * @param evt Evento de presionar el boton agregar
      */
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        txtNombre.setEnabled(false);
+        txtNombre.setEnabled(true);
         txtDescripcion.setEnabled(true);
         txtFechaIngreso.setEnabled(true);
         txtSeguro.setEnabled(true);
@@ -529,6 +535,10 @@ public class pnlProductos extends javax.swing.JPanel {
         ddlEmpresa2.setEnabled(true);
         ddlSucursal2.setEnabled(true);
         txtValor.setEnabled(true);
+        
+        btnEliminar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnNewProducto.setEnabled(false);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -771,21 +781,13 @@ public class pnlProductos extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnNewProducto;
-    private javax.swing.JComboBox<Object> ddlEmpresa;
-    private javax.swing.JComboBox<Object> ddlEmpresa1;
     private javax.swing.JComboBox<Object> ddlEmpresa2;
     private javax.swing.JComboBox<String> ddlEstado;
     private javax.swing.JComboBox<String> ddlRubro;
-    private javax.swing.JComboBox<Object> ddlSucursal;
-    private javax.swing.JComboBox<Object> ddlSucursal1;
     private javax.swing.JComboBox<Object> ddlSucursal2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
@@ -794,8 +796,6 @@ public class pnlProductos extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblRespuestaBuscar;
@@ -857,6 +857,7 @@ public class pnlProductos extends javax.swing.JPanel {
         ddlSucursal2.setEnabled(false);
         ddlSucursal2.removeAllItems();
         ddlSucursal2.addItem("Seleccione la Sucursal");
+        btnNewProducto.setEnabled(true);
         
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
@@ -902,7 +903,7 @@ public class pnlProductos extends javax.swing.JPanel {
             ddlEmpresa2.getModel().setSelectedItem(em);
             ddlSucursal2.getModel().setSelectedItem(suc);
             
-            
+            btnNewProducto.setEnabled(true);
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }else if(txtNombre.getText().equals("Ingrese ID del producto")){

@@ -55,6 +55,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lblRespuestaEmpresa = new javax.swing.JLabel();
+        lblRutRespuesta = new javax.swing.JLabel();
         btnNewEmpresa = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -129,6 +130,11 @@ public class pnlEmpresa extends javax.swing.JPanel {
         lblRespuestaEmpresa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRespuestaEmpresa.setText("Respuesta");
 
+        lblRutRespuesta.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblRutRespuesta.setForeground(java.awt.Color.red);
+        lblRutRespuesta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRutRespuesta.setText("Respuesta");
+
         javax.swing.GroupLayout pnlEmpresaLayout = new javax.swing.GroupLayout(pnlEmpresa);
         pnlEmpresa.setLayout(pnlEmpresaLayout);
         pnlEmpresaLayout.setHorizontalGroup(
@@ -146,8 +152,11 @@ public class pnlEmpresa extends javax.swing.JPanel {
                             .addComponent(txtDireccion)
                             .addGroup(pnlEmpresaLayout.createSequentialGroup()
                                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(pnlEmpresaLayout.createSequentialGroup()
+                                        .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lblRutRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(pnlEmpresaLayout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -172,7 +181,8 @@ public class pnlEmpresa extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRutRespuesta))
                 .addGap(18, 18, 18)
                 .addGroup(pnlEmpresaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -223,6 +233,11 @@ public class pnlEmpresa extends javax.swing.JPanel {
         lblRespuestaBuscar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRespuestaBuscar.setText("Respuesta");
 
+        tablaEmpresas = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaEmpresas.setBackground(new java.awt.Color(240, 240, 240));
         tablaEmpresas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaEmpresas.setModel(new javax.swing.table.DefaultTableModel(
@@ -325,8 +340,8 @@ public class pnlEmpresa extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRespuestaBuscar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -337,16 +352,13 @@ public class pnlEmpresa extends javax.swing.JPanel {
     private void txtRutKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRutKeyTyped
         if(txtRut.getText().length()>=10){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
-        if(!Character.isDigit(evt.getKeyChar()) && txtRut.getText().length() <= 7){
+        if(!Character.isDigit(evt.getKeyChar()) && txtRut.getText().length() < 7){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
-        if(evt.getKeyChar() != '-' && txtRut.getText().length() == 8){
-            evt.consume();
-            Toolkit.getDefaultToolkit().beep();
-        }
-        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != 'k' && evt.getKeyChar() != 'K' && txtRut.getText().length() == 9){
+        if(!Character.isDigit(evt.getKeyChar()) && evt.getKeyChar() != 'k' && evt.getKeyChar() != 'K' && txtRut.getText().length() >= 7 && evt.getKeyChar() != '-'){
             evt.consume();
             Toolkit.getDefaultToolkit().beep();
         }
@@ -422,8 +434,10 @@ public class pnlEmpresa extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "La Empresa ya fue Registrada", null, JOptionPane.ERROR_MESSAGE, null);
                     }
                 }
-            } else if(!validador){
-                lblRespuestaEmpresa.setText("El Rut es incorrecto");
+            } else if (!validador) {
+                if (lblRutRespuesta.getText().length() == 0) {
+                    lblRutRespuesta.setText("El Run es Incorrecto");
+                }
             }else{
                 lblRespuestaEmpresa.setText("Complete todos los campos de texto");
             }
@@ -465,6 +479,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
         txtRut.setEnabled(true);
         txtDireccion.setEnabled(true);
         txtRazonSocial.setEnabled(true);
+        btnNewEmpresa.setEnabled(false);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
         txtRut.requestFocus();
@@ -479,6 +494,9 @@ public class pnlEmpresa extends javax.swing.JPanel {
         txtRut.setEnabled(false);
         txtDireccion.setEnabled(true);
         txtRazonSocial.setEnabled(true);
+        btnNewEmpresa.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -550,6 +568,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRespuestaBuscar;
     private javax.swing.JLabel lblRespuestaEmpresa;
+    private javax.swing.JLabel lblRutRespuesta;
     private javax.swing.JPanel pnlBusqueda;
     private javax.swing.JPanel pnlEmpresa;
     private javax.swing.JTable tablaEmpresas;
@@ -565,26 +584,25 @@ public class pnlEmpresa extends javax.swing.JPanel {
      * @throws SQLException 
      */
     private void cargarTabla() throws SQLException {
-        DefaultTableModel modelo =  new DefaultTableModel();
-            modelo.addColumn("Rut");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Dirección");
-            modelo.addColumn("Razón Social");
-            
-            Empresa emp = new Empresa();
-            ResultSet rs = emp.listadoEmpresas(conn);
-            Object [] fila = new Object[4];
-            while(rs.next()){
-                fila[0] = rs.getString("RUT");
-                fila[1] = rs.getString("NOMBRE");
-                fila[2] = rs.getString("DIRECCION");
-                fila[3] = rs.getString("RAZON_SOCIAL");
-                modelo.addRow(fila);
-            }
-            
-            
-            tablaEmpresas.setModel(modelo);
-            tablaEmpresas.setVisible(true);
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Rut");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Dirección");
+        modelo.addColumn("Razón Social");
+
+        Empresa emp = new Empresa();
+        ResultSet rs = emp.listadoEmpresas(conn);
+        Object[] fila = new Object[4];
+        while (rs.next()) {
+            fila[0] = rs.getString("RUT");
+            fila[1] = rs.getString("NOMBRE");
+            fila[2] = rs.getString("DIRECCION");
+            fila[3] = rs.getString("RAZON_SOCIAL");
+            modelo.addRow(fila);
+        }
+
+        tablaEmpresas.setModel(modelo);
+        tablaEmpresas.setVisible(true);
     }
 
     /**
@@ -598,6 +616,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
         txtRazonSocial.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
+        btnNewEmpresa.setEnabled(true);
         
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
@@ -608,6 +627,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
         txtBuscar.setText("Ingrese Rut de la Empresa");
         lblRespuestaBuscar.setText("");
         lblRespuestaEmpresa.setText("");
+        lblRutRespuesta.setText("");
     }
 
     /**
@@ -623,6 +643,7 @@ public class pnlEmpresa extends javax.swing.JPanel {
             txtNombre.setText(emp.getNombre());
             txtDireccion.setText(emp.getDireccion());
             txtRazonSocial.setText(emp.getRazon_social());
+            btnNewEmpresa.setEnabled(true);
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }else if(txtRut.getText().equals("Ingrese Rut de la Empresa")){
@@ -640,6 +661,12 @@ public class pnlEmpresa extends javax.swing.JPanel {
      * @return Boolean correspondiente si es o no valido el rut
      */
     private boolean validarRut(String rut) {
+        boolean isRut = rut.matches("^[0-9]+[-|‐]{1}[0-9kK]{1}$");
+        if (!isRut) {
+            lblRutRespuesta.setText("El Formato del Rut es Incorrecto");
+            return false;
+        }
+        lblRutRespuesta.setText("");
         boolean validacion = false;
         try {
             rut =  rut.toUpperCase();

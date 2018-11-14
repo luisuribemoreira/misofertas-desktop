@@ -356,6 +356,11 @@ public class pnlProductos extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
+        tablaProductos2 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaProductos2.setBackground(new java.awt.Color(240, 240, 240));
         tablaProductos2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaProductos2.setModel(new javax.swing.table.DefaultTableModel(

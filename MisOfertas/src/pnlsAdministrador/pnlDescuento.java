@@ -73,7 +73,7 @@ public class pnlDescuento extends javax.swing.JPanel {
         lblPts = new javax.swing.JLabel();
 
         btnNewCertificado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnNewCertificado.setText("Nueva Sucursal");
+        btnNewCertificado.setText("Nuevo Certificado");
         btnNewCertificado.setActionCommand("Nuevo Certificado");
         btnNewCertificado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +81,11 @@ public class pnlDescuento extends javax.swing.JPanel {
             }
         });
 
+        tablaCertificados = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tablaCertificados.setBackground(new java.awt.Color(240, 240, 240));
         tablaCertificados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tablaCertificados.setModel(new javax.swing.table.DefaultTableModel(
@@ -354,8 +359,8 @@ public class pnlDescuento extends javax.swing.JPanel {
                             .addComponent(pnSucursal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(btnNewCertificado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
+                        .addComponent(btnNewCertificado)
+                        .addGap(60, 60, 60)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -385,8 +390,7 @@ public class pnlDescuento extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRespuestaBuscar)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -401,6 +405,7 @@ public class pnlDescuento extends javax.swing.JPanel {
         txtDescuento.setEnabled(true);
         txtTope.setEnabled(true);
         ddlRubro.setEnabled(true);
+        btnNewCertificado.setEnabled(false);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
         txtPtsMin.requestFocus();
@@ -429,6 +434,9 @@ public class pnlDescuento extends javax.swing.JPanel {
         ddlRubro.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
+        btnNewCertificado.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     /**
@@ -665,6 +673,7 @@ public class pnlDescuento extends javax.swing.JPanel {
         ddlRubro.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
+        btnNewCertificado.setEnabled(true);
         
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
@@ -697,6 +706,7 @@ public class pnlDescuento extends javax.swing.JPanel {
             
             ddlRubro.getModel().setSelectedItem(cer.getRubro());
             
+            btnNewCertificado.setEnabled(true);
             btnModificar.setEnabled(true);
             btnEliminar.setEnabled(true);
         }else if(txtPtsMin.getText().equals("Ingrese ID del Certificado")){
