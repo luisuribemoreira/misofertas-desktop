@@ -130,7 +130,9 @@ public class EnviaCorreo extends SwingWorker<Void, Void> {
             transport.connect("smtp.gmail.com", "misofertasant@gmail.com", "misofertas123");
             transport.sendMessage(message, message.getAllRecipients());
             transport.close();
-            String mensaje = "Estimado "+ persona.getNombre();
+            String mensaje = "Estimado "+ persona.getNombre()+ " "
+                    + "hemos subido una nueva oferta con un " +  oferta.getPorc_descuento()+"% de descuento</h1>"
+                    + "Puedes obtener mas informacion de nuestra oferta visualizando la imagen que te dejamos adjunta";
             agregarMensajeria(oferta,persona,asunto,mensaje);
         }
         catch (MessagingException me) {
@@ -176,7 +178,7 @@ public class EnviaCorreo extends SwingWorker<Void, Void> {
      */
     private static void agregarMensajeria(Oferta oferta, Persona persona, String asunto, String mensaje) {
         Mensajeria msj = new Mensajeria();
-        msj.setAsunto("hi");
+        msj.setAsunto(asunto);
         msj.setMensaje(mensaje);
         msj.setCupon(oferta.getImagen());
         msj.setImgOfer(oferta.getImagen());
