@@ -1,3 +1,8 @@
+/* CREACION DE DIRECTORIO EN USUARIO SYSTEM DANDOLE PRIVILEGIOS A USUARIO MISOFERTAS
+SELECT * FROM ALL_DIRECTORIES;
+CREATE DIRECTORY DIR_IMG AS 'D:\oraclexe\';
+GRANT READ, WRITE, EXECUTE ON DIRECTORY DIR_IMG TO misofertas;
+*/
 --SECCION BORRADO
 DROP TABLE certificado CASCADE CONSTRAINTS;
 DROP TABLE consumidor CASCADE CONSTRAINTS;
@@ -72,12 +77,6 @@ CREATE TABLE consumidor (
     usuario_username   VARCHAR2(25) NOT NULL
 );
 
-CREATE UNIQUE INDEX consumidor__idx ON
-    consumidor ( usuario_username ASC );
-
-CREATE UNIQUE INDEX consumidor__idxv1 ON
-    consumidor ( persona_run ASC );
-
 ALTER TABLE consumidor ADD CONSTRAINT consumidor_pk PRIMARY KEY ( usuario_username,
 persona_run );
 
@@ -103,12 +102,6 @@ CREATE TABLE empleado (
     usuario_username   VARCHAR2(25) NOT NULL
 );
 
-CREATE UNIQUE INDEX empleado__idx ON
-    empleado ( usuario_username ASC );
-
-CREATE UNIQUE INDEX empleado__idxv1 ON
-    empleado ( persona_run ASC );
-
 ALTER TABLE empleado ADD CONSTRAINT empleado_pk PRIMARY KEY ( usuario_username,
 persona_run );
 
@@ -132,8 +125,8 @@ ALTER TABLE lote ADD CONSTRAINT lote_pk PRIMARY KEY ( id_lote );
 
 CREATE TABLE mensajeria (
     id_msj                NUMBER(12) NOT NULL,
-    asunto                VARCHAR2(25) NOT NULL,
-    mensaje               VARCHAR2(100) NOT NULL,
+    asunto                VARCHAR2(100) NOT NULL,
+    mensaje               VARCHAR2(200) NOT NULL,
     cupon                 BLOB,
     img_oferta            BLOB,
     sucursal_id_sucur     NUMBER(8) NOT NULL,
@@ -401,7 +394,3 @@ BEGIN
     END IF;
 END;
 /
---Seccion Insert
-INSERT INTO persona VALUES('19308344-7','Gabriel','Espoz','Aliaga','Masculino','g.espoz@alumnos.duoc.cl',TO_DATE('30/04/1996','dd/mm/yyyy'));
-INSERT INTO usuario VALUES('g.espoz','123','Consumidor');
-INSERT INTO consumidor VALUES(0,'19308344-7','g.espoz');

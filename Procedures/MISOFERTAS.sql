@@ -43,8 +43,7 @@ BEGIN
 END;
 /
 /*Probando el pl de insertar producto*/
-EXEC AGREGAR_PRODUCTO('Celular','Producto tecnologico', TO_DATE('10/10/2018','DD/MM/YYYY'),1,50,'Tecnologia','Productos tecnologicos',50000, :v_respuesta);
-/
+
 /*Primera version del procedimiento almacenado de buscar producto*/
 create or replace PROCEDURE BUSCAR_PRODUCTO(
     v_id NUMBER, 
@@ -686,6 +685,7 @@ BEGIN
       v_cargo := 'ERROR';
 END;
 
+/
 /*Procedimiento almacenado de buscar un consumidor por run*/
 
 create or replace PROCEDURE BUSCAR_CONSUMIDOR_RUN(
