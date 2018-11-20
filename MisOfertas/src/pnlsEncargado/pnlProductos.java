@@ -8,6 +8,7 @@ package pnlsEncargado;
 import MisPaquetes.Producto;
 import static Sistema.MainSistema.conn;
 import static Sistema.MainSistema.emp_conectado;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -447,6 +448,7 @@ public class pnlProductos extends javax.swing.JPanel {
         ddlEstado.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
+        btnNewProducto.setEnabled(false);
         txtNombre.requestFocus();
     }//GEN-LAST:event_btnNewProductoActionPerformed
 
@@ -610,9 +612,11 @@ public class pnlProductos extends javax.swing.JPanel {
         (caracter != KeyEvent.VK_BACK_SPACE))
         {
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
         if(txtSeguro.getText().length()>= 7){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
 
     }//GEN-LAST:event_txtSeguroKeyTyped
@@ -625,6 +629,7 @@ public class pnlProductos extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(txtNombre.getText().length()>=25){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
@@ -636,6 +641,7 @@ public class pnlProductos extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(txtDescripcion.getText().length()>= 200){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtDescripcionKeyTyped
 
@@ -651,10 +657,12 @@ public class pnlProductos extends javax.swing.JPanel {
         (caracter != KeyEvent.VK_BACK_SPACE))
         {
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
         
         if(txtValor.getText().length()>= 9){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtValorKeyTyped
 
@@ -670,10 +678,12 @@ public class pnlProductos extends javax.swing.JPanel {
         (caracter != KeyEvent.VK_BACK_SPACE))
         {
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
         
         if(txtValor.getText().length()>= 9){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtStockSucurKeyTyped
 
@@ -752,6 +762,7 @@ public class pnlProductos extends javax.swing.JPanel {
         txtValor.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
+        btnNewProducto.setEnabled(true);
         
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);

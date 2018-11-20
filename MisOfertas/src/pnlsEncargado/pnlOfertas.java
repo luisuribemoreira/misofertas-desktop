@@ -11,6 +11,7 @@ import MisPaquetes.Producto;
 import MisPaquetes.Sucursal;
 import static Sistema.MainSistema.conn;
 import static Sistema.MainSistema.emp_conectado;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.io.FileInputStream;
@@ -85,7 +86,7 @@ public class pnlOfertas extends javax.swing.JPanel {
         btnBuscar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         lblRespuestaBuscar = new javax.swing.JLabel();
-        javax.swing.JButton btnNewOferta = new javax.swing.JButton();
+        btnNewOferta = new javax.swing.JButton();
         lblRespuestaOferta = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -649,6 +650,7 @@ public class pnlOfertas extends javax.swing.JPanel {
         btnBuscarImagen.setEnabled(true);
         btnAgregar.setEnabled(true);
         btnCancelar.setEnabled(true);
+        btnNewOferta.setEnabled(false);
         txtDescr.requestFocus();
     }//GEN-LAST:event_btnNewOfertaActionPerformed
 
@@ -659,10 +661,12 @@ public class pnlOfertas extends javax.swing.JPanel {
         (caracter != KeyEvent.VK_BACK_SPACE))
         {
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
         
         if(txtDescuento.getText().length()>= 3){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtDescuentoKeyTyped
 
@@ -673,6 +677,7 @@ public class pnlOfertas extends javax.swing.JPanel {
     private void txtDescrKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescrKeyTyped
         if(txtDescr.getText().length()>= 200){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtDescrKeyTyped
 
@@ -687,10 +692,12 @@ public class pnlOfertas extends javax.swing.JPanel {
         (caracter != KeyEvent.VK_BACK_SPACE))
         {
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
         
         if(txtValoracion.getText().length()>= 3){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtValoracionKeyTyped
 
@@ -705,10 +712,12 @@ public class pnlOfertas extends javax.swing.JPanel {
         (caracter != KeyEvent.VK_BACK_SPACE))
         {
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
         
         if(txtDescuento.getText().length()>= 10){
             evt.consume();
+            Toolkit.getDefaultToolkit().beep();
         }
     }//GEN-LAST:event_txtBuscarKeyTyped
 
@@ -761,6 +770,7 @@ public class pnlOfertas extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnNewOferta;
     private com.toedter.calendar.JDateChooser cldFechaInicio;
     private com.toedter.calendar.JDateChooser cldFechaTermino;
     private javax.swing.JComboBox<Object> ddlProducto;
@@ -867,6 +877,7 @@ public class pnlOfertas extends javax.swing.JPanel {
         txtDescuento.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnCancelar.setEnabled(false);
+        btnNewOferta.setEnabled(true);
         
         btnEliminar.setEnabled(false);
         btnModificar.setEnabled(false);
