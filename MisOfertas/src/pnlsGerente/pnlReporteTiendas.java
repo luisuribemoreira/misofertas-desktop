@@ -169,7 +169,11 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
-        // TODO add your handling code here:
+        try {
+            cargarTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(pnlReporteTiendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
     private void cbxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSucursalActionPerformed
@@ -204,6 +208,7 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
         }
     }
     
+
     private void vistaDefault() {
   
         cbxSucursal.setEnabled(true);
@@ -217,6 +222,28 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
 
     }
   
+        private void cargarTabla() throws SQLException {
+        DefaultTableModel modelo =  new DefaultTableModel();
+            modelo.addColumn("Nombre");   
+            modelo.addColumn("Cantidad Usuarios");
+            modelo.addColumn("Mensajes");   
+            modelo.addColumn("Valoracion");
+            modelo.addColumn("Descuentos Por rubro");
+            Sucursal suc = new Sucursal();
+            ResultSet rs = suc.reporteSucursal(conn, cbxSucursal.getSelectedIndex());
+            Object [] fila = new Object[5];
+            while(rs.next()){
+                fila[0] = rs.getString("nombre");
+                fila[1] = rs.getString("nro_usuarios");
+                fila[2] = rs.getString("mensajes");
+                fila[3] = rs.getString("valoracion");
+                fila[4] = rs.getString("desc_rubro");
+                modelo.addRow(fila);
+            }
+            
+            JReporte.setModel(modelo);
+            JReporte.setVisible(true);
+     }
     
 
         

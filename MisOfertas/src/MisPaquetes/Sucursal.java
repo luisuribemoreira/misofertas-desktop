@@ -107,6 +107,30 @@ public class Sucursal {
         ResultSet rs = stmt.executeQuery("SELECT * FROM SUCURSAL WHERE EMPRESA_RUT = '"+ rut +"'");
         return rs;
     }
+    public ResultSet reporteSucursal(Conexion conn, int id_sucursal) throws SQLException{
+        Statement stmt = conn.getConexion_base().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT S.NOMBRE AS nombre,"
+                + " COUNT(U.USERNAME) AS nro_usuarios,"
+                + " COUNT(ME.ID_MSJ) as mensajes, "
+                + "NVL(O.VALORACION_TOTAL,0) as valoracion,"
+                + " NVL(SUM(P.VALOR*(O.PORC_DESC)),0) as desc_rubro\n" +
+                "FROM SUCURSAL S\n" +
+                "FULL JOIN MENSAJERIA ME\n" +
+                "ON  S.ID_SUCUR = ME.SUCURSAL_ID_SUCUR\n" +
+                "FULL JOIN CONSUMIDOR C\n" +
+                "ON C.PERSONA_RUN = ME.CONSUMIDOR_RUN\n" +
+                "FULL JOIN USUARIO U\n" +
+                "ON C.USUARIO_USERNAME = U.USERNAME\n" +
+                "FULL JOIN PERSONA P \n" +
+                "ON P.RUN = C.PERSONA_RUN\n" +
+                "FULL JOIN OFERTA O\n" +
+                "ON O.SUCURSAL_ID_SUCUR = S.ID_SUCUR\n" +
+                "FULL JOIN  PRODUCTO P\n" +
+                "ON P.ID_PROD = O.PRODUCTO_ID_PROD\n" +
+                "WHERE S.ID_SUCUR = '"+ id_sucursal +"'\n" +
+                "GROUP BY S.NOMBRE, O.VALORACION_TOTAL, O.PORC_DESC");
+                return rs;
+    }
     
     /**
      * Método el cual utiliza el procedimiento almacenado "Buscar Sucursal" el cual busca la sucursal
