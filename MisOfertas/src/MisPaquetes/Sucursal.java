@@ -113,7 +113,7 @@ public class Sucursal {
                 + " COUNT(U.USERNAME) AS nro_usuarios,"
                 + " COUNT(ME.ID_MSJ) as mensajes, "
                 + "NVL(O.VALORACION_TOTAL,0) as valoracion,"
-                + " NVL(SUM(P.VALOR*(O.PORC_DESC)),0) as desc_rubro\n" +
+                + " NVL(SUM(P.VALOR/O.PORC_DESC),0) as desc_rubro\n" +
                 "FROM SUCURSAL S\n" +
                 "FULL JOIN MENSAJERIA ME\n" +
                 "ON  S.ID_SUCUR = ME.SUCURSAL_ID_SUCUR\n" +
@@ -130,6 +130,7 @@ public class Sucursal {
                 "WHERE S.ID_SUCUR = '"+ id_sucursal +"'\n" +
                 "GROUP BY S.NOMBRE, O.VALORACION_TOTAL, O.PORC_DESC");
                 return rs;
+                
     }
     
     /**
