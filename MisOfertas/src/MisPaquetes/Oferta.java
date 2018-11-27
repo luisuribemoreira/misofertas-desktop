@@ -262,6 +262,17 @@ public class Oferta {
         return "Oferta{" + "id=" + id + ", descripcion=" + descripcion + ", fecha_inicio=" + fecha_inicio + ", fecha_termino=" + fecha_termino + ", valoracion_total=" + valoracion_total + ", porc_descuento=" + porc_descuento + '}';
     }
     
-    
-    
+    /**
+     * Funcion que retorna la informacion de las ofertas por valoracion de los consumidores
+     * @param conn Conexion con la base de datos
+     * @return Retorna la informacion de las ofertas por valoracion de los consumidores
+     * @throws SQLException 
+     */
+    public ResultSet solicitudBI(Conexion conn) throws SQLException{
+        Statement stmt = conn.getConexion_base().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT O.ID_OFERTA AS ID,O.DESCRIPCION AS DESCRIPCION,O.PORC_DESC AS DESCUENTO,DE.FEC_VALORACION AS FECHA,DE.VALORACION AS VALORACION,DE.CONSUMIDOR_RUN AS RUN "
+                + "FROM OFERTA O  LEFT JOIN DETALLE_OFERTA DE " +
+                    "ON O.ID_OFERTA = DE.OFERTA_ID_OFERTA WHERE O.FEC_INICIO >= TO_DATE('" + this.fecha_inicio+"','YYYY/MM/DD') AND O.FEC_TERMINO <= TO_DATE('"+this.fecha_termino +"','YYYY/MM/DD')");
+        return rs;
+    }
 }

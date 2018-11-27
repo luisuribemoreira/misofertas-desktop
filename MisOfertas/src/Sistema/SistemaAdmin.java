@@ -647,7 +647,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
      * @param evt Evento que se produce al presionar el boton seis
      */
     private void seisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seisActionPerformed
-        new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlAndroid());
+        new CambiaPanel(pnlPrincipal, new pnlsAdministrador.pnlBI());
         if(this.seis.isSelected()){
             this.uno.setColorNormal(new Color(239,238,244));
             this.uno.setColorHover(new Color(204,204,204));
