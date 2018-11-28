@@ -128,7 +128,7 @@ public class Sucursal {
                 "FULL JOIN  PRODUCTO P\n" +
                 "ON P.ID_PROD = O.PRODUCTO_ID_PROD\n" +
                 "WHERE S.ID_SUCUR = '"+ id_sucursal +"'\n" +
-                "GROUP BY S.NOMBRE, O.VALORACION_TOTAL, O.PORC_DESC");
+                "GROUP BY S.NOMBRE, O.VALORACION_TOTAL");
                 return rs;
                 
     }
