@@ -69,7 +69,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
         pnlMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 5, 0, 0, new java.awt.Color(239, 238, 244)));
 
         uno.setForeground(new java.awt.Color(128, 128, 131));
-        uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
+        uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-box-32 (1).png"))); // NOI18N
         uno.setText("Productos");
         uno.setColorHover(new java.awt.Color(204, 204, 204));
         uno.setColorNormal(new java.awt.Color(204, 204, 204));
@@ -116,7 +116,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
 
         dos.setBackground(new java.awt.Color(239, 238, 244));
         dos.setForeground(new java.awt.Color(128, 128, 131));
-        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/collection.png"))); // NOI18N
+        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-price-tag-32.png"))); // NOI18N
         dos.setText("Ofertas");
         dos.setColorHover(new java.awt.Color(204, 204, 204));
         dos.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -153,7 +153,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
 
         CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
         CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
-        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-exit-32.png"))); // NOI18N
+        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-exit-32.png"))); // NOI18N
         CerrarSesion.setText("Cerrar Sesion");
         CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
         CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -215,7 +215,7 @@ public class SistemaEncargado extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(38, 86, 186));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/menu.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

@@ -6,24 +6,12 @@
 package pnlsGerente;
 
 import MisPaquetes.Sucursal;
-import MisPaquetes.*;
-import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
-import java.io.*;
 import static Sistema.MainSistema.conn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.lang.Integer;
-import static java.lang.Integer.parseInt;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sql.rowset.serial.SerialBlob;
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import pnlsAdministrador.pnlSucursal;
 
 /**
  *
@@ -55,12 +43,10 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         btnGenerarReporte = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         cbxSucursal = new javax.swing.JComboBox<>();
         labelNombreTiendas1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JReporte = new javax.swing.JTable();
-        btnVolver = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255), 3), "Reporte de Tienda", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPanel2.setToolTipText("");
@@ -71,8 +57,6 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
                 btnGenerarReporteActionPerformed(evt);
             }
         });
-
-        btnCancelar.setText("Cancelar");
 
         cbxSucursal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbxSucursal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una tienda" }));
@@ -91,16 +75,11 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labelNombreTiendas1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnGenerarReporte))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(labelNombreTiendas1, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(btnGenerarReporte)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -112,9 +91,7 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
                         .addComponent(labelNombreTiendas1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cbxSucursal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancelar)
-                .addContainerGap())
+                .addGap(45, 45, 45))
         );
 
         JReporte.setModel(new javax.swing.table.DefaultTableModel(
@@ -137,34 +114,27 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(JReporte);
 
-        btnVolver.setText("Ir Menu");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(10, 10, 10))
+                .addGap(262, 262, 262)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(324, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(38, 38, 38)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
-                .addComponent(btnVolver)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(73, 73, 73)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(295, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,9 +153,7 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable JReporte;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGenerarReporte;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<Object> cbxSucursal;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
@@ -210,19 +178,12 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
     
 
     private void vistaDefault() {
-  
         cbxSucursal.setEnabled(true);
         btnGenerarReporte.setEnabled(true);
-        btnCancelar.setEnabled(true);
-        btnVolver.setEnabled(true);
         JReporte.setEnabled(true);
-        btnVolver.setEnabled(true);
-        
-    
-
     }
   
-        private void cargarTabla() throws SQLException {
+    private void cargarTabla() throws SQLException {
         DefaultTableModel modelo =  new DefaultTableModel();
             modelo.addColumn("Nombre");   
             modelo.addColumn("Cantidad Usuarios");
@@ -243,8 +204,6 @@ public class pnlReporteTiendas extends javax.swing.JPanel {
             
             JReporte.setModel(modelo);
             JReporte.setVisible(true);
-     }
-    
-
-        
+    }
+       
 }

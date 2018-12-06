@@ -85,7 +85,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
         pnlMenu.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 5, 0, 0, new java.awt.Color(239, 238, 244)));
 
         uno.setForeground(new java.awt.Color(128, 128, 131));
-        uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home.png"))); // NOI18N
+        uno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-organization-32.png"))); // NOI18N
         uno.setText("Empresas");
         uno.setColorHover(new java.awt.Color(204, 204, 204));
         uno.setColorNormal(new java.awt.Color(204, 204, 204));
@@ -132,7 +132,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         tres.setBackground(new java.awt.Color(239, 238, 244));
         tres.setForeground(new java.awt.Color(128, 128, 131));
-        tres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/chat.png"))); // NOI18N
+        tres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-user-groups-32.png"))); // NOI18N
         tres.setText("Usuarios");
         tres.setColorHover(new java.awt.Color(204, 204, 204));
         tres.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -156,7 +156,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         dos.setBackground(new java.awt.Color(239, 238, 244));
         dos.setForeground(new java.awt.Color(128, 128, 131));
-        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/collection.png"))); // NOI18N
+        dos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-small-business-32.png"))); // NOI18N
         dos.setText("Sucursales");
         dos.setColorHover(new java.awt.Color(204, 204, 204));
         dos.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -180,7 +180,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         cinco.setBackground(new java.awt.Color(239, 238, 244));
         cinco.setForeground(new java.awt.Color(128, 128, 131));
-        cinco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/market.png"))); // NOI18N
+        cinco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-discount-32.png"))); // NOI18N
         cinco.setText("Descuentos");
         cinco.setColorHover(new java.awt.Color(204, 204, 204));
         cinco.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -206,7 +206,8 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel3.setText("DEVICE");
+        jLabel3.setText("Analisis");
+        jLabel3.setAutoscrolls(true);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -227,7 +228,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         seis.setBackground(new java.awt.Color(239, 238, 244));
         seis.setForeground(new java.awt.Color(128, 128, 131));
-        seis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/feeedback.png"))); // NOI18N
+        seis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-hierarchy-32.png"))); // NOI18N
         seis.setText("BI");
         seis.setColorHover(new java.awt.Color(204, 204, 204));
         seis.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -251,7 +252,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         cuatro.setBackground(new java.awt.Color(239, 238, 244));
         cuatro.setForeground(new java.awt.Color(128, 128, 131));
-        cuatro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ios.png"))); // NOI18N
+        cuatro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-box-32 (1).png"))); // NOI18N
         cuatro.setText("Productos");
         cuatro.setColorHover(new java.awt.Color(204, 204, 204));
         cuatro.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -275,7 +276,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
         CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
-        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-exit-32.png"))); // NOI18N
+        CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-exit-32.png"))); // NOI18N
         CerrarSesion.setText("Cerrar Sesion");
         CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
         CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
@@ -354,7 +355,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menu.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/menu.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setContentAreaFilled(false);
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -426,9 +427,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
         pnlCentro.setLayout(pnlCentroLayout);
         pnlCentroLayout.setHorizontalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlCentroLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 242, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1072, Short.MAX_VALUE)
         );
         pnlCentroLayout.setVerticalGroup(
             pnlCentroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
