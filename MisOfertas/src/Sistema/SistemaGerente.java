@@ -132,7 +132,7 @@ public class SistemaGerente extends javax.swing.JFrame {
         CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
         CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
         CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-exit-32.png"))); // NOI18N
-        CerrarSesion.setText("Cerrar Sesion");
+        CerrarSesion.setText("Cerrar Sesión");
         CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
         CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
         CerrarSesion.setColorPressed(new java.awt.Color(204, 204, 204));
@@ -291,7 +291,7 @@ public class SistemaGerente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(1175, 673));

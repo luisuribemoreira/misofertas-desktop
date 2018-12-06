@@ -118,7 +118,7 @@ public class SingIn extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(33, 33, 33));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Iniciar Sesion");
+        jLabel1.setText("Iniciar Sesión");
 
         jButton1.setBackground(new java.awt.Color(255, 87, 34));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-enter-32 (1).png"))); // NOI18N

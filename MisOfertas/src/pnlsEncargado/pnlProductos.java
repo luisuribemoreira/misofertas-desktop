@@ -216,7 +216,7 @@ public class pnlProductos extends javax.swing.JPanel {
         lblRespuestaEmpresa.setText("Respuesta");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Descripcion");
+        jLabel5.setText("Descripción");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Valor:");

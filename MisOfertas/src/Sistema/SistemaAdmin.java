@@ -206,7 +206,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel3.setText("Analisis");
+        jLabel3.setText("Análisis");
         jLabel3.setAutoscrolls(true);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -277,7 +277,7 @@ public class SistemaAdmin extends javax.swing.JFrame {
         CerrarSesion.setBackground(new java.awt.Color(239, 238, 244));
         CerrarSesion.setForeground(new java.awt.Color(128, 128, 131));
         CerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8-exit-32.png"))); // NOI18N
-        CerrarSesion.setText("Cerrar Sesion");
+        CerrarSesion.setText("Cerrar Sesión");
         CerrarSesion.setColorHover(new java.awt.Color(204, 204, 204));
         CerrarSesion.setColorNormal(new java.awt.Color(239, 238, 244));
         CerrarSesion.setColorPressed(new java.awt.Color(204, 204, 204));

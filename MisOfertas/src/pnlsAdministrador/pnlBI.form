@@ -158,7 +158,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ingrese las fechas sobre las que necesita que se genere el docuento con la informacion de las ofertas"/>
+                <Property name="text" type="java.lang.String" value="Ingres&#xe9; las fechas sobre las que necesita que se genere el documento con la informaci&#xf3;n de las ofertas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -166,7 +166,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fecha Termino:"/>
+                <Property name="text" type="java.lang.String" value="Fecha T&#xe9;rmino:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">

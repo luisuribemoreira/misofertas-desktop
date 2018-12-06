@@ -57,10 +57,10 @@ public class pnlBI extends javax.swing.JPanel {
         pnlOferta.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255), 3), "Solicitud De Documento Para BI", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Ingrese las fechas sobre las que necesita que se genere el docuento con la informacion de las ofertas");
+        jLabel1.setText("Ingresé las fechas sobre las que necesita que se genere el documento con la información de las ofertas");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Fecha Termino:");
+        jLabel2.setText("Fecha Término:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Fecha Inicio:");
