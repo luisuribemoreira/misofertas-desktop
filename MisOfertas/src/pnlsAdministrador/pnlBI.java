@@ -7,16 +7,11 @@ package pnlsAdministrador;
 
 import MisPaquetes.Oferta;
 import static Sistema.MainSistema.conn;
-import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
-import pnlsEncargado.*;
 
 /**
  *
@@ -197,7 +192,11 @@ public class pnlBI extends javax.swing.JPanel {
                 cadena += rs.getInt("ID") + " " + rs.getString("DESCRIPCION")+ " " + rs.getInt("DESCUENTO")+ " " + rs.getDate("FECHA")+ " " + rs.getInt("VALORACION")+ " " + rs.getString("RUN") + ";";
             }
             /*"D:\\Documentos\\documento.txt"*/
-            BufferedWriter writer = new BufferedWriter( new FileWriter(".\\documento.txt"));
+            Calendar fecha = Calendar.getInstance();
+            String dia = Integer.toString(fecha.get(Calendar.DATE));
+            String mes = Integer.toString(fecha.get(Calendar.MONTH));
+            String annio = Integer.toString(fecha.get(Calendar.YEAR));
+            BufferedWriter writer = new BufferedWriter( new FileWriter(".\\ArchivoBI("+ dia+"-"+mes+"-"+annio+").txt"));
             writer.write(cadena);
             writer.close();
             JOptionPane.showMessageDialog(null,"El documento fue generado revisar en la carpeta especificada por la empresa desarrolladora",null, JOptionPane.INFORMATION_MESSAGE, null);
